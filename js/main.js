@@ -26,14 +26,14 @@ const translations = {
         nav_skills: "Skills", 
         nav_work: "Projects",
         nav_blog: "Blog", 
-        
+
         status_text: "System Online // Open to Work",
         hero_greeting: "Hello, I'm",
         hero_name: "Mahmoud Elshorbagy",
         hero_desc: "Penetration Tester & Security Engineer (falcon0x1). I simulate advanced cyber attacks to help organizations strengthen their defenses. Specialized in Web, Mobile, and Active Directory security.",
         btn_contact: "Contact Me", 
         btn_cv: "Download CV", 
-        btn_blog: "Articles",
+        btn_blog: "Blog",
 
         stat_certs: "Certifications", stat_labs: "Labs Pwned", stat_tools: "Tools Built", stat_passion: "Commitment",
         skills_title: "Technical Arsenal",
