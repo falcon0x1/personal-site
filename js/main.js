@@ -1,11 +1,18 @@
 const translations = {
     ar: {
-        nav_about: "من أنا", nav_skills: "المهارات", nav_work: "المشاريع",
+       nav_about: "من أنا", 
+        nav_skills: "المهارات", 
+        nav_work: "المشاريع",
+        nav_blog: "المدونة", 
+        
         status_text: "النظام متصل // متاح للعمل",
         hero_greeting: "أهلاً، أنا",
         hero_name: "محمود الشوربجي",
         hero_desc: "مهندس أمن سيبراني ومختبر اختراق (Penetration Tester). أعمل على محاكاة الهجمات السيبرانية المتقدمة لمساعدة الشركات على اكتشاف الثغرات وتأمين أنظمتها (Web, Mobile, AD).",
-        btn_contact: "تواصل معي", btn_cv: "تحميل السيرة الذاتية", btn_blog: "المقالات",
+        btn_contact: "تواصل معي", 
+        btn_cv: "تحميل السيرة الذاتية", 
+        btn_blog: "المقالات",
+        
         stat_certs: "شهادة معتمدة", stat_labs: "معمل تدريبي", stat_tools: "أداة مطورة", stat_passion: "التزام وشغف",
         skills_title: "الترسانة التقنية",
         cert_header: ">> الشهادات", skills_header: ">> المهارات والأدوات",
@@ -15,12 +22,19 @@ const translations = {
         contact_title: "بدء الاتصال"
     },
     en: {
-        nav_about: "About", nav_skills: "Skills", nav_work: "Projects",
+      nav_about: "About", 
+        nav_skills: "Skills", 
+        nav_work: "Projects",
+        nav_blog: "Blog", 
+        
         status_text: "System Online // Open to Work",
         hero_greeting: "Hello, I'm",
         hero_name: "Mahmoud Elshorbagy",
         hero_desc: "Penetration Tester & Security Engineer (falcon0x1). I simulate advanced cyber attacks to help organizations strengthen their defenses. Specialized in Web, Mobile, and Active Directory security.",
-        btn_contact: "Contact Me", btn_cv: "Download CV", btn_blog: "Articles",
+        btn_contact: "Contact Me", 
+        btn_cv: "Download CV", 
+        btn_blog: "Articles",
+
         stat_certs: "Certifications", stat_labs: "Labs Pwned", stat_tools: "Tools Built", stat_passion: "Commitment",
         skills_title: "Technical Arsenal",
         cert_header: ">> CERTIFICATIONS", skills_header: ">> SKILLS & TOOLS",
