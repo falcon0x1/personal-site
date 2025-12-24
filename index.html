@@ -5,14 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- === SECURITY HEADERS === -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Frame-Options" content="DENY">
 
-    <!-- CSP: Strictly blocks 'unsafe-eval' because we removed the CDN! -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:;">
+        content="default-src 'self' https:; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:;">
 
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
@@ -24,32 +22,140 @@
 
     <link rel="icon" type="image/x-icon" href="favicon/favicon.svg">
 
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap"
         rel="stylesheet">
 
-    <!-- LOCAL CSS FILES -->
-    <!-- 1. The built Tailwind file -->
     <link rel="stylesheet" href="./dist/output.css">
-    <!-- 2. Your custom animations/styles -->
     <link rel="stylesheet" href="./css/style.css">
+
+    <style>
+        /* Terminal Specific Styles - Kept inline as allowed by style-src 'unsafe-inline' */
+        .terminal-container {
+            background: #0a0a0a;
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15);
+        }
+
+        .terminal-header {
+            background: #1a1a1a;
+            padding: 12px 16px;
+            border-bottom: 1px solid #00ff41;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-close { background: #ff5f56; }
+        .dot-minimize { background: #ffbd2e; }
+        .dot-maximize { background: #27c93f; }
+
+        .terminal-body {
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .terminal-output {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .terminal-prompt {
+            color: #00ff41;
+            display: inline-block;
+        }
+
+        .terminal-input {
+            background: none;
+            border: none;
+            color: #fff;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            outline: none;
+            width: calc(100% - 200px);
+            margin-left: 8px;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: #00ff41;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+
+        .terminal-line {
+            margin-bottom: 8px;
+        }
+
+        .command-success {
+            color: #00ff41;
+        }
+
+        .command-error {
+            color: #ff5f56;
+        }
+
+        .command-info {
+            color: #00d4ff;
+        }
+
+        .command-warning {
+            color: #ffbd2e;
+        }
+
+        .ascii-art {
+            color: #00ff41;
+            line-height: 1.2;
+            font-size: 12px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Custom Scrollbar for Terminal */
+        .terminal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: #00ff41;
+            border-radius: 4px;
+        }
+    </style>
 
 </head>
 
-<body class="grid-bg" oncontextmenu="return false;">
+<body class="grid-bg">
 
-    <!-- Preloader -->
     <div id="preloader">
         <div class="terminal-loader">
             root@falcon0x1:~# ./init_portfolio.sh
         </div>
     </div>
 
-    <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 transition-all duration-300"
         id="navbar">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -62,6 +168,7 @@
                 <div class="hidden md:flex space-x-8 gap-4 font-mono text-sm">
                     <a href="#about" class="nav-link text-gray-300 hover:text-white transition"
                         data-i18n="nav_about">About</a>
+                    <a href="#terminal" class="nav-link text-gray-300 hover:text-white transition">Terminal</a>
                     <a href="#skills" class="nav-link text-gray-300 hover:text-white transition"
                         data-i18n="nav_skills">Skills</a>
                     <a href="#projects" class="nav-link text-gray-300 hover:text-white transition"
@@ -87,7 +194,6 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <header class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16" id="about">
         <div
             class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-900/10 via-black to-black">
@@ -153,7 +259,6 @@
         </div>
     </header>
 
-    <!-- Stats -->
     <section class="py-12 bg-black/50 border-y border-gray-900 backdrop-blur-sm">
         <div class="container mx-auto px-6">
             <div
@@ -178,7 +283,47 @@
         </div>
     </section>
 
-    <!-- Skills -->
+    <section id="terminal" class="py-20 bg-dark-bg">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <h2 class="text-3xl font-bold mb-8 text-white flex items-center gap-3 reveal">
+                <span class="text-accent">#</span> Interactive Terminal
+                <span class="text-xs text-gray-500 font-normal font-mono ml-4">// Try typing "help"</span>
+            </h2>
+
+            <div class="terminal-container reveal delay-100">
+                <div class="terminal-header">
+                    <span class="terminal-dot dot-close"></span>
+                    <span class="terminal-dot dot-minimize"></span>
+                    <span class="terminal-dot dot-maximize"></span>
+                    <span class="text-gray-500 text-xs ml-3 font-mono">falcon0x1@portfolio:~$</span>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <div class="terminal-line">
+                        <span class="command-success">Welcome to falcon0x1 Portfolio Terminal v1.0</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="text-gray-500">Type 'help' for available commands</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="text-gray-500">─────────────────────────────────────────</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">falcon0x1@portfolio:~$</span>
+                        <input type="text" id="terminal-input" class="terminal-input" autofocus autocomplete="off">
+                        <span class="terminal-cursor"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <p class="text-gray-500 text-sm font-mono">
+                    <i class="fas fa-lightbulb text-accent mr-2"></i>
+                    Pro Tip: Try commands like <span class="text-accent">whoami</span>, <span class="text-accent">skills</span>, or <span class="text-accent">contact</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
     <section id="skills" class="py-20 bg-card-bg">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-3 reveal">
@@ -186,7 +331,6 @@
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- Certs -->
                 <div class="space-y-4 reveal delay-100">
                     <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2"
                         data-i18n="cert_header">>> CERTIFICATIONS</h3>
@@ -222,7 +366,6 @@
                     </div>
                 </div>
 
-                <!-- Technical Skills -->
                 <div class="reveal delay-200">
                     <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2"
                         data-i18n="skills_header">>> SKILLS & TOOLS</h3>
@@ -257,7 +400,6 @@
         </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects" class="py-20 border-t border-gray-900">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-3 reveal">
@@ -303,7 +445,6 @@
         </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact" class="py-20 bg-card-bg">
         <div class="container mx-auto px-6 max-w-4xl text-center">
             <h2 class="text-3xl font-bold mb-8 text-white reveal" data-i18n="contact_title">Initialize Connection</h2>
@@ -345,8 +486,8 @@
         </div>
     </footer>
 
-    <!-- Main Logic Script -->
     <script src="js/main.js"></script>
+    <script src="js/terminal.js"></script>
 </body>
 
 </html>
