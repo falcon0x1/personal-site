@@ -43,7 +43,7 @@ class PortfolioTerminal {
 
     init() {
         this.input.addEventListener('keydown', (e) => this.handleKeyDown(e));
-        this.input.focus();
+        //this.input.focus();
         this.body.addEventListener('click', () => this.input.focus());
     }
 
@@ -145,6 +145,8 @@ class PortfolioTerminal {
         `;
         this.input = document.getElementById('terminal-input');
         this.init(); // Re-attach listeners
+        this.input.focus();
+
     }
 
     removeCursor() {

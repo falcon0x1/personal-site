@@ -10,7 +10,7 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
 
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https:; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:;">
+        content="default-src 'self' https:; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:;">
 
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
@@ -31,122 +31,7 @@
     <link rel="stylesheet" href="./dist/output.css">
     <link rel="stylesheet" href="./css/style.css">
 
-    <style>
-        /* Terminal Specific Styles - Kept inline as allowed by style-src 'unsafe-inline' */
-        .terminal-container {
-            background: #0a0a0a;
-            border: 1px solid #00ff41;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15);
-        }
-
-        .terminal-header {
-            background: #1a1a1a;
-            padding: 12px 16px;
-            border-bottom: 1px solid #00ff41;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .dot-close { background: #ff5f56; }
-        .dot-minimize { background: #ffbd2e; }
-        .dot-maximize { background: #27c93f; }
-
-        .terminal-body {
-            padding: 20px;
-            height: 400px;
-            overflow-y: auto;
-            font-family: 'Fira Code', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .terminal-output {
-            color: #e0e0e0;
-            margin-bottom: 10px;
-        }
-
-        .terminal-prompt {
-            color: #00ff41;
-            display: inline-block;
-        }
-
-        .terminal-input {
-            background: none;
-            border: none;
-            color: #fff;
-            font-family: 'Fira Code', monospace;
-            font-size: 14px;
-            outline: none;
-            width: calc(100% - 200px);
-            margin-left: 8px;
-        }
-
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: #00ff41;
-            animation: blink 1s infinite;
-            margin-left: 2px;
-        }
-
-        .terminal-line {
-            margin-bottom: 8px;
-        }
-
-        .command-success {
-            color: #00ff41;
-        }
-
-        .command-error {
-            color: #ff5f56;
-        }
-
-        .command-info {
-            color: #00d4ff;
-        }
-
-        .command-warning {
-            color: #ffbd2e;
-        }
-
-        .ascii-art {
-            color: #00ff41;
-            line-height: 1.2;
-            font-size: 12px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Custom Scrollbar for Terminal */
-        .terminal-body::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .terminal-body::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-
-        .terminal-body::-webkit-scrollbar-thumb {
-            background: #00ff41;
-            border-radius: 4px;
-        }
-    </style>
-
-</head>
+    </head>
 
 <body class="grid-bg">
 
@@ -309,7 +194,7 @@
                     </div>
                     <div class="terminal-line">
                         <span class="terminal-prompt">falcon0x1@portfolio:~$</span>
-                        <input type="text" id="terminal-input" class="terminal-input" autofocus autocomplete="off">
+                        <input type="text" id="terminal-input" class="terminal-input"  autocomplete="off">
                         <span class="terminal-cursor"></span>
                     </div>
                 </div>
@@ -324,81 +209,118 @@
         </div>
     </section>
 
-    <section id="skills" class="py-20 bg-card-bg">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-3 reveal">
-                <span class="text-accent">#</span> <span data-i18n="skills_title">Technical Arsenal</span>
-            </h2>
+   <section id="skills" class="py-20 bg-card-bg">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-3 reveal">
+            <span class="text-accent">#</span> Technical Arsenal
+        </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="space-y-4 reveal delay-100">
-                    <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2"
-                        data-i18n="cert_header">>> CERTIFICATIONS</h3>
+        <!-- GRID WRAPPER -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 
-                    <div
-                        class="group p-4 bg-dark-bg border border-gray-800 rounded flex gap-4 hover:border-accent hover:shadow-[0_0_10px_rgba(0,255,65,0.1)] transition duration-300 cursor-default transform hover:-translate-y-1">
-                        <div class="text-2xl text-gray-500 group-hover:text-accent transition"><i
-                                class="fas fa-shield-alt"></i></div>
-                        <div>
-                            <h4 class="font-bold text-white">eWAPT</h4>
-                            <p class="text-xs text-gray-500">eLearnSecurity Web Application Penetration Tester</p>
-                        </div>
+            <!-- LEFT COLUMN : CERTIFICATIONS -->
+            <div class="space-y-4 reveal delay-100">
+                <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2">
+                    >> CERTIFICATIONS
+                </h3>
+
+                <a href="https://certs.ine.com/5e316417-fc2c-4002-a598-3fa7f484c93e#acc.z10dbmSl"
+                   target="_blank" rel="noopener noreferrer"
+                   class="group p-4 bg-dark-bg border border-gray-800 rounded flex gap-4
+                          hover:border-accent hover:shadow-[0_0_10px_rgba(0,255,65,0.1)]
+                          transition duration-300 transform hover:-translate-y-1">
+
+                    <div class="text-2xl text-gray-500 group-hover:text-accent transition">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-
-                    <div
-                        class="group p-4 bg-dark-bg border border-gray-800 rounded flex gap-4 hover:border-accent hover:shadow-[0_0_10px_rgba(0,255,65,0.1)] transition duration-300 cursor-default transform hover:-translate-y-1">
-                        <div class="text-2xl text-gray-500 group-hover:text-accent transition"><i
-                                class="fas fa-globe"></i></div>
-                        <div>
-                            <h4 class="font-bold text-white">Certified Web Pentester</h4>
-                            <p class="text-xs text-gray-500">CyberTalents / ITI</p>
-                        </div>
+                    <div>
+                        <h4 class="font-bold text-white">eWAPT</h4>
+                        <p class="text-xs text-gray-500">
+                            eLearnSecurity Web Application Penetration Tester
+                        </p>
                     </div>
+                </a>
 
-                    <div
-                        class="group p-4 bg-dark-bg border border-gray-800 rounded flex gap-4 hover:border-accent hover:shadow-[0_0_10px_rgba(0,255,65,0.1)] transition duration-300 cursor-default transform hover:-translate-y-1">
-                        <div class="text-2xl text-gray-500 group-hover:text-accent transition"><i
-                                class="fab fa-android"></i></div>
-                        <div>
-                            <h4 class="font-bold text-white">Certified Mobile Pentester</h4>
-                            <p class="text-xs text-gray-500">CyberTalents / ITI</p>
-                        </div>
-                    </div>
-                </div>
+                <a href="https://cybertalents.com/certifications/af472f89-2d5b-4969-bbf5-c3cbc3f5fba2"
+                   target="_blank" rel="noopener noreferrer"
+                   class="group p-4 bg-dark-bg border border-gray-800 rounded flex gap-4
+                          hover:border-accent hover:shadow-[0_0_10px_rgba(0,255,65,0.1)]
+                          transition duration-300 transform hover:-translate-y-1">
 
-                <div class="reveal delay-200">
-                    <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2"
-                        data-i18n="skills_header">>> SKILLS & TOOLS</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag border-accent text-accent bg-green-900/10 hover:bg-green-900/30">Burp
-                            Suite Pro</span>
-                        <span class="skill-tag">Metasploit</span>
-                        <span class="skill-tag">Nmap</span>
-                        <span class="skill-tag">OWASP ZAP</span>
-                        <span class="skill-tag">sqlmap</span>
-                        <span class="skill-tag">Wireshark</span>
-                        <span class="skill-tag">Frida</span>
-                        <span class="skill-tag">JADX</span>
-                        <span class="skill-tag">MobSF</span>
-                        <span class="skill-tag">Objection</span>
-                        <span class="skill-tag">Apktool</span>
-                        <span class="skill-tag">ADB</span>
-                        <span class="skill-tag">Active Directory</span>
-                        <span class="skill-tag">TCP/IP & DNS</span>
-                        <span class="skill-tag">Linux (Arch/Kali/RedHat)</span>
-                        <span class="skill-tag">Windows Security</span>
-                        <span class="skill-tag border-accent text-accent bg-green-900/10 hover:bg-green-900/30">Bash
-                            Scripting</span>
-                        <span
-                            class="skill-tag border-accent text-accent bg-green-900/10 hover:bg-green-900/30">Python</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">Git</span>
+                    <div class="text-2xl text-gray-500 group-hover:text-accent transition">
+                        <i class="fas fa-globe"></i>
                     </div>
+                    <div>
+                        <h4 class="font-bold text-white">Certified Web Pentester</h4>
+                        <p class="text-xs text-gray-500">CyberTalents / ITI</p>
+                    </div>
+                </a>
+
+                <a href="https://cybertalents.com/certifications/592c008e-094a-425e-a7a8-0323281d8b2c"
+                   target="_blank" rel="noopener noreferrer"
+                   class="group p-4 bg-dark-bg border border-gray-800 rounded flex gap-4
+                          hover:border-accent hover:shadow-[0_0_10px_rgba(0,255,65,0.1)]
+                          transition duration-300 transform hover:-translate-y-1">
+
+                    <div class="text-2xl text-gray-500 group-hover:text-accent transition">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white">Certified Mobile Pentester</h4>
+                        <p class="text-xs text-gray-500">CyberTalents / ITI</p>
+                    </div>
+                </a>
+
+                <a href="https://www.credly.com/badges/da7eead9-5427-4bf0-aeba-6f9fa68977aa/public_url"
+                   target="_blank" rel="noopener noreferrer"
+                   class="group p-4 bg-dark-bg border border-gray-800 rounded flex gap-4
+                          hover:border-accent hover:shadow-[0_0_10px_rgba(0,255,65,0.1)]
+                          transition duration-300 transform hover:-translate-y-1">
+
+                    <div class="text-2xl text-gray-500 group-hover:text-accent transition">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white">API Security Certified</h4>
+                        <p class="text-xs text-gray-500">APIsec University</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- RIGHT COLUMN : SKILLS -->
+            <div class="reveal delay-200">
+                <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2">
+                    >> SKILLS & TOOLS
+                </h3>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag border-accent text-accent bg-green-900/10">Burp Suite Pro</span>
+                    <span class="skill-tag">Metasploit</span>
+                    <span class="skill-tag">Nmap</span>
+                    <span class="skill-tag">OWASP ZAP</span>
+                    <span class="skill-tag">sqlmap</span>
+                    <span class="skill-tag">Wireshark</span>
+                    <span class="skill-tag">Frida</span>
+                    <span class="skill-tag">JADX</span>
+                    <span class="skill-tag">MobSF</span>
+                    <span class="skill-tag">Objection</span>
+                    <span class="skill-tag">Apktool</span>
+                    <span class="skill-tag">ADB</span>
+                    <span class="skill-tag">Active Directory</span>
+                    <span class="skill-tag">TCP/IP & DNS</span>
+                    <span class="skill-tag">Linux (Arch/Kali/RedHat)</span>
+                    <span class="skill-tag">Windows Security</span>
+                    <span class="skill-tag border-accent text-accent bg-green-900/10">Bash Scripting</span>
+                    <span class="skill-tag border-accent text-accent bg-green-900/10">Python</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Git</span>
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     <section id="projects" class="py-20 border-t border-gray-900">
         <div class="container mx-auto px-6">
