@@ -1122,11 +1122,11 @@ border: 1px solid var(--color-border-gray-800);
 #mobile-menu a {
     display: block;
     padding: 1rem 0;
-    color: var(--color-text-white);
+    color: #ffffff !important;
     font-family: 'Fira Code', monospace;
     font-size: 1rem;
     transition: color 0.2s ease;
-    border-bottom: 1px solid var(--color-border-gray-800);
+    border-bottom: 1px solid rgba(55, 65, 81, 0.5);
 }
 
 #mobile-menu a:last-child {
@@ -1134,7 +1134,7 @@ border: 1px solid var(--color-border-gray-800);
 }
 
 #mobile-menu a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent) !important;
 }
 
 /* Mobile menu theme toggle and language button */
@@ -1143,7 +1143,7 @@ border: 1px solid var(--color-border-gray-800);
     gap: 1rem;
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--color-border-gray-800);
+    border-top: 1px solid rgba(55, 65, 81, 0.5);
     flex-wrap: wrap;
 }
 
@@ -1154,7 +1154,33 @@ border: 1px solid var(--color-border-gray-800);
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
     text-align: center;
-    border: none;
+    border: 1px solid var(--color-accent) !important;
+    color: var(--color-accent) !important;
+    background: transparent;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#mobile-menu .mobile-controls button:hover,
+#mobile-menu .mobile-controls a:hover {
+    background: var(--color-accent);
+    color: #000000 !important;
+}
+
+/* Mobile menu social icons */
+#mobile-menu .flex.justify-center {
+    border-top: 1px solid rgba(55, 65, 81, 0.5);
+}
+
+#mobile-menu .flex.justify-center a {
+    border-bottom: none !important;
+    padding: 0.5rem;
+    color: #9ca3af !important;
+}
+
+#mobile-menu .flex.justify-center a:hover {
+    color: var(--color-accent) !important;
 }
 
 /* Mobile responsive glitch effect - reduce intensity on small screens */
