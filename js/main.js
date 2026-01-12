@@ -488,6 +488,138 @@ const initApp = () => {
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+            // Toggle hamburger icon to X
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    }
+
+    // Mobile Theme Toggle
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    if (mobileThemeToggle) {
+        const mobileThemeIcon = mobileThemeToggle.querySelector('i');
+        const mobileTeamLabel = document.getElementById('mobile-team-label');
+        const navLogo = document.getElementById('nav-logo');
+
+        // Sync mobile toggle state on load
+        if (body.classList.contains('blue-team')) {
+            if (mobileThemeIcon) {
+                mobileThemeIcon.classList.remove('fa-skull-crossbones');
+                mobileThemeIcon.classList.add('fa-shield-alt');
+            }
+            if (mobileTeamLabel) {
+                mobileTeamLabel.textContent = 'BLUE';
+            }
+        }
+
+        mobileThemeToggle.addEventListener('click', () => {
+            const isBlueTeam = body.classList.toggle('blue-team');
+            body.classList.toggle('light-theme');
+            const newTeam = isBlueTeam ? 'blue' : 'red';
+            localStorage.setItem('team', newTeam);
+
+            // Update mobile toggle UI
+            if (mobileThemeIcon) {
+                if (isBlueTeam) {
+                    mobileThemeIcon.classList.remove('fa-skull-crossbones');
+                    mobileThemeIcon.classList.add('fa-shield-alt');
+                } else {
+                    mobileThemeIcon.classList.remove('fa-shield-alt');
+                    mobileThemeIcon.classList.add('fa-skull-crossbones');
+                }
+            }
+            if (mobileTeamLabel) {
+                mobileTeamLabel.textContent = isBlueTeam ? 'BLUE' : 'RED';
+            }
+
+            // Sync desktop toggle UI
+            const desktopThemeIcon = themeToggle?.querySelector('i');
+            const desktopTeamLabel = document.getElementById('team-label');
+            if (desktopThemeIcon) {
+                if (isBlueTeam) {
+                    desktopThemeIcon.classList.remove('fa-skull-crossbones');
+                    desktopThemeIcon.classList.add('fa-shield-alt');
+                } else {
+                    desktopThemeIcon.classList.remove('fa-shield-alt');
+                    desktopThemeIcon.classList.add('fa-skull-crossbones');
+                }
+            }
+            if (desktopTeamLabel) {
+                desktopTeamLabel.textContent = isBlueTeam ? 'BLUE' : 'RED';
+            }
+
+            // Update logo
+            if (navLogo) {
+                navLogo.src = isBlueTeam ? 'img/logo-blue.png' : 'img/logo-black.png';
+            }
+        });
+    }
+
+    // Mobile Language Toggle
+    const mobileLangBtn = document.getElementById('mobile-lang-btn');
+    if (mobileLangBtn) {
+        // Sync mobile lang button state on load
+        mobileLangBtn.textContent = currentLang === 'en' ? 'AR' : 'EN';
+
+        mobileLangBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const html = document.documentElement;
+            html.setAttribute('lang', currentLang);
+            html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            
+            // Update both mobile and desktop buttons
+            mobileLangBtn.textContent = currentLang === 'en' ? 'AR' : 'EN';
+            if (langBtn) {
+                langBtn.textContent = currentLang === 'en' ? 'AR' : 'EN';
+            }
+
+            // Switch typing phrases
+            typingPhrases = phrases[currentLang];
+            pIndex = 0;
+            cIndex = 0;
+            isDeleting = false;
+
+            if (translations[currentLang]['hero_name'] && nameEl) {
+                nameEl.textContent = translations[currentLang]['hero_name'];
+                nameEl.setAttribute('data-text', translations[currentLang]['hero_name']);
+
+                if (currentLang === 'ar' && glitchWrapper) {
+                    glitchWrapper.style.fontFamily = "'Cairo', sans-serif";
+                } else if (glitchWrapper) {
+                    glitchWrapper.style.fontFamily = "inherit";
+                }
+            }
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                    if (key === 'hero_headline') {
+                        el.setAttribute('data-text', translations[currentLang][key]);
+                        if (typeof hackerDecode === 'function') hackerDecode(el);
+                    }
+                }
+            });
         });
     }
 

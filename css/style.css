@@ -1094,10 +1094,16 @@ border: 1px solid var(--color-border-gray-800);
 #mobile-menu {
     top: 64px;
     transition: all 0.3s ease-in-out;
+    background: #0a0a0a !important;
+    min-height: calc(100vh - 64px);
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+    display: none;
+    z-index: 41;
 }
 
 #mobile-menu:not(.hidden) {
-    display: block;
+    display: block !important;
     animation: slideDown 0.3s ease-out;
 }
 
@@ -1115,15 +1121,40 @@ border: 1px solid var(--color-border-gray-800);
 
 #mobile-menu a {
     display: block;
-    padding: 0.75rem 0;
+    padding: 1rem 0;
     color: var(--color-text-white);
     font-family: 'Fira Code', monospace;
-    font-size: 0.875rem;
+    font-size: 1rem;
     transition: color 0.2s ease;
+    border-bottom: 1px solid var(--color-border-gray-800);
+}
+
+#mobile-menu a:last-child {
+    border-bottom: none;
 }
 
 #mobile-menu a:hover {
     color: var(--color-accent);
+}
+
+/* Mobile menu theme toggle and language button */
+#mobile-menu .mobile-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border-gray-800);
+    flex-wrap: wrap;
+}
+
+#mobile-menu .mobile-controls button,
+#mobile-menu .mobile-controls a {
+    flex: 1;
+    min-width: 80px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    text-align: center;
+    border: none;
 }
 
 /* Mobile responsive glitch effect - reduce intensity on small screens */
@@ -1657,6 +1688,8 @@ textarea.form-input {
     border: 1px solid var(--color-border-gray-800);
     border-radius: 0.75rem;
     transition: all 0.3s;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .contact-info-card:hover {
@@ -1668,6 +1701,7 @@ textarea.form-input {
 .contact-icon {
     width: 50px;
     height: 50px;
+    min-width: 50px;
     background: var(--color-accent);
     color: var(--color-text-black);
     border-radius: 50%;
@@ -1680,6 +1714,29 @@ textarea.form-input {
 
 .contact-info-card:hover .contact-icon {
     transform: scale(1.1) rotate(5deg);
+}
+
+/* Contact section mobile fixes */
+@media (max-width: 768px) {
+    .contact-info-card {
+        padding: 1rem;
+    }
+
+    .contact-icon {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        font-size: 1.1rem;
+    }
+
+    .contact-info-card h4 {
+        font-size: 0.95rem;
+    }
+
+    .contact-info-card p {
+        font-size: 0.75rem;
+        word-break: break-all;
+    }
 }
 
 /* Blue Team Overrides */
@@ -1952,5 +2009,255 @@ textarea.form-input {
     100% {
         background-position: 0% 50%;
         text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+}
+
+/* =========================================
+   COMPREHENSIVE MOBILE RESPONSIVE STYLES
+   ========================================= */
+
+/* Navbar Logo adjustments for different screen sizes */
+@media (max-width: 1023px) {
+    #nav-logo {
+        width: 40px !important;
+        height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+    }
+
+    #navbar .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Mobile Portrait (up to 480px) */
+@media (max-width: 480px) {
+    #navbar .container {
+        padding: 0.5rem 0.75rem;
+    }
+
+    #nav-logo {
+        width: 32px !important;
+        height: 32px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
+    }
+
+    #navbar a span {
+        font-size: 0.9rem;
+    }
+
+    .hero-headline {
+        font-size: 1.75rem !important;
+        line-height: 1.2;
+    }
+
+    .hero-sub {
+        font-size: 0.95rem;
+    }
+
+    .btn-massive {
+        padding: 12px 24px;
+        font-size: 0.875rem;
+    }
+
+    .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.75rem;
+        height: auto;
+    }
+
+    /* Contact section mobile fixes */
+    #contact .grid {
+        gap: 1.5rem;
+    }
+
+    .contact-form {
+        padding: 1.25rem;
+    }
+
+    .contact-info-card {
+        padding: 0.875rem;
+    }
+
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        font-size: 1rem;
+    }
+
+    /* Terminal adjustments */
+    .terminal-body {
+        height: 300px;
+        font-size: 12px;
+    }
+
+    .terminal-input {
+        font-size: 12px;
+        width: calc(100% - 150px);
+    }
+
+    /* Blog cards */
+    .blog-title {
+        font-size: 1rem;
+    }
+
+    .blog-excerpt {
+        font-size: 0.8rem;
+    }
+
+    /* Skills section */
+    .skill-card {
+        padding: 1rem;
+    }
+
+    .skill-progress-ring {
+        width: 60px;
+        height: 60px;
+    }
+
+    .skill-title {
+        font-size: 0.875rem;
+    }
+
+    .skill-desc {
+        font-size: 0.7rem;
+    }
+
+    /* Stats section */
+    .stat-number {
+        font-size: 1.75rem !important;
+    }
+
+    /* Experience section */
+    .experience-title {
+        font-size: 1rem;
+    }
+
+    .experience-list li {
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile Landscape (height constraint) */
+@media (max-height: 500px) and (orientation: landscape) {
+    #mobile-menu {
+        min-height: auto;
+        max-height: calc(100vh - 64px);
+        overflow-y: auto;
+    }
+
+    #mobile-menu a {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    #mobile-menu .mobile-controls {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+    }
+
+    .hero-minimal {
+        min-height: auto;
+        padding-top: 80px;
+        padding-bottom: 40px;
+    }
+}
+
+/* Tablet adjustments (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hero-headline {
+        font-size: 2.5rem;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .profile-clean {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    /* Contact section grid */
+    #contact .grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Fix for very small screens */
+@media (max-width: 320px) {
+    .hero-headline {
+        font-size: 1.5rem !important;
+    }
+
+    .min-badge {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
+
+    .btn-massive,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .flex-col.sm\\:flex-row {
+        flex-direction: column !important;
+    }
+
+    .contact-info-card h4 {
+        font-size: 0.85rem;
+    }
+
+    .contact-info-card p {
+        font-size: 0.7rem;
+    }
+}
+
+/* Ensure full-width on mobile for grids */
+@media (max-width: 768px) {
+
+    .grid.md\\:grid-cols-2,
+    .grid.md\\:grid-cols-4 {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Fix stats grid to 2 columns on mobile */
+    .grid.grid-cols-2.md\\:grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Fix dividers on stats */
+    .divide-x> :not([hidden])~ :not([hidden]) {
+        border-left-width: 0 !important;
+    }
+
+    /* Add top border instead for second row */
+    .grid.grid-cols-2> :nth-child(n+3) {
+        border-top: 1px solid var(--color-border-gray-800);
+        padding-top: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Hero stats row mobile */
+    .hero-stats-row {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    /* Blog cards buttons mobile */
+    #blog .flex-wrap {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #blog .flex-wrap a {
+        width: 100%;
+        text-align: center;
     }
 }

@@ -52,17 +52,17 @@
 
     <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800 transition-all duration-300"
         id="navbar">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="container mx-auto px-4 lg:px-6 py-3 lg:py-4 flex justify-between items-center">
             <a href="#"
-                class="flex items-center gap-3 text-xl md:text-2xl font-bold font-mono text-white tracking-tighter hover:text-accent transition duration-300 transform hover:scale-105">
+                class="flex items-center gap-2 lg:gap-3 text-lg lg:text-2xl font-bold font-mono text-white tracking-tighter hover:text-accent transition duration-300 transform hover:scale-105">
                 <img src="img/logo-black.png" alt="falcon0x1" id="nav-logo"
-                    class="w-[50px] h-[50px] md:w-[80px] md:h-[80px] object-contain"
-                    style="max-width: 80px; max-height: 80px;">
+                    class="w-[40px] h-[40px] lg:w-[60px] lg:h-[60px] object-contain"
+                    style="max-width: 60px; max-height: 60px;">
                 <span><span class="text-accent">&lt;</span>falcon0x1<span class="text-accent">/&gt;</span></span>
             </a>
 
-            <div class="flex items-center gap-6">
-                <div class="hidden md:flex space-x-8 gap-4 font-mono text-sm">
+            <div class="flex items-center gap-4 lg:gap-6">
+                <div class="hidden lg:flex space-x-6 gap-3 font-mono text-sm">
                     <a href="#about" class="nav-link text-gray-300 hover:text-white transition"
                         data-i18n="nav_about">About</a>
                     <a href="#terminal" class="nav-link text-gray-300 hover:text-white transition">Terminal</a>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div
-                    class="hidden md:flex items-center gap-3 border-l border-gray-700 pl-4 rtl:border-l-0 rtl:border-r rtl:pr-4 rtl:pl-0">
+                    class="hidden lg:flex items-center gap-3 border-l border-gray-700 pl-4 rtl:border-l-0 rtl:border-r rtl:pr-4 rtl:pl-0">
                     <button id="lang-btn"
                         class="text-xs font-bold font-mono border border-accent text-accent px-3 py-1 rounded hover:bg-accent hover:text-black transition uppercase"
                         aria-label="Toggle language between English and Arabic">
@@ -104,8 +104,8 @@
                         <i class="fab fa-linkedin text-xl"></i>
                     </a>
                 </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none p-2">
                         <i class="fas fa-bars" style="font-size: 1.5rem;"></i>
                     </button>
                 </div>
@@ -115,14 +115,51 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu"
-        class="hidden fixed w-full z-40 bg-black/90 backdrop-blur-md border-b border-gray-800 transition-all duration-300 md:hidden">
+        class="hidden fixed w-full z-40 bg-black/95 backdrop-blur-md border-b border-gray-800 transition-all duration-300 lg:hidden">
         <div class="container mx-auto px-6 py-4">
-            <a href="#about" class="block py-2 text-white hover:text-accent">About</a>
-            <a href="#terminal" class="block py-2 text-white hover:text-accent">Terminal</a>
-            <a href="#skills" class="block py-2 text-white hover:text-accent">Skills</a>
-            <a href="#projects" class="block py-2 text-white hover:text-accent">Projects</a>
+            <a href="#about" class="block py-3 text-white hover:text-accent font-mono" data-i18n="nav_about">About</a>
+            <a href="#terminal" class="block py-3 text-white hover:text-accent font-mono">Terminal</a>
+            <a href="#skills" class="block py-3 text-white hover:text-accent font-mono" data-i18n="nav_skills">Skills</a>
+            <a href="#projects" class="block py-3 text-white hover:text-accent font-mono" data-i18n="nav_work">Projects</a>
+            <a href="#contact" class="block py-3 text-white hover:text-accent font-mono">Contact</a>
             <a href="https://falcon0x1.github.io/" target="_blank" rel="noopener noreferrer"
-                class="block py-2 text-white hover:text-accent">Blog</a>
+                class="block py-3 text-white hover:text-accent font-mono" data-i18n="nav_blog">Blog</a>
+            
+            <!-- Mobile Controls -->
+            <div class="mobile-controls flex gap-3 mt-4 pt-4 border-t border-gray-800">
+                <button id="mobile-lang-btn"
+                    class="flex-1 text-sm font-bold font-mono border border-accent text-accent px-3 py-2 rounded hover:bg-accent hover:text-black transition uppercase"
+                    aria-label="Toggle language between English and Arabic">
+                    AR
+                </button>
+                <button id="mobile-theme-toggle"
+                    class="flex-1 flex items-center justify-center gap-2 text-sm font-bold font-mono border border-accent text-accent px-3 py-2 rounded hover:bg-accent hover:text-black transition"
+                    aria-label="Toggle between Red Team and Blue Team themes">
+                    <i class="fas fa-skull-crossbones"></i>
+                    <span id="mobile-team-label">RED</span>
+                </button>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex justify-center gap-6 mt-4 pt-4 border-t border-gray-800">
+                <a href="https://linkedin.com/in/mahmoud-elshorbagy-b77b38234/" target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-accent transition transform hover:scale-110"
+                    aria-label="View Mahmoud Elshorbagy's LinkedIn profile">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/falcon0x1" target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-accent transition transform hover:scale-110"
+                    aria-label="View GitHub profile">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:mahmoud.elshorbagy0x1@gmail.com"
+                    class="text-gray-400 hover:text-accent transition transform hover:scale-110"
+                    aria-label="Send email">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
         </div>
     </div>
 
