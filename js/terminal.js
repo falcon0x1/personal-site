@@ -34,11 +34,11 @@ class PortfolioTerminal {
     escapeHtml(text) {
         if (!text) return text;
         return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
     init() {
@@ -187,76 +187,111 @@ class PortfolioTerminal {
     }
 
     aboutCommand() {
-        this.addOutput('<span class="command-success">[PROFILE]</span>');
-        this.addOutput('─────────────────────────────────────────');
-        this.addOutput('Name: Mahmoud Elshorbagy');
-        this.addOutput('Alias: falcon0x1');
-        this.addOutput('Role: Penetration Tester & Security Engineer');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╔══════════════════════════════════════════════╗\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e║          SECURITY PROFILE - FALCON0X1        ║\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╚══════════════════════════════════════════════╝\u003c/span\u003e');
         this.addOutput('');
-        this.addOutput('I simulate advanced cyber attacks to help organizations');
-        this.addOutput('strengthen their defenses. Specialized in Web, Mobile,');
-        this.addOutput('and Active Directory security assessments.');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e► IDENTITY\u003c/span\u003e');
+        this.addOutput('  Name:     Mahmoud Elshorbagy');
+        this.addOutput('  Alias:    falcon0x1');
+        this.addOutput('  Role:     Penetration Tester \u0026 Security Engineer');
+        this.addOutput('  Location: Egypt');
         this.addOutput('');
-        this.addOutput('<span class="command-info">Experience:</span> 50+ Labs Pwned | 4+ Certifications');
-        this.addOutput('<span class="command-info">Focus Areas:</span> OWASP Top 10 | Mobile Security | AD Exploitation');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e► MISSION\u003c/span\u003e');
+        this.addOutput('  Simulating advanced cyber attacks to help organizations');
+        this.addOutput('  strengthen their defenses. Specialized in finding and');
+        this.addOutput('  exploiting vulnerabilities before malicious actors do.');
+        this.addOutput('');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e► EXPERTISE\u003c/span\u003e');
+        this.addOutput('  • Web Application Security (OWASP Top 10)');
+        this.addOutput('  • Mobile Penetration Testing (Android/iOS)');
+        this.addOutput('  • Active Directory Exploitation');
+        this.addOutput('  • Network Security Assessment');
+        this.addOutput('  • Security Automation \u0026 Scripting');
+        this.addOutput('');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e► ACHIEVEMENTS\u003c/span\u003e');
+        this.addOutput('  ✓ 50+ Vulnerable Labs Pwned');
+        this.addOutput('  ✓ 4+ Professional Certifications');
+        this.addOutput('  ✓ 15+ Security Research Publications');
+        this.addOutput('  ✓ 120+ GitHub Contributions');
+        this.addOutput('');
+        this.addOutput('\u003cspan class=\"command-info\"\u003eType "skills" for technical arsenal\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-info\"\u003eType "experience" for work history\u003c/span\u003e');
     }
 
     skillsCommand() {
-        this.addOutput('<span class="command-success">[TECHNICAL ARSENAL]</span>');
-        this.addOutput('─────────────────────────────────────────');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╔══════════════════════════════════════════════╗\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e║           TECHNICAL ARSENAL                  ║\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╚══════════════════════════════════════════════╝\u003c/span\u003e');
+        this.addOutput('');
 
         const skills = {
-            'Web Application Testing': ['Burp Suite Pro', 'OWASP ZAP', 'sqlmap', 'Nikto'],
-            'Mobile Security': ['Frida', 'JADX', 'MobSF', 'Objection', 'Apktool', 'ADB'],
-            'Network Analysis': ['Nmap', 'Wireshark', 'Masscan', 'tcpdump'],
-            'Exploitation': ['Metasploit', 'Empire', 'Covenant', 'Mimikatz'],
-            'Programming': ['Bash', 'Python', 'JavaScript', 'SQL'],
-            'Infrastructure': ['Active Directory', 'Linux', 'Windows', 'TCP/IP']
+            '🌐 Web Application Testing': ['Burp Suite Pro', 'OWASP ZAP', 'sqlmap', 'Nikto', 'Nuclei'],
+            '📱 Mobile Security': ['Frida', 'JADX', 'MobSF', 'Objection', 'Apktool', 'ADB'],
+            '🔍 Network Analysis': ['Nmap', 'Wireshark', 'Masscan', 'tcpdump', 'Netcat'],
+            '💥 Exploitation': ['Metasploit', 'Empire', 'Covenant', 'Mimikatz', 'BloodHound'],
+            '💻 Programming': ['Bash', 'Python', 'JavaScript', 'SQL', 'PowerShell'],
+            '🏗️ Infrastructure': ['Active Directory', 'Linux', 'Windows', 'Docker', 'AWS']
         };
 
         for (const [category, tools] of Object.entries(skills)) {
-            this.addOutput(`<span class="command-info">${category}:</span>`);
-            this.addOutput(`  ${tools.join(' | ')}`);
+            this.addOutput(`\u003cspan class=\"text-accent\"\u003e${category}\u003c/span\u003e`);
+            this.addOutput(`  ${tools.join(' • ')}`);
             this.addOutput('');
         }
+
+        this.addOutput('\u003cspan class=\"command-info\"\u003e💡 Proficiency: Advanced to Expert Level\u003c/span\u003e');
     }
 
     projectsCommand() {
-        this.addOutput('<span class="command-success">[PROJECTS & RESEARCH]</span>');
-        this.addOutput('─────────────────────────────────────────');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╔══════════════════════════════════════════════╗\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e║         PROJECTS \u0026 RESEARCH                 ║\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╚══════════════════════════════════════════════╝\u003c/span\u003e');
         this.addOutput('');
-        this.addOutput('<span class="command-info">1. FalconRecon</span>');
-        this.addOutput('   Advanced Bash automation tool for reconnaissance');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e1. FalconRecon\u003c/span\u003e - Advanced Reconnaissance Tool');
+        this.addOutput('   Bash automation framework for security assessments');
         this.addOutput('   Features: Subdomain enum, port scanning, vuln discovery');
-        this.addOutput('   <span class="text-accent">→ github.com/falcon0x1/FalconRecon</span>');
+        this.addOutput('   \u003cspan class=\"command-info\"\u003e→ github.com/falcon0x1/FalconRecon\u003c/span\u003e');
         this.addOutput('');
-        this.addOutput('<span class="command-info">2. Security Research</span>');
-        this.addOutput('   Technical writeups on Medium');
-        this.addOutput('   Topics: IDOR, SQLi, Active Directory exploitation');
-        this.addOutput('   <span class="text-accent">→ medium.com/@mahmoudelshorpagy7</span>');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e2. Security Research Blog\u003c/span\u003e - Technical Writeups');
+        this.addOutput('   In-depth articles on Android \u0026 Web security');
+        this.addOutput('   Topics: IDOR, SQLi, Android exploitation, AD attacks');
+        this.addOutput('   \u003cspan class=\"command-info\"\u003e→ falcon0x1.github.io\u003c/span\u003e');
         this.addOutput('');
-        this.addOutput('<span class="text-gray-500">Use "blog" command to visit my blog</span>');
+        this.addOutput('\u003cspan class=\"text-gray-500\"\u003eUse "blog" command to visit my blog\u003c/span\u003e');
     }
 
     contactCommand() {
-        this.addOutput('<span class="command-success">[CONTACT INFORMATION]</span>');
-        this.addOutput('─────────────────────────────────────────');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╔══════════════════════════════════════════════╗\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e║         CONTACT INFORMATION                  ║\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╚══════════════════════════════════════════════╝\u003c/span\u003e');
+        this.addOutput('');
         this.addOutput('📧 Email:    mahmoud.elshorbagy0x1@gmail.com');
         this.addOutput('📱 WhatsApp: +20 155 6688657');
         this.addOutput('💼 LinkedIn: linkedin.com/in/mahmoud-elshorbagy-b77b38234/');
         this.addOutput('🐙 GitHub:   github.com/falcon0x1');
         this.addOutput('📝 Blog:     falcon0x1.github.io');
         this.addOutput('');
-        this.addOutput('<span class="command-info">Status:</span> <span class="text-accent">Open to Work</span>');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e► STATUS: OPEN TO WORK\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-info\"\u003e  Available for: Pentesting | Security Consulting | Red Team\u003c/span\u003e');
     }
 
     certsCommand() {
-        this.addOutput('<span class="command-success">[CERTIFICATIONS]</span>');
-        this.addOutput('─────────────────────────────────────────');
-        this.addOutput('✓ eWAPT - eLearnSecurity Web Application Penetration Tester');
-        this.addOutput('✓ Certified Web Pentester - CyberTalents / ITI');
-        this.addOutput('✓ Certified Mobile Pentester - CyberTalents / ITI');
-        this.addOutput('✓ Various Security Training Completion');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╔══════════════════════════════════════════════╗\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e║           CERTIFICATIONS                     ║\u003c/span\u003e');
+        this.addOutput('\u003cspan class=\"command-success\"\u003e╚══════════════════════════════════════════════╝\u003c/span\u003e');
+        this.addOutput('');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e✓ eWPT\u003c/span\u003e - eLearnSecurity Web Application Penetration Tester');
+        this.addOutput('  Issued by: INE Security');
+        this.addOutput('  Focus: Advanced web app security testing');
+        this.addOutput('');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e✓ Certified Web Pentester\u003c/span\u003e - CyberTalents / ITI');
+        this.addOutput('  Focus: OWASP Top 10, API security');
+        this.addOutput('');
+        this.addOutput('\u003cspan class=\"text-accent\"\u003e✓ Certified Mobile Pentester\u003c/span\u003e - CyberTalents / ITI');
+        this.addOutput('  Focus: Android/iOS security assessment');
+        this.addOutput('');
+        this.addOutput('\u003cspan class=\"command-info\"\u003e📜 Total: 4+ Professional Certifications\u003c/span\u003e');
     }
 
     socialCommand() {
@@ -291,8 +326,8 @@ class PortfolioTerminal {
             if (index < lines.length - 1) line.remove();
         });
 
-            // Add welcome back
-            this.addOutput('<span class="command-success">Terminal cleared</span>');
+        // Add welcome back
+        this.addOutput('<span class="command-success">Terminal cleared</span>');
     }
 
     whoamiCommand() {
