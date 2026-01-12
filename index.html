@@ -119,12 +119,14 @@
         <div class="container mx-auto px-6 py-4">
             <a href="#about" class="block py-3 text-white hover:text-accent font-mono" data-i18n="nav_about">About</a>
             <a href="#terminal" class="block py-3 text-white hover:text-accent font-mono">Terminal</a>
-            <a href="#skills" class="block py-3 text-white hover:text-accent font-mono" data-i18n="nav_skills">Skills</a>
-            <a href="#projects" class="block py-3 text-white hover:text-accent font-mono" data-i18n="nav_work">Projects</a>
+            <a href="#skills" class="block py-3 text-white hover:text-accent font-mono"
+                data-i18n="nav_skills">Skills</a>
+            <a href="#projects" class="block py-3 text-white hover:text-accent font-mono"
+                data-i18n="nav_work">Projects</a>
             <a href="#contact" class="block py-3 text-white hover:text-accent font-mono">Contact</a>
             <a href="https://falcon0x1.github.io/" target="_blank" rel="noopener noreferrer"
                 class="block py-3 text-white hover:text-accent font-mono" data-i18n="nav_blog">Blog</a>
-            
+
             <!-- Mobile Controls -->
             <div class="mobile-controls flex gap-3 mt-4 pt-4 border-t border-gray-800">
                 <button id="mobile-lang-btn"
@@ -139,7 +141,7 @@
                     <span id="mobile-team-label">RED</span>
                 </button>
             </div>
-            
+
             <!-- Social Links -->
             <div class="flex justify-center gap-6 mt-4 pt-4 border-t border-gray-800">
                 <a href="https://linkedin.com/in/mahmoud-elshorbagy-b77b38234/" target="_blank"
@@ -148,8 +150,7 @@
                     aria-label="View Mahmoud Elshorbagy's LinkedIn profile">
                     <i class="fab fa-linkedin text-2xl"></i>
                 </a>
-                <a href="https://github.com/falcon0x1" target="_blank"
-                    rel="noopener noreferrer"
+                <a href="https://github.com/falcon0x1" target="_blank" rel="noopener noreferrer"
                     class="text-gray-400 hover:text-accent transition transform hover:scale-110"
                     aria-label="View GitHub profile">
                     <i class="fab fa-github text-2xl"></i>
@@ -876,14 +877,10 @@
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Contact Form -->
                 <div class="reveal delay-100">
-                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                    <form action="https://formsubmit.co/mahmoud.elshorbagy0x1@gmail.com" method="POST"
                         class="contact-form" id="contact-form">
-                        <input type="hidden" name="form-name" value="contact">
+                        <!-- Note: You will need to confirm the first submission via email -->
 
-                        <!-- Honeypot for spam protection -->
-                        <p class="hidden">
-                            <label>Don't fill this out: <input name="bot-field"></label>
-                        </p>
 
                         <div class="form-group">
                             <label for="name" class="form-label">Name</label>
