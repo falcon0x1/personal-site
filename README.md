@@ -3,67 +3,68 @@
 ```
 root@falcon:~/0x1# ./init.sh
 [+] Loading modules...
-[✓] Web Security     [90%]
-[✓] Mobile Security  [80%]
-[✓] Network & AD     [75%]
-[✓] Scripting       [95%]
-[✓] Active Directory [85%]
-[✓] Reverse Engineering [65%]
+[✓] Web Security     [██████░░]
+[✓] Mobile Security [████░░░]
+[✓] Network         [███░░░░]
+[✓] Scripting      [██████░]
+[✓] Active Dir     [█████░░]
+[✓] Reverse Eng    [███░░░░]
 [+] Initialization complete
 ```
 
-## 👤 Who Am I?
+## 👤 About Me
 
-**falcon0x1** (Mahmoud Elshorbagy) is a Penetration Tester & Red Teamer specializing in:
+**falcon0x1** (Mahmoud Elshorbagy) - Penetration Tester & Red Teamer
 
-- 🔴 **Red Teaming** - Full-scope adversary emulation
-- 🌐 **Web Application Security** - OWASP Top 10 + beyond
-- 📱 **Mobile Security** - Android & iOS penetration testing
-- 🏢 **Active Directory** - Enterprise network security
-- ⚙️ **Scripting & Automation** - Python, Bash, custom tools
+Specialized in Web Application Security, Mobile Security, and Active Directory security.
 
 > *"Building tools that break systems, to make them stronger."*
 
 ---
 
-## 🛠️ Arsenal
+## 🛠️ Skills
 
-```
-[ SCAN_DEPTH: 0.98 ] [ SYSTEM: ARCH_LINUX ] [ STATUS: DEPLOYED ]
-
-~/bin/web_sec     : Burp Suite Pro, OWASP ZAP, sqlmap, Postman, GraphQL
-~/bin/mobile_sec  : Frida, MobSF, JADX, Objection, apktool
-~/bin/net_infra   : Nmap, Metasploit, Wireshark, Active Directory
-~/bin/automation  : Python, Bash, C++, Arch Linux, Git
-```
+| Category | Proficiency |
+|----------|-------------|
+| Web Security | 90% |
+| Mobile Security | 80% |
+| Network | 75% |
+| Scripting | 95% |
+| Active Directory | 85% |
+| Reverse Engineering | 65% |
 
 ---
 
 ## 📜 Certifications
 
-| Certification | Issuer | Status |
-|---------------|--------|--------|
-| API Security Certified | APIsec University | ✅ Verified |
-| eJPT | eLearnSecurity | ✅ Verified |
-| eWPTXv2 | eLearnSecurity | ✅ Verified |
-| CC | CyberTalents | ✅ Verified |
-| LPT | EC-Council | ✅ Verified |
+| Certification | Issuer |
+|---------------|--------|
+| eWPT | INE Security |
+| API Security Certified | APIsec University |
 
 ---
 
 ## 📂 Projects
 
-### 🔴 Red Team
-- **FalconDelta** - AD attack chain automation
-- **ZeroTrust** - Zero Trust architecture scanner
+### [FalconRecon](https://github.com/falcon0x1/FalconRecon)
+Advanced reconnaissance framework for web application security testing.
 
-### 🌐 Web Security
-- **FalconRecon** - Advanced reconnaissance framework
-- **FalconServiceAnalyzer** - Service enumeration tool
+### [FalconServiceAnalyzer](https://github.com/falcon0x1/FalconServiceAnalyzer)
+Analyzes Android services attack surface. Automates reconnaissance to discover exposed components.
 
-### ⚙️ Automation
-- Custom Python scripts for bug bounty automation
-- Burp Suite extensions
+### [FalconDelta](https://github.com/falcon0x1/FalconDelta)
+Red team attack chain automation tool.
+
+### [ZeroTrust](https://github.com/falcon0x1/ZeroTrust)
+Cyberpunk Privacy Shield - Flutter app with K-Anonymity password checks and malicious link analyzer.
+
+---
+
+## 📝 Blog Posts
+
+- [Android Security: Falcons Guide](https://falcon0x1.github.io/posts/android-security-falcons-guide/)
+- [Hacking Android Services: Lazy Pentesters Guide](https://falcon0x1.github.io/posts/hacking-android-services-lazy-pentesters-guide/)
+- [Web Enumeration & Brute Force: Manual to Python Automation](https://falcon0x1.github.io/posts/web-enumeration-and-brute-force-from-manual-checks-to-python-automation/)
 
 ---
 
@@ -85,7 +86,6 @@ root@falcon:~/0x1# ./init.sh
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/mahmoud-elshorbagy-b77b38234)
 [![GitHub](https://img.shields.io/badge/GitHub-333?style=flat&logo=github&logoColor=white)](https://github.com/falcon0x1)
-[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=flat&logo=twitter&logoColor=white)](https://twitter.com/falcon0x1)
 
 </div>
 
@@ -102,19 +102,12 @@ npm install
 
 # Build for production
 npm run build
-
-# Deploy to Cloudflare Pages
-# Push to GitHub and connect to Cloudflare
 ```
 
 ---
 
 <div align="center">
 
-```
-𓆲 0x1 ━━╸ Security is not a product, but a process. ━━╸ 𓆲
-```
-
-**Made with 🐦‍🔥 by falcon0x1**
+**Security is not a product, but a process.**
 
 </div>
