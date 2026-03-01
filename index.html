@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com;">
+
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
+
+    <meta name="description"
+        content="falcon0x1 (Mahmoud Elshorbagy) - Penetration Tester & Red Teamer. Specialized in Web, Mobile, and AD Security.">
+    <meta name="author" content="falcon0x1">
+
+    <title>falcon0x1 | Offensive Security Portfolio</title>
+
+    <link rel="icon" type="image/png" href="favicon/favicon.png">
+
+    <!-- Arabic font support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            stroke-width: 0;
+            stroke: currentColor;
+            fill: currentColor;
+            vertical-align: middle;
+        }
+    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=JetBrains+Mono:wght@400;700;800&family=Source+Code+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./dist/main.min.css">
+
+    <!-- Performance Analytics (Canary/Obfuscated) -->
+    <script src="js/canary.min.js" defer></script>
+
+</head>
+
+<body class="grid-bg">
+    <!-- Noise Overlay Background -->
+    <div id="noise-overlay"></div>
+
+    <!-- SVG Sprite for Inline Icons -->
+    <!-- Lucide Icons for UI/tech | Font Awesome Brands for company logos -->
+    <svg style="display: none;">
+        <!-- Lucide Icons - Tech/UI Icons -->
+        <symbol id="icon-skull" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+        </symbol>
+        <symbol id="icon-bars" viewBox="0 0 24 24">
+            <line x1="4" x2="20" y1="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <line x1="4" x2="20" y1="6" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <line x1="4" x2="20" y1="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </symbol>
+        <symbol id="icon-envelope" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                points="22,6 12,13 2,6" />
+        </symbol>
+        <symbol id="icon-lightbulb" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M9 18h6" />
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M10 22h4" />
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+        </symbol>
+        <symbol id="icon-globe" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+            <line x1="2" x2="22" y1="12" y2="12" stroke="currentColor" stroke-width="2" />
+            <path fill="none" stroke="currentColor" stroke-width="2"
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </symbol>
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </symbol>
+        <symbol id="icon-smartphone" viewBox="0 0 24 24">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2" />
+            <line x1="12" x2="12" y1="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </symbol>
+        <symbol id="icon-active-directory" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M12 2L2 7l10 5 10-5-10-5z" />
+            <symbol id="icon-bars" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </symbol>
+            <symbol id="icon-times" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </symbol>
+            <symbol id="icon-terminal" viewBox="0 0 24 24">
+                <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" points="4 17 10 11 4 5" />
+                <line x1="12" x2="20" y1="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </symbol>
+            <symbol id="icon-server" viewBox="0 0 24 24">
+                <rect x="2" x2="22" y="2" y2="8" width="20" height="8" rx="2" ry="2" fill="none" stroke="currentColor"
+                    stroke-width="2" />
+                <rect x="2" x2="22" y1="14" y2="22" width="20" height="8" rx="2" ry="2" fill="none"
+                    stroke="currentColor" stroke-width="2" />
+                <line x1="6" x2="6.01" y1="6" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <line x1="6" x2="6.01" y1="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </symbol>
+            <symbol id="icon-file-text" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" points="14 2 14 8 20 8" />
+                <line x1="16" x2="8" y1="13" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <line x1="16" x2="8" y1="17" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" points="10 9 9 9 8 9" />
+            </symbol>
+            <symbol id="icon-code" viewBox="0 0 24 24">
+                <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" points="16 18 22 12 16 6" />
+                <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" points="8 6 2 12 8 18" />
+            </symbol>
+            <symbol id="icon-clock" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+                <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" points="12 6 12 12 16 14" />
+            </symbol>
+            <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+                <line x1="5" x2="19" y1="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <polyline fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" points="12 5 19 12 12 19" />
+            </symbol>
+            <symbol id="icon-blog" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </symbol>
+            <symbol id="icon-paper-plane" viewBox="0 0 24 24">
+                <line x1="22" x2="11" y1="3" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <polygon points="22 3 15 22 11 13 2 9 22 3" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </symbol>
+            <symbol id="icon-message-circle" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.3a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            </symbol>
+
+            <!-- Font Awesome Brands - Company Logos -->
+            <symbol id="icon-linkedin" viewBox="0 0 448 512">
+                <path fill="currentColor"
+                    d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5s17.2-38.5 38.5-38.5c21.3 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.5 0-39.8 27-39.8 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 63-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
+            </symbol>
+            <symbol id="icon-github" viewBox="0 0 496 512">
+                <path fill="currentColor"
+                    d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-24.4 8.7-44.5 23-60.1-2.3-5.7-10-28.5 2.2-59.3 0 0 18.8-6.1 61.6 23.2 17.9-5.3 37.1-7.9 56.1-7.9 19 0 38.2 2.6 56.1 7.9 42.8-29.3 61.6-23.2 61.6-23.2 12.2 30.8 4.5 53.6 2.2 59.3 14.6 15.6 23 35.7 23 60.1 0 96.6-56.6 104.2-113.1 110.1 9.2 7.9 17.3 23.5 17.3 47.4 0 34.3-.3 61.9-.3 70.3 0 6.5 4.7 14.6 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
+            </symbol>
+            <symbol id="icon-whatsapp" viewBox="0 0 448 512">
+                <path fill="currentColor"
+                    d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+            </symbol>
+        </symbol>
+        <symbol id="icon-android" viewBox="0 0 576 512">
+            <path fill="currentColor"
+                d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-176.29-52.94A301.25,301.25,0,0,0,85.9,148.55L37.36,64.45a10,10,0,1,0-17.27,10h0l47.94,83A283.48,283.48,0,0,0,0,368H576a283.48,283.48,0,0,0-68.85-210.52Z" />
+        </symbol>
+        <symbol id="icon-network-wired" viewBox="0 0 640 512">
+            <path fill="currentColor"
+                d="M640 264v-16c0-8.84-7.16-16-16-16H544V160c0-8.84-7.16-16-16-16h-48V80c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v64h-48c-8.84 0-16 7.16-16 16v72H16c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h80v72c0 8.84 7.16 16 16 16h48v64c0 8.84 7.16 16 16 16h288c8.84 0 16-7.16 16-16v-64h48c8.84 0 16-7.16 16-16v-72h80c8.84 0 16-7.16 16-16zM224 352V160h192v192H224z" />
+        </symbol>
+        </symbol>
+        <symbol id="icon-reverse-engineering" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <text x="7" y="15" font-size="6" fill="currentColor" font-family="monospace" font-weight="bold">01</text>
+        </symbol>
+        </symbol>
+        <symbol id="icon-medium" viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none"
+                d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+        </symbol>
+    </svg>
+
+    <!-- Micro-Progress Scrollbar -->
+    <div id="scroll-progress"></div>
+
+    <div id="preloader">
+        <div class="terminal-loader">
+            root@falcon0x1:~# ./init_portfolio.sh
+        </div>
+    </div>
+
+    <nav class="fixed w-full z-50 top-0 left-0 floating-navbar glassmorphism" id="navbar">
+        <div class="px-6 py-3 flex justify-between items-center container mx-auto max-w-7xl">
+            <a href="#"
+                class="flex items-center gap-2 lg:gap-3 text-lg lg:text-2xl font-bold font-mono text-white tracking-tighter hover:text-accent transition duration-300 transform hover:scale-105">
+                <img src="img/logo-black.webp" alt="falcon0x1" id="nav-logo"
+                    class="h-8 w-8 lg:h-12 lg:w-12 object-contain" style="image-rendering: -webkit-optimize-contrast;">
+                <span><span class="text-accent">&lt;</span>falcon0x1<span class="text-accent">/&gt;</span></span>
+            </a>
+
+            <div class="flex items-center gap-4 lg:gap-6">
+                <div class="hidden lg:flex space-x-6 gap-3 font-mono text-sm">
+                    <a href="#about" class="nav-link text-gray-300 hover:text-white transition"
+                        data-i18n="nav_about">About</a>
+                    <a href="#terminal" class="nav-link text-gray-300 hover:text-white transition">Terminal</a>
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-white transition"
+                        data-i18n="nav_skills">Skills</a>
+                    <div class="relative dropdown">
+                        <a href="#projects" class="nav-link text-gray-300 hover:text-white transition"
+                            data-i18n="nav_work">Projects</a>
+                        <div
+                            class="dropdown-content absolute hidden bg-nav-bg backdrop-blur-md border border-gray-800 rounded-md mt-2 py-2 w-48 z-50">
+                            <a href="#projects"
+                                class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/50 hover:text-white">FalconRecon</a>
+                            <a href="#projects"
+                                class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/50 hover:text-white">Writeups</a>
+                        </div>
+                    </div>
+
+                    <a href="https://falcon0x1.github.io/" target="_blank" rel="noopener noreferrer"
+                        class="nav-link text-gray-300 hover:text-white transition" data-i18n="nav_blog">Blog</a>
+                </div>
+
+                <div
+                    class="hidden lg:flex items-center gap-3 border-l border-gray-700 pl-4 rtl:border-l-0 rtl:border-r rtl:pr-4 rtl:pl-0">
+                    <button id="lang-btn"
+                        class="text-xs font-bold font-mono border border-accent text-accent px-3 py-1 rounded hover:bg-accent hover:text-black transition uppercase"
+                        aria-label="Toggle language between English and Arabic">
+                        AR
+                    </button>
+                    <button id="theme-toggle"
+                        class="flex items-center gap-2 text-xs font-bold font-mono border border-accent text-accent px-3 py-1 rounded hover:bg-accent hover:text-black transition"
+                        aria-label="Toggle between Red Team and Blue Team themes">
+                        <svg class="icon">
+                            <use href="#icon-skull"></use>
+                        </svg>
+                        <span id="team-label">RED</span>
+                    </button>
+                    <a href="https://linkedin.com/in/mahmoud-elshorbagy-b77b38234/" target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-gray-400 hover:text-accent transition transform hover:scale-110"
+                        aria-label="View Mahmoud Elshorbagy's LinkedIn profile">
+                        <svg class="icon">
+                            <use href="#icon-linkedin"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none p-2">
+                        <svg class="icon">
+                            <use href="#icon-bars"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Left Side: Vertical Social Bar -->
+    <div class="vertical-social-bar hidden xl:flex">
+        <div class="social-line"></div>
+        <a href="https://github.com/falcon0x1" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg class="icon">
+                <use href="#icon-github"></use>
+            </svg>
+        </a>
+        <a href="https://linkedin.com/in/mahmoud-elshorbagy-b77b38234/" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn">
+            <svg class="icon">
+                <use href="#icon-linkedin"></use>
+            </svg>
+        </a>
+        <a href="mailto:falcon0x1.sec@gmail.com" aria-label="Email">
+            <svg class="icon">
+                <use href="#icon-envelope"></use>
+            </svg>
+        </a>
+        <div class="social-line"></div>
+    </div>
+
+    <!-- Right Side: Live Threat Feed -->
+    <div class="vertical-threat-feed hidden xl:block">
+        <div class="threat-marquee">
+            <span>[SYS] Auth accepted...</span>
+            <span>[NET] Port 22 closed...</span>
+            <span>[WARN] Brute force detected...</span>
+            <span>[FW] Dropping packet from 10.0.0.5...</span>
+            <span>[SEC] IDS signature matched...</span>
+            <span>[APP] Buffer overflow attempt blocked...</span>
+            <span>[SYS] Key rotation successful...</span>
+            <span>[NET] Establishing secure tunnel...</span>
+            <!-- Duplicated for seamless loop -->
+            <span>[SYS] Auth accepted...</span>
+            <span>[NET] Port 22 closed...</span>
+            <span>[WARN] Brute force detected...</span>
+            <span>[FW] Dropping packet from 10.0.0.5...</span>
+            <span>[SEC] IDS signature matched...</span>
+            <span>[APP] Buffer overflow attempt blocked...</span>
+            <span>[SYS] Key rotation successful...</span>
+            <span>[NET] Establishing secure tunnel...</span>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 w-full h-full z-40 flex flex-col items-center justify-center lg:hidden">
+        <div class="container mx-auto px-6 text-center">
+            <a href="#about" class="menu-item block py-3 text-2xl text-white hover:text-accent font-mono"
+                data-i18n="nav_about">About</a>
+            <a href="#terminal"
+                class="menu-item block py-3 text-2xl text-white hover:text-accent font-mono">Terminal</a>
+            <a href="#skills" class="menu-item block py-3 text-2xl text-white hover:text-accent font-mono"
+                data-i18n="nav_skills">Skills</a>
+            <a href="#projects" class="menu-item block py-3 text-2xl text-white hover:text-accent font-mono"
+                data-i18n="nav_work">Projects</a>
+            <a href="#contact" class="menu-item block py-3 text-2xl text-white hover:text-accent font-mono">Contact</a>
+            <a href="https://falcon0x1.github.io/" target="_blank" rel="noopener noreferrer"
+                class="menu-item block py-3 text-2xl text-white hover:text-accent font-mono"
+                data-i18n="nav_blog">Blog</a>
+
+            <!-- Mobile Controls -->
+            <div class="menu-controls w-full max-w-xs mx-auto">
+                <div class="flex gap-4 mt-8 pt-6 border-t border-gray-800">
+                    <button id="mobile-lang-btn"
+                        class="flex-1 text-sm font-bold font-mono border border-accent text-accent px-3 py-2 rounded hover:bg-accent hover:text-black transition uppercase"
+                        aria-label="Toggle language between English and Arabic">
+                        AR
+                    </button>
+                    <button id="mobile-theme-toggle"
+                        class="flex-1 flex items-center justify-center gap-2 text-sm font-bold font-mono border border-accent text-accent px-3 py-2 rounded hover:bg-accent hover:text-black transition"
+                        aria-label="Toggle between Red Team and Blue Team themes">
+                        <svg class="icon">
+                            <use href="#icon-skull"></use>
+                        </svg>
+                        <span id="mobile-team-label">RED</span>
+                    </button>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex justify-center gap-6 mt-6">
+                    <a href="https://linkedin.com/in/mahmoud-elshorbagy-b77b38234/" target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-gray-400 hover:text-accent transition transform hover:scale-110"
+                        aria-label="View Mahmoud Elshorbagy's LinkedIn profile">
+                        <svg class="icon text-2xl">
+                            <use href="#icon-linkedin"></use>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/falcon0x1" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-400 hover:text-accent transition transform hover:scale-110"
+                        aria-label="View GitHub profile">
+                        <svg class="icon text-2xl">
+                            <use href="#icon-github"></use>
+                        </svg>
+                    </a>
+                    <a href="mailto:mahmoud.elshorbagy0x1@gmail.com"
+                        class="text-gray-400 hover:text-accent transition transform hover:scale-110"
+                        aria-label="Send email">
+                        <svg class="icon">
+                            <use href="#icon-envelope"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="hero-minimal hero-section" id="about" style="padding-top: 8rem;">
+        <div class="ambient-spotlight"></div>
+        <div class="container mx-auto px-6 relative z-10 w-full">
+            <div class="hero-grid reveal">
+                <!-- Left Column: Content -->
+                <div class="text-left">
+                    <!-- Brutalist Badge -->
+                    <div class="min-badge reveal" style="animation-delay: 0.1s;">
+                        <span class="min-dot"></span>
+                        <span data-i18n="status_text">AVAILABLE FOR HIRE</span>
+                    </div>
+
+                    <!-- Brutalist Handle Display -->
+                    <span class="hero-handle glowing-text reveal" style="animation-delay: 0.2s;">falcon0x1</span>
+
+                    <!-- Massive Headline -->
+                    <h1 class="hero-headline text-white glitch-text" data-i18n="hero_headline"
+                        data-text="SECURITY ENGINEER" style="animation-delay: 0.3s;">
+                        SECURITY ENGINEER
+                    </h1>
+
+                    <!-- Punchy Subtext with Interactive Typing -->
+                    <p class="hero-sub reveal" style="animation-delay: 0.4s;">
+                        <span data-i18n="hero_greeting">Hello, I'm</span> <strong id="hero-name" class="glitch-name"
+                            data-text="Mahmoud Elshorbagy">Mahmoud Elshorbagy</strong><br>
+                        <span id="hero-role" class="hero-role"></span>
+                    </p>
+
+                    <!-- Brutalist Mission Log -->
+                    <div class="hero-intro reveal" style="animation-delay: 0.5s;">
+                        <div class="mb-2">
+                            <span class="text-accent font-bold" data-i18n="mission_rank">RANK:</span>
+                            <span class="text-gray-300" data-i18n="mission_r_val">Security Engineer</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="text-accent font-bold" data-i18n="mission_target">TARGET:</span>
+                            <span class="text-gray-300" data-i18n="mission_t_val">Web, Mobile, API</span>
+                        </div>
+                        <div>
+                            <span class="text-accent font-bold" data-i18n="mission_mission">MISSION:</span>
+                            <span class="text-gray-300" data-i18n="mission_m_val">Penetration Testing</span>
+                        </div>
+                    </div>
+
+                    <!-- Brutalist CTA -->
+                    <div class="flex flex-col sm:flex-row gap-4 items-start reveal" style="animation-delay: 0.6s;">
+                        <a href="#contact" class="btn-massive" aria-label="Initialize Connection">
+                            <span data-i18n="btn_contact">Initialize Connection</span>
+                        </a>
+
+                        <div class="flex items-center gap-4 mt-2 sm:mt-0 h-full">
+                            <a href="cv.pdf" download="Mahmoud-Elshorbagy-CV.pdf" class="btn-secondary"
+                                aria-label="Resume">
+                                <span data-i18n="btn_cv">Download CV</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Profile Image with Cyber-Frame Glass -->
+                <div class="hero-image-wrapper reveal" style="animation-delay: 0.4s;">
+                    <div class="cyber-frame-glass">
+                        <img src="https://github.com/falcon0x1.png" alt="falcon0x1" class="profile-clean"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-12 bg-black/50 border-y border-gray-900 backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-800 rtl:divide-x-reverse reveal">
+                <div class="hover:transform hover:scale-110 transition duration-300">
+                    <div class="text-3xl font-bold text-white mb-1 stat-number" data-value="4" data-suffix="+">4+</div>
+                    <div class="text-accent text-xs font-mono uppercase" data-i18n="stat_certs">Certifications</div>
+                </div>
+                <div class="hover:transform hover:scale-110 transition duration-300">
+                    <div class="text-3xl font-bold text-white mb-1 stat-number" data-value="50" data-suffix="+">50+
+                    </div>
+                    <div class="text-accent text-xs font-mono uppercase" data-i18n="stat_labs">Labs Pwned</div>
+                </div>
+                <div class="hover:transform hover:scale-110 transition duration-300">
+                    <div class="text-3xl font-bold text-white mb-1 stat-number" data-value="2">2</div>
+                    <div class="text-accent text-xs font-mono uppercase" data-i18n="stat_tools">Tools Built</div>
+                </div>
+                <div class="hover:transform hover:scale-110 transition duration-300">
+                    <div class="text-3xl font-bold text-white mb-1 stat-number" data-value="100" data-suffix="%">100%
+                    </div>
+                    <div class="text-accent text-xs font-mono uppercase" data-i18n="stat_passion">Commitment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="terminal" class="py-20 bg-dark-bg" dir="ltr">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="section-header reveal">
+                <span class="section-marker">##</span>
+                <h2 class="section-title" style="margin-bottom: 0;">Interactive Terminal</h2>
+                <div class="section-line"></div>
+            </div>
+            <p class="text-gray-500 text-sm mb-8 reveal" style="font-family: var(--font-body);">// Try typing "help"</p>
+
+            <div class="terminal-container reveal delay-100">
+                <div class="terminal-header">
+                    <span class="terminal-dot dot-close"></span>
+                    <span class="terminal-dot dot-minimize"></span>
+                    <span class="terminal-dot dot-maximize"></span>
+                    <span class="text-gray-500 text-xs ml-3 font-mono">falcon0x1@portfolio:~$</span>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <div class="terminal-line">
+                        <span class="command-success">Welcome to falcon0x1 Portfolio Terminal v1.0</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="text-gray-500">Type 'help' for available commands</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="text-gray-500">─────────────────────────────────────────</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">falcon0x1@portfolio:~$</span>
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off">
+                        <span class="terminal-cursor"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <p class="text-gray-500 text-sm font-mono">
+                    <svg class="icon text-accent">
+                        <use href="#icon-lightbulb"></use>
+                    </svg>
+                    Pro Tip: Try commands like <span class="text-accent">whoami</span>, <span
+                        class="text-accent">skills</span>, or <span class="text-accent">contact</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 bg-card-bg">
+        <div class="container mx-auto px-6">
+            <div class="section-header reveal">
+                <span class="section-marker">##</span>
+                <h2 class="section-title" style="margin-bottom: 0;">Technical Arsenal</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Slogan -->
+            <p class="text-gray-500 text-sm mb-12 reveal" style="font-family: var(--font-body);"
+                data-i18n="slogan_skills">"Every tool is a weapon when you know how to wield it."</p>
+
+            <!-- GRID WRAPPER -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+                <!-- LEFT COLUMN : CERTIFICATIONS -->
+                <div class="space-y-5 reveal delay-100">
+                    <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2">
+                        >> CERTIFICATIONS
+                    </h3>
+
+                    <!-- eWPT + INE -->
+                    <div class="flip-card" style="height: 140px;">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front p-4 flex items-center justify-between">
+                                <div class="flex gap-4 items-center">
+                                    <img src="img/ewpt.webp" alt="eWPT"
+                                        style="width: 80px; height: 80px; object-fit: contain;">
+                                    <div>
+                                        <h4 class="font-bold text-white text-lg">eWPT</h4>
+                                        <p class="text-xs text-gray-400">Web Application Penetration Tester</p>
+                                    </div>
+                                </div>
+                                <img src="img/ine.webp" alt="INE Security"
+                                    style="width: 60px; height: 60px; object-fit: contain; border-radius: 4px;">
+                            </div>
+                            <div class="flip-card-back flex items-center justify-center gap-4 p-4">
+                                <img src="img/ewpt.webp" alt="eWPT"
+                                    style="width: 60px; height: 60px; object-fit: contain;">
+                                <div class="text-center">
+                                    <h4 class="font-bold text-white">eWPT Certified</h4>
+                                    <p class="text-xs text-gray-400 mb-2">INE Security</p>
+                                    <a href="https://certs.ine.com/5e316417-fc2c-4002-a598-3fa7f484c93e#acc.z10dbmSl"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-accent hover:underline text-sm" data-i18n="btn_verify">Verify
+                                        Certificate</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CyberTalents Web + ITI -->
+                    <div class="flip-card" style="height: 140px;">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front p-4 flex items-center justify-between">
+                                <div class="flex gap-4 items-center">
+                                    <img src="img/cybertalents.webp" alt="CyberTalents"
+                                        style="width: 70px; height: 70px; object-fit: contain;">
+                                    <div>
+                                        <h4 class="font-bold text-white text-lg">Certified Web Pentester</h4>
+                                        <p class="text-xs text-gray-400">CyberTalents / ITI</p>
+                                    </div>
+                                </div>
+                                <img src="img/iti.webp" alt="ITI"
+                                    style="width: 60px; height: 60px; object-fit: contain; border-radius: 4px;">
+                            </div>
+                            <div class="flip-card-back flex items-center justify-center gap-4 p-4">
+                                <img src="img/cybertalents.webp" alt="CyberTalents"
+                                    style="width: 50px; height: 50px; object-fit: contain;">
+                                <div class="text-center">
+                                    <h4 class="font-bold text-white">Certified Web Pentester</h4>
+                                    <p class="text-xs text-gray-400 mb-2">CyberTalents / ITI</p>
+                                    <a href="https://cybertalents.com/certifications/af472f89-2d5b-4969-bbf5-c3cbc3f5fba2"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-accent hover:underline text-sm" data-i18n="btn_verify">Verify
+                                        Certificate</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CyberTalents Mobile + ITI -->
+                    <div class="flip-card" style="height: 140px;">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front p-4 flex items-center justify-between">
+                                <div class="flex gap-4 items-center">
+                                    <img src="img/cybertalents.webp" alt="CyberTalents"
+                                        style="width: 70px; height: 70px; object-fit: contain;">
+                                    <div>
+                                        <h4 class="font-bold text-white text-lg">Certified Mobile Pentester</h4>
+                                        <p class="text-xs text-gray-400">CyberTalents / ITI</p>
+                                    </div>
+                                </div>
+                                <img src="img/iti.webp" alt="ITI"
+                                    style="width: 60px; height: 60px; object-fit: contain; border-radius: 4px;">
+                            </div>
+                            <div class="flip-card-back flex items-center justify-center gap-4 p-4">
+                                <img src="img/cybertalents.webp" alt="CyberTalents"
+                                    style="width: 50px; height: 50px; object-fit: contain;">
+                                <div class="text-center">
+                                    <h4 class="font-bold text-white">Certified Mobile Pentester</h4>
+                                    <p class="text-xs text-gray-400 mb-2">CyberTalents / ITI</p>
+                                    <a href="https://cybertalents.com/certifications/592c008e-094a-425e-a7a8-0323281d8b2c"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-accent hover:underline text-sm" data-i18n="btn_verify">Verify
+                                        Certificate</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- APIsec -->
+                    <div class="flip-card" style="height: 140px;">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front p-4 flex items-center">
+                                <img src="img/apisec.webp" alt="APIsec"
+                                    style="width: 90px; height: 90px; object-fit: contain;">
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-white text-lg">API Penetration Testing</h4>
+                                    <p class="text-xs text-gray-400">APIsec University</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back flex items-center justify-center gap-4 p-4">
+                                <img src="img/apisec.webp" alt="APIsec"
+                                    style="width: 60px; height: 60px; object-fit: contain;">
+                                <div class="text-center">
+                                    <h4 class="font-bold text-white">API Security Certified</h4>
+                                    <p class="text-xs text-gray-400 mb-2">APIsec University</p>
+                                    <a href="https://www.credly.com/badges/da7eead9-5427-4bf0-aeba-6f9fa68977aa/public_url"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-accent hover:underline text-sm" data-i18n="btn_verify">Verify
+                                        Certificate</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN : SKILLS -->
+                <div class="reveal">
+                    <h3 class="skills-header">
+                        SKILLS & TOOLS
+                    </h3>
+
+                    <!-- Cyber Badges Grid -->
+                    <div class="cyber-badges-container">
+                        <div class="cyber-badge-wrapper reveal delay-100">
+                            <div class="cyber-badge">
+                                <div class="cyber-badge-inner">
+                                    <svg class="icon badge-icon">
+                                        <use href="#icon-globe"></use>
+                                    </svg>
+                                    <h4 class="badge-title">Web Sec</h4>
+                                    <span class="badge-level">90%</span>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                            <div class="badge-glow"></div>
+                        </div>
+
+                        <div class="cyber-badge-wrapper reveal delay-200">
+                            <div class="cyber-badge">
+                                <div class="cyber-badge-inner">
+                                    <svg class="icon badge-icon">
+                                        <use href="#icon-smartphone"></use>
+                                    </svg>
+                                    <h4 class="badge-title">Mobile Sec</h4>
+                                    <span class="badge-level">80%</span>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                            <div class="badge-glow"></div>
+                        </div>
+
+                        <div class="cyber-badge-wrapper reveal delay-300">
+                            <div class="cyber-badge">
+                                <div class="cyber-badge-inner">
+                                    <svg class="icon badge-icon">
+                                        <use href="#icon-shield"></use>
+                                    </svg>
+                                    <h4 class="badge-title">Network</h4>
+                                    <span class="badge-level">75%</span>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-progress" data-width="75%"></div>
+                            </div>
+                            <div class="badge-glow"></div>
+                        </div>
+
+                        <div class="cyber-badge-wrapper reveal delay-400">
+                            <div class="cyber-badge">
+                                <div class="cyber-badge-inner">
+                                    <svg class="icon badge-icon">
+                                        <use href="#icon-terminal"></use>
+                                    </svg>
+                                    <h4 class="badge-title">Scripting</h4>
+                                    <span class="badge-level">95%</span>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-progress" data-width="95%"></div>
+                            </div>
+                            <div class="badge-glow"></div>
+                        </div>
+
+                        <div class="cyber-badge-wrapper reveal delay-500">
+                            <div class="cyber-badge">
+                                <div class="cyber-badge-inner">
+                                    <svg class="icon badge-icon">
+                                        <use href="#icon-active-directory"></use>
+                                    </svg>
+                                    <h4 class="badge-title">Active Dir</h4>
+                                    <span class="badge-level">85%</span>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                            <div class="badge-glow"></div>
+                        </div>
+
+                        <div class="cyber-badge-wrapper reveal delay-600">
+                            <div class="cyber-badge">
+                                <div class="cyber-badge-inner">
+                                    <svg class="icon badge-icon">
+                                        <use href="#icon-reverse-engineering"></use>
+                                    </svg>
+                                    <h4 class="badge-title">Rev Eng</h4>
+                                    <span class="badge-level">65%</span>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-progress" data-width="65%"></div>
+                            </div>
+                            <div class="badge-glow"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- THE TERMINAL HUD ARSENAL V2 - Full Width Below Skills -->
+    <div class="tools-hud-container reveal">
+        <!-- Corner Brackets -->
+        <div class="hud-corner hud-corner-tl"></div>
+        <div class="hud-corner hud-corner-tr"></div>
+        <div class="hud-corner hud-corner-bl"></div>
+        <div class="hud-corner hud-corner-br"></div>
+        
+        <!-- Metadata Bar -->
+        <div class="hud-meta-bar">
+            <span><span class="hud-meta-module">SCAN_DEPTH:</span> 0.98</span>
+            <span><span class="hud-meta-status">SYSTEM:</span> ARCH_LINUX</span>
+            <span><span class="hud-meta-version">STATUS:</span> DEPLOYED</span>
+        </div>
+        
+        <!-- Header -->
+        <div class="hud-header">[ ARSENAL_DB_QUERY // SUCCESS ]</div>
+        
+        <div class="hud-category">
+            <div class="hud-label-row">
+                <div class="hud-label">web_sec</div>
+                <span class="hud-timestamp">[ 09:44:12 ]</span>
+            </div>
+            <div class="hud-tools">
+                <span class="hud-tool-item">Burp Suite Pro</span>
+                <span class="hud-tool-item">OWASP ZAP</span>
+                <span class="hud-tool-item">sqlmap</span>
+                <span class="hud-tool-item">Postman</span>
+                <span class="hud-tool-item">GraphQL</span>
+                <span class="hud-tool-item">JWT Auth</span>
+            </div>
+        </div>
+        
+        <div class="hud-category">
+            <div class="hud-label-row">
+                <div class="hud-label">mobile_sec</div>
+                <span class="hud-timestamp">[ 09:44:15 ]</span>
+            </div>
+            <div class="hud-tools">
+                <span class="hud-tool-item">Frida</span>
+                <span class="hud-tool-item">MobSF</span>
+                <span class="hud-tool-item">JADX</span>
+                <span class="hud-tool-item">Objection</span>
+                <span class="hud-tool-item">apktool</span>
+                <span class="hud-tool-item">adb</span>
+            </div>
+        </div>
+        
+        <div class="hud-category">
+            <div class="hud-label-row">
+                <div class="hud-label">net_infra</div>
+                <span class="hud-timestamp">[ 09:44:18 ]</span>
+            </div>
+            <div class="hud-tools">
+                <span class="hud-tool-item">Nmap</span>
+                <span class="hud-tool-item">Metasploit</span>
+                <span class="hud-tool-item">Wireshark</span>
+                <span class="hud-tool-item">Active Directory</span>
+            </div>
+        </div>
+        
+        <div class="hud-category">
+            <div class="hud-label-row">
+                <div class="hud-label">automation</div>
+                <span class="hud-timestamp">[ 09:44:21 ]</span>
+            </div>
+            <div class="hud-tools">
+                <span class="hud-tool-item">Python</span>
+                <span class="hud-tool-item">Bash</span>
+                <span class="hud-tool-item">C++</span>
+                <span class="hud-tool-item">Arch Linux</span>
+                <span class="hud-tool-item">Git</span>
+            </div>
+        </div>
+    </div>
+
+    <section id="projects" class="py-20 border-t border-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="section-header reveal">
+                <span class="section-marker">##</span>
+                <h2 class="section-title" style="margin-bottom: 0;"><span data-i18n="work_title">Projects</span></h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Slogan -->
+            <p class="text-gray-500 text-sm mb-8 reveal" style="font-family: var(--font-body);"
+                data-i18n="slogan_projects">"Building tools that break systems, to make them stronger."</p>
+
+            <!-- Project Filters -->
+            <div class="flex flex-wrap gap-2 mb-8 reveal project-filters" id="project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Sec</button>
+                <button class="filter-btn" data-filter="automation">Automation</button>
+                <button class="filter-btn" data-filter="research">Research</button>
+                <button class="filter-btn" data-filter="iot">IoT</button>
+            </div>
+
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="javascript:void(0)" onclick="document.getElementById('modal-project1').showModal()"
+                    data-category="automation web"
+                    class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-100">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-accent transition">FalconRecon</h3>
+                        <svg
+                            class="icon text-xl text-gray-500 group-hover:text-white transition transform group-hover:rotate-12">
+                            <use href="#icon-github"></use>
+                        </svg>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed" data-i18n="proj_1_desc">
+                        Advanced Bash-based automation tool for reconnaissance. Streamlines subdomain enumeration, port
+                        scanning, and vulnerability discovery.
+                    </p>
+                    <div class="flex gap-2 text-xs font-mono">
+                        <span class="px-2 py-1 bg-gray-900 text-accent rounded">Bash</span>
+                        <span class="px-2 py-1 bg-gray-900 text-gray-300 rounded">Automation</span>
+                    </div>
+                </a>
+
+                <a href="javascript:void(0)" onclick="document.getElementById('modal-project2').showModal()"
+                    data-category="automation web mobile"
+                    class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-200">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-accent transition">
+                            FalconServiceAnalyzer
+                        </h3>
+                        <svg
+                            class="icon text-xl text-gray-500 group-hover:text-white transition transform group-hover:rotate-12">
+                            <use href="#icon-github"></use>
+                        </svg>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed" data-i18n="proj_2_desc">
+                        Android Service Attack Surface Analyzer - Automated reconnaissance and attack command
+                        generation.
+                    </p>
+                    <div class="flex gap-2 text-xs font-mono">
+                        <span class="px-2 py-1 bg-gray-900 text-accent rounded">Bash/Python</span>
+                        <span class="px-2 py-1 bg-gray-900 text-gray-300 rounded">Mobile Sec</span>
+                    </div>
+                </a>
+
+                <a href="javascript:void(0)" onclick="document.getElementById('modal-project3').showModal()"
+                    data-category="automation research"
+                    class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-accent transition">
+                            FalconDelta</h3>
+                        <svg
+                            class="icon text-xl text-gray-500 group-hover:text-white transition transform group-hover:rotate-12">
+                            <use href="#icon-github"></use>
+                        </svg>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                        Cybersecurity research and automation utility built in Python.
+                    </p>
+                    <div class="flex gap-2 text-xs font-mono">
+                        <span class="px-2 py-1 bg-gray-900 text-accent rounded">Python</span>
+                        <span class="px-2 py-1 bg-gray-900 text-gray-300 rounded">Security</span>
+                    </div>
+                </a>
+
+                <a href="javascript:void(0)" onclick="document.getElementById('modal-project4').showModal()"
+                    data-category="privacy mobile"
+                    class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-400">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-accent transition"
+                            data-i18n="proj_3_title">ZeroTrust</h3>
+                        <svg
+                            class="icon text-xl text-gray-500 group-hover:text-white transition transform group-hover:rotate-12">
+                            <use href="#icon-github"></use>
+                        </svg>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed" data-i18n="proj_3_desc">
+                        Advanced Zero Trust access implementation designed with robust authentication mechanisms.
+                    </p>
+                    <div class="flex gap-2 text-xs font-mono">
+                        <span class="px-2 py-1 bg-gray-900 text-accent rounded">Dart</span>
+                        <span class="px-2 py-1 bg-gray-900 text-gray-300 rounded">Architecture</span>
+                    </div>
+                </a>
+
+                <a href="javascript:void(0)" onclick="document.getElementById('modal-project5').showModal()"
+                    data-category="iot"
+                    class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-accent transition">
+                            Smart Poultry Farm (IoT)</h3>
+                        <svg
+                            class="icon text-xl text-gray-500 group-hover:text-white transition transform group-hover:rotate-12">
+                            <use href="#icon-github"></use>
+                        </svg>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                        IoT/ICS Automation System integrating sensors, controllers, and a mobile interface.
+                    </p>
+                    <div class="flex gap-2 text-xs font-mono">
+                        <span class="px-2 py-1 bg-gray-900 text-accent rounded">Embedded</span>
+                        <span class="px-2 py-1 bg-gray-900 text-gray-300 rounded">IoT Sec</span>
+                    </div>
+                </a>
+            </div>
+
+
+            <!-- Modals -->
+            <dialog id="modal-project1" class="cyber-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-2xl font-bold text-accent">FalconRecon</h3>
+                        <form method="dialog"><button class="modal-close">&times;</button></form>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="text-white font-bold mb-2 break-word">Vulnerability Exploit Chain</h4>
+                        <p class="text-gray-400 text-sm mb-4">Automates the discovery of exposed subdomains, open ports,
+                            and potential CVEs in a continuous pipeline using parallel processing.</p>
+
+                        <h4 class="text-white font-bold mb-2">Impact</h4>
+                        <p class="text-gray-400 text-sm mb-4">Enables Red Teams to map external attack surfaces 3x
+                            faster with zero manual intervention, generating actionable security reports instantly.</p>
+
+                        <h4 class="text-white font-bold mb-2">Tools Used</h4>
+                        <div class="flex gap-2 text-xs font-mono mb-6 flex-wrap">
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Bash</span>
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Nmap</span>
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Amass</span>
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Nuclei</span>
+                        </div>
+
+                        <a href="https://github.com/falcon0x1/FalconRecon" target="_blank"
+                            class="btn btn-primary w-full text-center flex justify-center mt-4 py-3">Execute
+                            Deep-Dive (GitHub)</a>
+                    </div>
+                </div>
+            </dialog>
+
+            <dialog id="modal-project2" class="cyber-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-2xl font-bold text-accent">FalconServiceAnalyzer</h3>
+                        <form method="dialog"><button class="modal-close">&times;</button></form>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="text-white font-bold mb-2 break-word">Vulnerability Exploit Chain</h4>
+                        <p class="text-gray-400 text-sm mb-4">Analyzes the attack surface of Android services. Automates
+                            reconnaissance to discover exposed components and generates direct attack commands
+                            simulating malicious local apps.</p>
+
+                        <h4 class="text-white font-bold mb-2">Impact</h4>
+                        <p class="text-gray-400 text-sm mb-4">Significantly reduces the time required to perform
+                            comprehensive static and dynamic analysis on complex Android applications, accelerating
+                            zero-day discovery in mobile vectors.</p>
+
+                        <h4 class="text-white font-bold mb-2">Tools Used</h4>
+                        <div class="flex gap-2 text-xs font-mono mb-6 flex-wrap">
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Bash</span>
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Python</span>
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">ADB</span>
+                        </div>
+
+                        <a href="https://github.com/falcon0x1/FalconServiceAnalyzer" target="_blank"
+                            class="btn btn-primary w-full text-center flex justify-center mt-4 py-3">Inspect
+                            Source (GitHub)</a>
+                    </div>
+                </div>
+            </dialog>
+
+            <dialog id="modal-project3" class="cyber-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-2xl font-bold text-accent">FalconDelta</h3>
+                        <form method="dialog"><button class="modal-close">&times;</button></form>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="text-white font-bold mb-2 break-word">Vulnerability Exploit Chain</h4>
+                        <p class="text-gray-400 text-sm mb-4">A powerful Android APK security analysis and comparison
+                            tool. Integrates deep DEX analysis to extract hidden API endpoints, hardcoded secrets, and
+                            dangerous permission changes across application versions.</p>
+
+                        <h4 class="text-white font-bold mb-2">Impact</h4>
+                        <p class="text-gray-400 text-sm mb-4">Allows security analysts and penetration testers to
+                            instantly visualize the exact attack surface differences between an old and a new APK,
+                            accelerating zero-day discovery.</p>
+
+                        <h4 class="text-white font-bold mb-2">Tools Used</h4>
+                        <div class="flex gap-2 text-xs font-mono mb-6 flex-wrap">
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Python
+                                3</span>
+                            <span
+                                class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Androguard</span>
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">APK
+                                Analysis</span>
+                        </div>
+
+                        <a href="https://github.com/falcon0x1/FalconDelta" target="_blank"
+                            class="btn btn-primary w-full text-center flex justify-center mt-4 py-3">Inspect
+                            Source Code</a>
+                    </div>
+                </div>
+            </dialog>
+
+            <dialog id="modal-project4" class="cyber-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-2xl font-bold text-accent">ZeroTrust</h3>
+                        <form method="dialog"><button class="modal-close">&times;</button></form>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="text-white font-bold mb-2 break-word">Vulnerability Exploit Chain</h4>
+                        <p class="text-gray-400 text-sm mb-4">A Cyberpunk Privacy Shield application built in Flutter.
+                            Integrates K-Anonymity password checks (HIBP), a malicious link analyzer powered by
+                            VirusTotal, and localized device integrity verification.</p>
+
+                        <h4 class="text-white font-bold mb-2">Impact</h4>
+                        <p class="text-gray-400 text-sm mb-4">Demonstrates the ability to architect secure, serverless
+                            mobile applications. Ensures military-grade user privacy by maintaining zero backend
+                            requirements while actively scanning for root/jailbreak indicators.</p>
+
+                        <h4 class="text-white font-bold mb-2">Tools Used</h4>
+                        <div class="flex gap-2 text-xs font-mono mb-6 flex-wrap">
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Dart /
+                                Flutter</span>
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">GetX</span>
+                            <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Security
+                                Architecture</span>
+                        </div>
+
+                        <a href="https://github.com/falcon0x1/ZeroTrust" target="_blank"
+                            class="btn btn-primary w-full text-center flex justify-center mt-4 py-3">View
+                            Architecture (GitHub)</a>
+                    </div>
+                </div>
+        </div>
+        </dialog>
+
+        <dialog id="modal-project5" class="cyber-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-2xl font-bold text-accent">Smart Poultry Farm (IoT/ICS)</h3>
+                    <form method="dialog"><button class="modal-close">&times;</button></form>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-white font-bold mb-2 break-word">Architecture & Security</h4>
+                    <p class="text-gray-400 text-sm mb-4">Designed a localized IoT-based control system integrating
+                        sensors, controllers, and a mobile interface. Implemented remote access and API-based
+                        communication between embedded hardware and mobile applications.</p>
+
+                    <h4 class="text-white font-bold mb-2">Impact</h4>
+                    <p class="text-gray-400 text-sm mb-4">Addressed critical security considerations related to
+                        unauthorized control, API exposure, and system integrity within an Industrial Control System
+                        (ICS) environment. Achieved Excellent grade on Graduation.</p>
+
+                    <h4 class="text-white font-bold mb-2">Technologies Used</h4>
+                    <div class="flex gap-2 text-xs font-mono mb-6 flex-wrap">
+                        <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">IoT
+                            Devices</span>
+                        <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">API</span>
+                        <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">Mobile App</span>
+                        <span class="px-2 py-1 bg-gray-900 border border-gray-800 text-accent rounded">ICS
+                            Security</span>
+                    </div>
+
+                    <button onclick="document.getElementById('modal-project5').close()"
+                        class="btn btn-primary w-full text-center flex justify-center mt-4 py-3">Close</button>
+                </div>
+            </div>
+        </dialog>
+
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3 reveal">
+                <span class="text-accent">#</span> Professional Experience
+            </h2>
+
+            <!-- Slogan -->
+            <p class="text-gray-500 font-mono text-sm mb-12 reveal" data-i18n="slogan_experience">"Think like an
+                attacker, defend like a guardian."
+            </p>
+
+            <div class="experience-timeline">
+                <!-- Experience 1: ITI -->
+                <div class="experience-item reveal delay-100">
+                    <div class="experience-dot"></div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Trainee — Offensive Security & Penetration Testing Track</h3>
+                            <span class="experience-date">Jul 2025 – Nov 2025</span>
+                        </div>
+                        <p class="experience-company">Information Technology Institute (ITI), Nasr City, Cairo</p>
+                        <ul class="experience-list">
+                            <li>Conducted comprehensive Black-Box and Grey-Box penetration testing on 15+ lab targets
+                                mimicking real-world banking and e-commerce applications</li>
+                            <li>Performed manual and automated penetration testing against OWASP Top 10 vulnerabilities
+                            </li>
+                            <li>Conducted web, API, and Active Directory attacks in controlled lab environments</li>
+                            <li>Applied industry-standard methodologies such as PTES and OSSTMM during security
+                                assessments</li>
+                            <li>Gained hands-on experience with Bash scripting and Red Hat Linux administration</li>
+                        </ul>
+                        <div class="experience-tags">
+                            <span>Web Security</span>
+                            <span>API Testing</span>
+                            <span>Active Directory</span>
+                            <span>OWASP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 2: Education -->
+                <div class="experience-item reveal delay-200">
+                    <div class="experience-dot"></div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Bachelor of Systems & Computer Engineering</h3>
+                            <span class="experience-date">Sep 2019 – Jul 2024</span>
+                        </div>
+                        <p class="experience-company">Faculty of Engineering, Al-Azhar University — Cairo, Egypt</p>
+                        <ul class="experience-list">
+                            <li>Cumulative Grade: <strong class="text-accent">Very Good</strong></li>
+                            <li>Graduation Project: IoT/ICS Automation System — Security & Development (Smart Poultry
+                                Farm Automation) — Grade: <strong class="text-accent">Excellent</strong></li>
+                            <li>Designed a localized IoT-based control system integrating sensors, controllers, and a
+                                mobile interface</li>
+                            <li>Implemented remote access and API-based communication between embedded hardware and
+                                mobile application</li>
+                            <li>Addressed security considerations related to unauthorized control, API exposure, and
+                                system integrity</li>
+                        </ul>
+                        <div class="experience-tags">
+                            <span>IoT Security</span>
+                            <span>Embedded Systems</span>
+                            <span>API Development</span>
+                            <span>Mobile App</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Blog Posts Preview Section -->
+    <section id="blog" class="py-20 bg-card-bg">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-3 reveal">
+                <span class="text-accent">#</span> Latest Writeups
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Blog Post 1 -->
+                <article class="blog-card reveal delay-100">
+                    <div class="blog-card-header">
+                        <span class="blog-tag">Android Security</span>
+                        <span class="blog-date">Jan 2026</span>
+                    </div>
+                    <h3 class="blog-title">Android Security: The Falcon's Guide to Permissions & Attack Surfaces</h3>
+                    <p class="blog-excerpt">
+                        Understanding the Android attack surface when auditing applications. A comprehensive guide to
+                        permissions, components, and security testing...
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-read-time"><svg class="icon">
+                                <use href="#icon-clock"></use>
+                            </svg> 10 min read</span>
+                        <a href="https://falcon0x1.github.io/posts/android-security-falcons-guide/" target="_blank"
+                            rel="noopener noreferrer" class="blog-link">
+                            Read More <svg class="icon">
+                                <use href="#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-card reveal delay-200">
+                    <div class="blog-card-header">
+                        <span class="blog-tag">Mobile Security</span>
+                        <span class="blog-date">Jan 2026</span>
+                    </div>
+                    <h3 class="blog-title">Hacking Android Services: The Lazy Pentester's Guide</h3>
+                    <p class="blog-excerpt">
+                        Beyond Activities: exploiting Android Services with automation scripts. A practical guide to
+                        finding and exploiting service vulnerabilities...
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-read-time"><svg class="icon">
+                                <use href="#icon-clock"></use>
+                            </svg> 8 min read</span>
+                        <a href="https://falcon0x1.github.io/posts/hacking-android-services-lazy-pentesters-guide/"
+                            target="_blank" rel="noopener noreferrer" class="blog-link">
+                            Read More <svg class="icon">
+                                <use href="#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-card reveal delay-300">
+                    <div class="blog-card-header">
+                        <span class="blog-tag">Web Security</span>
+                        <span class="blog-date">Jan 2026</span>
+                    </div>
+                    <h3 class="blog-title">Web Enumeration & Brute Force: From Manual to Python</h3>
+                    <p class="blog-excerpt">
+                        The art of being a digital detective. From manual enumeration to Python automation for web
+                        security testing...
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-read-time"><svg class="icon">
+                                <use href="#icon-clock"></use>
+                            </svg> 7 min read</span>
+                        <a href="https://falcon0x1.github.io/posts/web-enumeration-and-brute-force-from-manual-checks-to-python-automation/"
+                            target="_blank" rel="noopener noreferrer" class="blog-link">
+                            Read More <svg class="icon">
+                                <use href="#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 4 - Medium -->
+                <article class="blog-card reveal delay-400">
+                    <div class="blog-card-header">
+                        <span class="blog-tag">IDOR</span>
+                        <span class="blog-date">2024</span>
+                    </div>
+                    <h3 class="blog-title">Exploiting IDOR Vulnerabilities: A Deep Dive</h3>
+                    <p class="blog-excerpt">
+                        A comprehensive guide to identifying and exploiting Insecure Direct Object Reference
+                        vulnerabilities in modern web applications...
+                    </p>
+                    <div class="blog-footer">
+                        <span class="blog-read-time"><svg class="icon">
+                                <use href="#icon-clock"></use>
+                            </svg> 12 min read</span>
+                        <a href="https://medium.com/@mahmoudelshorpagy7" target="_blank" rel="noopener noreferrer"
+                            class="blog-link">
+                            Read More <svg class="icon">
+                                <use href="#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mt-32 pt-16 reveal"
+                style="margin-top: 80px; padding-top: 40px;">
+                <a href="https://falcon0x1.github.io/" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-black font-bold rounded hover:bg-opacity-90 transition">
+                    <svg class="icon">
+                        <use href="#icon-blog"></use>
+                    </svg>
+                    <span data-i18n="btn_personal_blog">Personal Blog</span>
+                </a>
+                <a href="https://medium.com/@mahmoudelshorpagy7" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-6 py-3 border-2 border-accent text-accent font-bold rounded hover:bg-accent hover:text-black transition">
+                    <svg class="icon">
+                        <use href="#icon-medium"></use>
+                    </svg>
+                    <span data-i18n="btn_medium">Medium Articles</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Activity Section -->
+    <section id="github" class="py-20 bg-dark-bg">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-white flex items-center gap-3 reveal">
+                <span class="text-accent">#</span> GitHub Activity
+            </h2>
+
+            <div class="github-section reveal delay-100">
+                <div class="github-header">
+                    <h3>
+                        <svg class="icon">
+                            <use href="#icon-github"></use>
+                        </svg>
+                        <span>falcon0x1</span>
+                    </h3>
+                    <a href="https://github.com/falcon0x1" target="_blank" rel="noopener noreferrer"
+                        class="text-accent hover:underline text-sm">View Profile →</a>
+                </div>
+
+                <div class="github-stats">
+                    <div class="github-stat">
+                        <div class="github-stat-value stat-number" data-value="15" data-suffix="+">15+</div>
+                        <div class="github-stat-label">Repositories</div>
+                    </div>
+                    <div class="github-stat">
+                        <div class="github-stat-value stat-number" data-value="120" data-suffix="+">120+</div>
+                        <div class="github-stat-label">Contributions</div>
+                    </div>
+                    <div class="github-stat">
+                        <div class="github-stat-value stat-number" data-value="50" data-suffix="+">50+</div>
+                        <div class="github-stat-label">Stars</div>
+                    </div>
+                    <div class="github-stat">
+                        <div class="github-stat-value stat-number" data-value="10" data-suffix="+">10+</div>
+                        <div class="github-stat-label">Forks</div>
+                    </div>
+                </div>
+
+                <!-- GitHub Calendar Widget -->
+                <div id="github-calendar" class="github-calendar-container">
+                    <img src="https://ghchart.rshah.org/ff3333/falcon0x1" alt="GitHub Contributions"
+                        class="w-full rounded-lg" style="filter: brightness(0.9) contrast(1.1);" loading="lazy"
+                        width="700" height="112">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="contact" class="py-20 bg-card-bg border-t border-gray-800">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl font-bold mb-8 text-white text-center reveal" data-i18n="contact_title">Initialize
+                Connection</h2>
+            <p class="text-center text-gray-400 mb-12 reveal">
+                Have a project in mind or want to discuss security? Drop me a message!
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Contact Form -->
+                <div class="reveal delay-100">
+                    <form action="https://formsubmit.co/mahmoud.elshorbagy0x1@gmail.com" method="POST"
+                        class="contact-form" id="contact-form">
+                        <!-- Note: You will need to confirm the first submission via email -->
+
+
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" name="name" required class="form-input"
+                                placeholder="Your Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" required class="form-input"
+                                placeholder="your.email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" id="subject" name="subject" required class="form-input"
+                                placeholder="Project Inquiry">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" required rows="5" class="form-input"
+                                placeholder="Your message..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <svg class="icon">
+                                <use href="#icon-paper-plane"></use>
+                            </svg>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-4 reveal delay-200">
+                    <h3 class="text-xl font-bold text-white mb-6">Connect With Me</h3>
+
+                    <a href="mailto:mahmoud.elshorbagy0x1@gmail.com" class="contact-info-card group">
+                        <div class="contact-icon">
+                            <svg class="icon">
+                                <use href="#icon-envelope"></use>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">Email</h4>
+                            <p class="text-sm text-gray-400">mahmoud.elshorbagy0x1@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/201556688657" target="_blank" rel="noopener noreferrer"
+                        class="contact-info-card group">
+                        <div class="contact-icon">
+                            <svg class="icon">
+                                <use href="#icon-whatsapp"></use>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">WhatsApp</h4>
+                            <p class="text-sm text-gray-400">+20 155 6688657</p>
+                        </div>
+                    </a>
+
+                    <a href="https://linkedin.com/in/mahmoud-elshorbagy-b77b38234/" target="_blank"
+                        rel="noopener noreferrer" class="contact-info-card group">
+                        <div class="contact-icon">
+                            <svg class="icon">
+                                <use href="#icon-linkedin"></use>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">LinkedIn</h4>
+                            <p class="text-sm text-gray-400">Let's connect professionally</p>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/falcon0x1" target="_blank" rel="noopener noreferrer"
+                        class="contact-info-card group">
+                        <div class="contact-icon">
+                            <svg class="icon">
+                                <use href="#icon-github"></use>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-1">GitHub</h4>
+                            <p class="text-sm text-gray-400">Check out my projects</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-6 bg-black border-t border-gray-800 text-center relative">
+        <div class="container mx-auto px-6">
+            <p class="text-gray-600 text-xs font-mono">
+                &copy; 2025 falcon0x1. <span class="text-green-900">Secure by Design.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"
+        referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"
+        referrerpolicy="no-referrer"></script>
+
+    <script src="./dist/main.min.js" defer></script>
+</body>
+
+</html>
