@@ -1,3 +1,32 @@
+// Global error handler to prevent clipboard and other API errors from breaking the site
+window.addEventListener('error', function(e) {
+    if (e.message && (e.message.includes('clipboard') || e.message.includes('navigator'))) {
+        console.warn('Ignored non-critical error:', e.message);
+        e.preventDefault();
+    }
+}, true);
+
+// Clipboard API safety wrapper
+if (navigator && navigator.clipboard) {
+    const originalClipboard = { ...navigator.clipboard };
+    navigator.clipboard = new Proxy(navigator.clipboard, {
+        get: function(target, prop) {
+            try {
+                return function(...args) {
+                    try {
+                        return target[prop].apply(target, args);
+                    } catch (e) {
+                        console.warn('Clipboard operation failed:', e.message);
+                        return Promise.reject(e);
+                    }
+                };
+            } catch (e) {
+                return undefined;
+            }
+        }
+    });
+}
+
 const translations = {
     ar: {
         nav_about: "من أنا",

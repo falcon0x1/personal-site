@@ -45,6 +45,32 @@ async function buildJS() {
     const outputPath = path.join(distDir, 'main.min.js');
     fs.writeFileSync(outputPath, result.code);
 
+    // Copy canary.min.js to dist
+    const canarySrc = path.join(projectRoot, 'js/canary.min.js');
+    const canaryDest = path.join(distDir, 'canary.min.js');
+    if (fs.existsSync(canarySrc)) {
+      fs.copyFileSync(canarySrc, canaryDest);
+      console.log('  ✅ Copied canary.min.js to dist/');
+    }
+
+    // Copy img folder to dist/img
+    const imgSrcDir = path.join(projectRoot, 'img');
+    const imgDestDir = path.join(distDir, 'img');
+    if (fs.existsSync(imgSrcDir)) {
+      if (!fs.existsSync(imgDestDir)) {
+        fs.mkdirSync(imgDestDir, { recursive: true });
+      }
+      const imgFiles = fs.readdirSync(imgSrcDir);
+      for (const file of imgFiles) {
+        const srcFile = path.join(imgSrcDir, file);
+        const destFile = path.join(imgDestDir, file);
+        if (fs.statSync(srcFile).isFile()) {
+          fs.copyFileSync(srcFile, destFile);
+        }
+      }
+      console.log('  ✅ Copied img/ folder to dist/img/');
+    }
+
     const originalSize = Buffer.byteLength(combinedJS, 'utf8');
     const minifiedSize = Buffer.byteLength(result.code, 'utf8');
     const savings = ((1 - minifiedSize / originalSize) * 100).toFixed(1);
