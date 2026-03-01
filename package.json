@@ -5,7 +5,7 @@
   "scripts": {
     "prebuild": "mkdir -p dist",
     "build:images": "node scripts/build-images.js",
-    "build:css": "node scripts/build-css.js",
+    "build:css": "npx tailwindcss -i css/tailwind-input.css -o dist/output.css --minify && node scripts/build-css.js",
     "build:js": "node scripts/build-js.js",
     "build:html": "node scripts/build-html.js",
     "build": "npm run prebuild && npm run build:images && npm run build:css && npm run build:js && npm run build:html",
@@ -18,6 +18,7 @@
     "postcss": "^8.4.0",
     "postcss-import": "^15.0.0",
     "sharp": "^0.33.0",
+    "tailwindcss": "^3.4.19",
     "terser": "^5.0.0"
   },
   "main": "log_check.js",
