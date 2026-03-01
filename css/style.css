@@ -1924,6 +1924,7 @@ html[lang="ar"] .bg-gray-800 {
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    z-index: 10;
 }
 
 .tools-hud-container::before {

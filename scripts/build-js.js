@@ -71,6 +71,24 @@ async function buildJS() {
       console.log('  ✅ Copied img/ folder to dist/img/');
     }
 
+    // Copy favicon folder to dist/favicon
+    const faviconSrcDir = path.join(projectRoot, 'favicon');
+    const faviconDestDir = path.join(distDir, 'favicon');
+    if (fs.existsSync(faviconSrcDir)) {
+      if (!fs.existsSync(faviconDestDir)) {
+        fs.mkdirSync(faviconDestDir, { recursive: true });
+      }
+      const faviconFiles = fs.readdirSync(faviconSrcDir);
+      for (const file of faviconFiles) {
+        const srcFile = path.join(faviconSrcDir, file);
+        const destFile = path.join(faviconDestDir, file);
+        if (fs.statSync(srcFile).isFile()) {
+          fs.copyFileSync(srcFile, destFile);
+        }
+      }
+      console.log('  ✅ Copied favicon/ folder to dist/favicon/');
+    }
+
     const originalSize = Buffer.byteLength(combinedJS, 'utf8');
     const minifiedSize = Buffer.byteLength(result.code, 'utf8');
     const savings = ((1 - minifiedSize / originalSize) * 100).toFixed(1);
