@@ -3173,14 +3173,15 @@ nav.fixed::after {
 .cyber-datacard::before {
     content: '[ VERIFIED ]';
     position: absolute;
-    top: -8px;
-    right: 15px;
-    background: var(--color-bg);
+    top: 0;
+    right: 0;
+    background: rgba(0, 255, 204, 0.1);
+    border-bottom-left-radius: 8px;
     color: #00ffcc;
     font-family: var(--font-display), monospace;
     font-size: 0.65rem;
     font-weight: 800;
-    padding: 0 8px;
+    padding: 3px 8px;
     letter-spacing: 1px;
     z-index: 3;
 }
@@ -3256,4 +3257,29 @@ nav.fixed::after {
     color: var(--color-text-gray-400);
     font-size: 0.8rem;
     font-family: monospace;
+}
+
+/* Anchor tag as datacard */
+a.cyber-datacard {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .cyber-datacard {
+        padding: 0.8rem;
+    }
+    .datacard-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        margin-right: 0.8rem;
+    }
+    .datacard-info h3 {
+        font-size: 0.9rem;
+    }
+    .datacard-info p {
+        font-size: 0.7rem;
+    }
 }
