@@ -768,17 +768,17 @@ const initApp = () => {
                         `;
 
         const RED_BANNER = `
-                        < div class="mb-2 text-accent font-mono text-[6px] sm:text-[8px] leading-tight whitespace-pre overflow-x-auto" >
-                            ${FALCON_ASCII}
-</div >
-    <div class="text-red-500 font-bold mb-4">𓅈 AGGRESSIVE MODE 𓅂</div>
+<div class="mb-2 text-accent font-mono text-[6px] sm:text-[8px] leading-tight whitespace-pre overflow-x-auto">
+${FALCON_ASCII}
+</div>
+<div class="text-red-500 font-bold mb-4">𓅈 AGGRESSIVE MODE 𓅂</div>
 `;
 
         const BLUE_BANNER = `
-    < div class="mb-2 text-blue-400 font-mono text-[6px] sm:text-[8px] leading-tight whitespace-pre overflow-x-auto" >
-        ${FALCON_ASCII}
-</div >
-    <div class="text-blue-300 font-bold mb-4">𖤍 DEFENSIVE MODE 🐦‍🔥</div>
+<div class="mb-2 text-blue-400 font-mono text-[6px] sm:text-[8px] leading-tight whitespace-pre overflow-x-auto">
+${FALCON_ASCII}
+</div>
+<div class="text-blue-300 font-bold mb-4">𖤍 DEFENSIVE MODE 🐦‍🔥</div>
 `;
 
         const COMMANDS = {
@@ -807,11 +807,11 @@ const initApp = () => {
                 const date = new Date().toLocaleDateString();
                 const isAr = document.documentElement.lang === 'ar';
                 if (isAr) {
-                    return `< div class="text-gray-300" > جاري البحث عن تحديثات...</div >
+                    return `<div class="text-gray-300">جاري البحث عن تحديثات...</div>
                         <div class="text-green-500">النظام محدث.</div>
                         <div class="text-gray-500">آخر تحديث: ${date} // تمت إضافة أداتين</div>`;
                 }
-                return `< div > Fetching latest intel...</div >
+                return `<div>Fetching latest intel...</div>
                         <div class="text-green-500">System up to date.</div>
                         <div class="text-gray-500">Last updated: ${date} // 2 New Tools Added</div>`;
             },
@@ -830,7 +830,7 @@ const initApp = () => {
             const line = document.createElement('div');
             line.className = 'terminal-line mb-1';
             if (isCommand) {
-                line.innerHTML = `< span class="terminal-prompt" > falcon0x1@portfolio: ~$</span > ${text} `;
+                line.innerHTML = `<span class="terminal-prompt">falcon0x1@portfolio: ~$</span> ${text}`;
             } else {
                 line.innerHTML = text;
             }

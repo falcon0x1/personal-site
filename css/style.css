@@ -3153,3 +3153,107 @@ nav.fixed::after {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
+/* =========================================
+   CYBER DATACARDS (WITH LOGOS & SCANNER)
+   ========================================= */
+.cyber-datacard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.7);
+    border: 1px solid var(--color-border-gray-800);
+    border-left: 3px solid var(--color-text-gray-600);
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.cyber-datacard::before {
+    content: '[ VERIFIED ]';
+    position: absolute;
+    top: -8px;
+    right: 15px;
+    background: var(--color-bg);
+    color: #00ffcc;
+    font-family: var(--font-display), monospace;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0 8px;
+    letter-spacing: 1px;
+    z-index: 3;
+}
+
+.cyber-datacard::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 0, 60, 0.1), transparent);
+    transform: skewX(-20deg);
+    z-index: 1;
+}
+
+.cyber-datacard:hover {
+    border-left-color: var(--color-accent);
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    background: rgba(20, 20, 20, 0.9);
+}
+
+.cyber-datacard:hover::after {
+    animation: cyber-scan 1.2s infinite;
+}
+
+@keyframes cyber-scan {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+.datacard-icon-wrapper {
+    flex-shrink: 0;
+    width: 65px;
+    height: 65px;
+    margin-right: 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.datacard-icon {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(40%);
+    transition: all 0.3s ease;
+}
+
+.cyber-datacard:hover .datacard-icon {
+    filter: grayscale(0%) drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+    transform: scale(1.05);
+}
+
+.datacard-info {
+    z-index: 2;
+}
+
+.datacard-info h3 {
+    color: var(--color-text-white);
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-display), monospace;
+}
+
+.datacard-info p {
+    color: var(--color-text-gray-400);
+    font-size: 0.8rem;
+    font-family: monospace;
+}
