@@ -3373,9 +3373,37 @@ a.cyber-datacard {
         opacity: 1;
         margin-top: 1rem;
     }
-    .experience-card.is-open .exp-toggle {
+.experience-card.is-open .exp-toggle {
         color: #00ffcc;
     }
+    .exp-toggle::after {
+        content: ' [ + ]';
+    }
+}
+
+/* =========================================
+   MOBILE HORIZONTAL SCROLL - WRITEUPS
+   ========================================= */
+@media (max-width: 768px) {
+    .writeups-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding-bottom: 1.5rem;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .writeups-container::-webkit-scrollbar {
+        display: none;
+    }
+    .blog-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        min-width: 280px;
+    }
+}
     .experience-card.is-open .exp-toggle::after {
         content: ' [ - ]';
     }
