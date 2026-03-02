@@ -779,12 +779,14 @@ html[dir="rtl"] .nav-link::after {
 }
 
 .terminal-cursor {
-    display: inline-block;
-    width: 8px;
-    height: 16px;
-    background: var(--color-terminal-cursor);
-    animation: blink 1s infinite;
-    margin-left: 2px;
+    display: inline-block !important;
+    width: 10px;
+    height: 1.1em;
+    background-color: var(--color-accent);
+    vertical-align: text-bottom;
+    margin-left: 4px;
+    float: none !important;
+    animation: blink 1s step-end infinite;
 }
 
 .terminal-line {
