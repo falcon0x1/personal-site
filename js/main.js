@@ -979,17 +979,9 @@ function initAccordion() {
     expHeaders.forEach(header => {
         header.addEventListener('click', function() {
             const card = this.closest('.experience-card');
-            const toggle = this.querySelector('.exp-toggle');
             
-            // Toggle current card
+            // Toggle current card - CSS handles the rotation animation
             card.classList.toggle('is-open');
-            
-            // Update toggle text
-            if (card.classList.contains('is-open')) {
-                toggle.textContent = '[ - ]';
-            } else {
-                toggle.textContent = '[ + ]';
-            }
         });
     });
 }
