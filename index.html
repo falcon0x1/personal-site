@@ -435,9 +435,11 @@
                 </div>
 
                 <!-- Right Column: Profile Image with Cyber-Frame Glass -->
-                <div class="hero-image-wrapper reveal" style="animation-delay: 0.4s;">
-                    <div class="cyber-frame-glass">
-                        <img src="https://github.com/falcon0x1.png" alt="falcon0x1" class="profile-clean"
+                <div class="hero-image-wrapper reveal flex justify-center" style="animation-delay: 0.4s;">
+                    <div class="relative inline-block p-[2px] rounded border border-gray-800 bg-gradient-to-br from-gray-900 to-black shadow-[0_0_20px_rgba(255,0,60,0.15)] group">
+                        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-accent z-10 transition-all duration-300 group-hover:w-full group-hover:h-full"></div>
+                        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-accent z-10 transition-all duration-300 group-hover:w-full group-hover:h-full"></div>
+                        <img src="https://github.com/falcon0x1.png" alt="Mahmoud" class="relative z-0 object-cover w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 grayscale group-hover:grayscale-0 transition-all duration-500 rounded-sm"
                             loading="lazy">
                     </div>
                 </div>
@@ -709,7 +711,7 @@
     </section>
 
     <!-- THE TERMINAL HUD ARSENAL V2 - Full Width Below Skills -->
-    <div class="tools-hud-container reveal">
+    <div class="tools-hud-container reveal mt-4 md:mt-0 overflow-visible p-1">
         <!-- Corner Brackets -->
         <div class="hud-corner hud-corner-tl"></div>
         <div class="hud-corner hud-corner-tr"></div>
@@ -1077,7 +1079,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20">
+    <section id="experience" class="py-12 md:py-20 pt-12 md:pt-20 mt-8 md:mt-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3 reveal">
                 <span class="text-accent">#</span> Professional Experience
@@ -1099,7 +1101,7 @@
                                 <span class="experience-date">Jul 2025 – Nov 2025</span>
                                 <p class="experience-company">Information Technology Institute (ITI), Nasr City, Cairo</p>
                             </div>
-                            <span class="exp-toggle text-accent whitespace-nowrap flex-shrink-0 text-xl">[ + ]</span>
+                            <span class="exp-toggle text-accent md:hidden transition-transform duration-300 transform text-lg">&#9660;</span>
                         </div>
                         <div class="exp-content">
                             <ul class="experience-list">
@@ -1132,7 +1134,7 @@
                                 <span class="experience-date">Sep 2019 – Jul 2024</span>
                                 <p class="experience-company">Faculty of Engineering, Al-Azhar University — Cairo, Egypt</p>
                             </div>
-                            <span class="exp-toggle text-accent whitespace-nowrap flex-shrink-0 text-xl">[ + ]</span>
+                            <span class="exp-toggle text-accent md:hidden transition-transform duration-300 transform text-lg">&#9660;</span>
                         </div>
                         <div class="exp-content">
                             <ul class="experience-list">
