@@ -1448,10 +1448,14 @@ html[lang="ar"] .bg-gray-800 {
         grid-template-columns: 1fr;
         gap: 3rem;
         text-align: center;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
     }
 
     .hero-grid .text-left {
         text-align: center;
+        width: 100%;
     }
 }
 
@@ -3388,21 +3392,23 @@ a.cyber-datacard {
    ========================================= */
 @media (max-width: 768px) {
     .writeups-container {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 1rem;
-        padding-bottom: 1.5rem;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
     .writeups-container::-webkit-scrollbar {
         display: none;
     }
-    .blog-card {
-        flex: 0 0 85%;
-        scroll-snap-align: center;
+    .writeups-container > div, .writeup-card, .blog-card {
+        flex: 0 0 85% !important;
+        max-width: 85% !important;
+        scroll-snap-align: center !important;
         min-width: 280px;
     }
 }
