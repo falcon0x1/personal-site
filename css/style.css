@@ -3342,3 +3342,44 @@ a.cyber-datacard {
     border-color: #fff;
     background: rgba(255, 255, 255, 0.05);
 }
+
+/* =========================================
+   MOBILE ACCORDION - ENCRYPTED LOGS
+   ========================================= */
+/* DESKTOP: Always open, no toggle button */
+@media (min-width: 769px) {
+    .exp-toggle { display: none; }
+    .exp-content { display: block !important; }
+    .exp-header { cursor: default; }
+}
+
+/* MOBILE: Collapsed by default, show toggle button */
+@media (max-width: 768px) {
+    .exp-header {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .exp-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+        opacity: 0;
+    }
+    .experience-card.is-open .exp-content {
+        max-height: 1000px;
+        opacity: 1;
+        margin-top: 1rem;
+    }
+    .experience-card.is-open .exp-toggle {
+        color: #00ffcc;
+    }
+    .experience-card.is-open .exp-toggle::after {
+        content: ' [ - ]';
+    }
+    .exp-toggle::after {
+        content: ' [ + ]';
+    }
+}
