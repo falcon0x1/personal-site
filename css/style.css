@@ -3157,68 +3157,92 @@ nav.fixed::after {
 /* =========================================
    CYBER DATACARDS (WITH LOGOS & SCANNER)
    ========================================= */
-/* 1. Force a sleek horizontal layout and reduce padding */
+/* Force sleek horizontal layout */
 .cyber-datacard {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    justify-content: flex-start !important;
     padding: 0.6rem 1rem !important;
     margin-bottom: 0.8rem !important;
     min-height: 70px;
+    position: relative;
+    overflow: hidden;
 }
 
-/* 2. Shrink the icons to look sharper and less overwhelming */
+/* Dynamic Badge via data attribute */
+.cyber-datacard::before {
+    content: attr(data-badge) !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 6px;
+    font-size: 0.6rem !important;
+    padding: 3px 8px !important;
+    font-family: var(--font-display), monospace;
+    font-weight: 800;
+    letter-spacing: 1px;
+    z-index: 3;
+}
+
+/* Specific Badge Colors */
+.badge-verified::before {
+    background: rgba(0, 255, 204, 0.1);
+    color: #00ffcc;
+}
+.badge-request::before {
+    background: rgba(255, 170, 0, 0.1);
+    color: #ffaa00;
+}
+
+/* Wrapper that supports 1 or 2 logos */
 .datacard-icon-wrapper {
-    width: 45px !important;
+    width: auto !important;
+    min-width: 45px;
     height: 45px !important;
     margin-right: 1rem !important;
     padding: 4px !important;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0 !important;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 2;
 }
 
-/* 3. Refine the typography for a compact data-ui look */
+.datacard-icon {
+    max-width: 40px;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(40%);
+    transition: all 0.3s ease;
+}
+
+/* Compact Typography */
 .datacard-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
+    z-index: 2;
 }
 
 .datacard-info h3 {
-    font-size: 0.9rem !important;
+    font-size: 0.95rem !important;
     margin-bottom: 0.1rem !important;
-    line-height: 1.2 !important;
+    color: var(--color-text-white);
+    font-family: var(--font-display), monospace;
 }
 
 .datacard-info p {
-    font-size: 0.75rem !important;
+    font-size: 0.8rem !important;
     margin: 0 !important;
-    line-height: 1.2 !important;
+    color: var(--color-text-gray-400);
 }
 
-/* 4. Scale down the Verified badge slightly */
-.cyber-datacard::before {
-    font-size: 0.55rem !important;
-    padding: 2px 6px !important;
-}
-
-.cyber-datacard::before {
-    content: '[ VERIFIED ]';
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: rgba(0, 255, 204, 0.1);
-    border-bottom-left-radius: 8px;
-    color: #00ffcc;
-    font-family: var(--font-display), monospace;
-    font-size: 0.65rem;
-    font-weight: 800;
-    padding: 3px 8px;
-    letter-spacing: 1px;
-    z-index: 3;
-}
-
+/* Scanner Effect */
 .cyber-datacard::after {
     content: '';
     position: absolute;
@@ -3247,49 +3271,9 @@ nav.fixed::after {
     100% { left: 200%; }
 }
 
-.datacard-icon-wrapper {
-    flex-shrink: 0;
-    width: 65px;
-    height: 65px;
-    margin-right: 1.2rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 4px;
-    padding: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-}
-
-.datacard-icon {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    filter: grayscale(40%);
-    transition: all 0.3s ease;
-}
-
 .cyber-datacard:hover .datacard-icon {
     filter: grayscale(0%) drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
     transform: scale(1.05);
-}
-
-.datacard-info {
-    z-index: 2;
-}
-
-.datacard-info h3 {
-    color: var(--color-text-white);
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
-    font-family: var(--font-display), monospace;
-}
-
-.datacard-info p {
-    color: var(--color-text-gray-400);
-    font-size: 0.8rem;
-    font-family: monospace;
 }
 
 /* Anchor tag as datacard */
