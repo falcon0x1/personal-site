@@ -422,17 +422,15 @@
                     </div>
 
                     <!-- Brutalist CTA -->
-                    <div class="flex flex-col sm:flex-row gap-4 items-start reveal" style="animation-delay: 0.6s;">
-                        <a href="#contact" class="btn-massive" aria-label="Initialize Connection">
+                    <div class="flex flex-wrap items-center gap-4 mt-6 reveal">
+                        <a href="#contact" class="cyber-btn primary" aria-label="Initialize Connection">
                             <span data-i18n="btn_contact">Initialize Connection</span>
                         </a>
 
-                        <div class="flex items-center gap-4 mt-2 sm:mt-0 h-full">
-                            <a href="cv.pdf" download="Mahmoud-Elshorbagy-CV.pdf" class="btn-secondary"
-                                aria-label="Resume">
-                                <span data-i18n="btn_cv">Download CV</span>
-                            </a>
-                        </div>
+                        <a href="cv.pdf" download="Mahmoud-Elshorbagy-CV.pdf" class="cyber-btn secondary"
+                            aria-label="Resume">
+                            <span data-i18n="btn_cv">Download CV</span>
+                        </a>
                     </div>
                 </div>
 
@@ -499,10 +497,9 @@
                     <div class="terminal-line">
                         <span class="text-gray-500">─────────────────────────────────────────</span>
                     </div>
-                    <div class="terminal-line">
+                    <div class="terminal-line" style="display: flex; align-items: center;">
                         <span class="terminal-prompt">falcon0x1@portfolio:~$</span>
-                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off">
-                        <span class="terminal-cursor"></span>
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" style="background: transparent; border: none; outline: none; color: inherit; font-family: inherit; font-size: inherit; flex: 1; margin-left: 5px;">
                     </div>
                 </div>
             </div>
