@@ -970,8 +970,36 @@ ${FALCON_ASCII}
     if (headline && typeof hackerDecode === 'function') hackerDecode(headline);
 };
 
+// Mobile Accordion - Encrypted Logs
+function initAccordion() {
+    const isMobile = window.innerWidth <= 768;
+    if (!isMobile) return;
+
+    const expHeaders = document.querySelectorAll('.exp-header');
+    expHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const card = this.closest('.experience-card');
+            const toggle = this.querySelector('.exp-toggle');
+            
+            // Toggle current card
+            card.classList.toggle('is-open');
+            
+            // Update toggle text
+            if (card.classList.contains('is-open')) {
+                toggle.textContent = '[ - ]';
+            } else {
+                toggle.textContent = '[ + ]';
+            }
+        });
+    });
+}
+
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
     initApp();
+    initAccordion();
 } else {
-    document.addEventListener('DOMContentLoaded', initApp);
+    document.addEventListener('DOMContentLoaded', () => {
+        initApp();
+        initAccordion();
+    });
 }
