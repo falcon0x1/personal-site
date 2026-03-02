@@ -436,10 +436,14 @@
 
                 <!-- Right Column: Profile Image with Cyber-Frame Glass -->
                 <div class="hero-image-wrapper reveal flex justify-center" style="animation-delay: 0.4s;">
-                    <div class="relative inline-block p-[2px] rounded border border-gray-800 bg-gradient-to-br from-gray-900 to-black shadow-[0_0_20px_rgba(255,0,60,0.15)] group">
-                        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-accent z-10 transition-all duration-300 group-hover:w-full group-hover:h-full"></div>
-                        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-accent z-10 transition-all duration-300 group-hover:w-full group-hover:h-full"></div>
-                        <img src="https://github.com/falcon0x1.png" alt="Mahmoud" class="relative z-0 object-cover w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 grayscale group-hover:grayscale-0 transition-all duration-500 rounded-sm"
+                    <div class="relative inline-block p-1 rounded-sm bg-gradient-to-br from-gray-900 to-black shadow-[0_0_15px_rgba(255,0,60,0.15)] group mx-auto">
+                        <!-- Top Left Bracket -->
+                        <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-accent z-10 transition-all duration-300 group-hover:w-full group-hover:h-full"></div>
+                        <!-- Bottom Right Bracket -->
+                        <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-accent z-10 transition-all duration-300 group-hover:w-full group-hover:h-full"></div>
+                        
+                        <!-- Ensure the image has relative z-0 to stay under brackets -->
+                        <img src="https://github.com/falcon0x1.png" alt="Mahmoud" class="relative z-0 object-cover w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 grayscale group-hover:grayscale-0 transition-all duration-500 rounded-sm"
                             loading="lazy">
                     </div>
                 </div>
@@ -606,7 +610,7 @@
                     </h3>
 
                     <!-- Cyber Badges Grid -->
-                    <div class="cyber-badges-container">
+                    <div class="cyber-badges-container pt-6 md:pt-0 overflow-visible">
                         <div class="cyber-badge-wrapper reveal delay-100">
                             <div class="cyber-badge">
                                 <div class="cyber-badge-inner">
@@ -1079,7 +1083,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-12 md:py-20 pt-12 md:pt-20 mt-8 md:mt-16">
+    <section id="experience" class="pt-12 md:pt-32 mt-8 md:mt-24">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3 reveal">
                 <span class="text-accent">#</span> Professional Experience
@@ -1101,7 +1105,9 @@
                                 <span class="experience-date">Jul 2025 – Nov 2025</span>
                                 <p class="experience-company">Information Technology Institute (ITI), Nasr City, Cairo</p>
                             </div>
-                            <span class="exp-toggle text-accent md:hidden transition-transform duration-300 transform text-lg">&#9660;</span>
+                            <span class="exp-toggle text-accent md:hidden transition-transform duration-300 transform">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </span>
                         </div>
                         <div class="exp-content">
                             <ul class="experience-list">
@@ -1134,7 +1140,9 @@
                                 <span class="experience-date">Sep 2019 – Jul 2024</span>
                                 <p class="experience-company">Faculty of Engineering, Al-Azhar University — Cairo, Egypt</p>
                             </div>
-                            <span class="exp-toggle text-accent md:hidden transition-transform duration-300 transform text-lg">&#9660;</span>
+                            <span class="exp-toggle text-accent md:hidden transition-transform duration-300 transform">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </span>
                         </div>
                         <div class="exp-content">
                             <ul class="experience-list">
