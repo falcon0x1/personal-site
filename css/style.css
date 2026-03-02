@@ -3379,11 +3379,8 @@ a.cyber-datacard {
         opacity: 1;
         margin-top: 1rem;
     }
-.experience-card.is-open .exp-toggle {
+    .experience-card.is-open .exp-toggle {
         color: #00ffcc;
-    }
-    .exp-toggle::after {
-        content: ' [ + ]';
     }
 }
 
@@ -3410,12 +3407,5 @@ a.cyber-datacard {
         max-width: 85% !important;
         scroll-snap-align: center !important;
         min-width: 280px;
-    }
-}
-    .experience-card.is-open .exp-toggle::after {
-        content: ' [ - ]';
-    }
-    .exp-toggle::after {
-        content: ' [ + ]';
     }
 }

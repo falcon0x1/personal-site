@@ -380,7 +380,7 @@
     <header class="hero-minimal hero-section" id="about" style="padding-top: 8rem;">
         <div class="ambient-spotlight"></div>
         <div class="container mx-auto px-6 relative z-10 w-full">
-            <div class="hero-grid reveal">
+            <div class="hero-grid reveal flex flex-col-reverse lg:flex-row">
                 <!-- Left Column: Content -->
                 <div class="text-left items-center lg:items-start">
                     <!-- Brutalist Badge -->
@@ -1169,6 +1169,10 @@
                 <span class="text-accent">#</span> Latest Writeups
             </h2>
 
+            <div class="md:hidden text-right text-xs text-gray-500 mb-2 font-mono animate-pulse">
+                Swipe right &rarr;
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 writeups-container">
                 <!-- Blog Post 1 -->
                 <article class="blog-card reveal delay-100">
@@ -1267,8 +1271,8 @@
                 </article>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-4 mt-32 pt-16 reveal"
-                style="margin-top: 80px; padding-top: 40px;">
+            <div class="flex flex-wrap justify-center gap-4 mt-4 pt-8 reveal"
+                style="margin-top: 20px; padding-top: 20px;">
                 <a href="https://falcon0x1.github.io/" target="_blank" rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-black font-bold rounded hover:bg-opacity-90 transition">
                     <svg class="icon">
