@@ -3292,13 +3292,13 @@ a.cyber-datacard {
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .cyber-datacard {
-        padding: 0.5rem 0.6rem !important;
-        min-height: 60px;
+        padding: 0.6rem !important;
+        min-height: 65px !important;
     }
     .datacard-icon-wrapper {
-        min-width: 35px;
-        height: 35px !important;
-        margin-right: 0.6rem !important;
+        min-width: 40px !important;
+        height: 40px !important;
+        margin-right: 0.8rem !important;
     }
     .datacard-info h3 {
         font-size: 0.8rem !important;
@@ -3307,8 +3307,10 @@ a.cyber-datacard {
         font-size: 0.65rem !important;
     }
     .cyber-datacard::before {
-        font-size: 0.45rem !important;
-        padding: 2px 4px !important;
+        font-size: 0.5rem !important;
+        padding: 2px 5px !important;
+        top: 0 !important;
+        right: 0 !important;
     }
 }
 
