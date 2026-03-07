@@ -118,8 +118,6 @@ const translations = {
         btn_contact: "Contact Me",
         btn_cv: "Download CV",
         btn_blog: "Blog",
-
-        btn_blog: "Blog",
         btn_verify: "Verify Certificate",
         btn_personal_blog: "Personal Blog",
         btn_medium: "Medium Articles",
@@ -358,7 +356,7 @@ const initApp = () => {
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // Initialize hero role typing animation
-    const heroRoleEl = document.getElementById('hero-role');
+    const heroRoleEl = document.getElementById('typing-text');
     if (heroRoleEl) type(heroRoleEl);
 
     // Initial hacker decode effect on static hero text
