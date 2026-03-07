@@ -713,150 +713,858 @@ const initApp = () => {
     const terminalBody = document.getElementById('terminal-body');
 
     if (terminalInput && terminalBody) {
-        const FALCON_ASCII = `
-   __      _                  ___      _
-                        / _ | __ _ | | __ ___ _ _ / _ \\_  _ / |
- | _ / _' | / _/ _ \\ ' \\    | (_) \\ \\/ / |
- | _ | \\__, _ | _\\__\\___ / _ || _ |    \\___ / /_/ | _ |
-                        `;
+        // Global Terminal State
+        let commandHistory = [];
+        let historyIndex = -1;
+        let isTyping = false;
+        let matrixActive = false;
+        let matrixTimeout = null;
 
-        const RED_BANNER = `
-<div class="mb-2 text-accent font-mono text-[6px] sm:text-[8px] leading-tight whitespace-pre overflow-x-auto">
-${FALCON_ASCII}
-</div>
-<div class="text-red-500 font-bold mb-4">𓅈 AGGRESSIVE MODE 𓅂</div>
-`;
+        // ASCII Art
+        const ASCII_FALCON = `
+   ╔══════════════════════════════════════════╗
+   ║     ██╗  ██╗ ██████╗ ██╗  ██╗ ██╗       ║
+   ║     ██║  ██║██╔═══██╗╚██╗██╔╝███║       ║
+   ║     ██║  ██║██║   ██║ ╚███╔╝ ╚██║       ║
+   ║     ██║  ██║██║   ██║ ██╔██╗  ██║       ║
+   ║     ╚██████╔╝╚██████╔╝██╔╝ ██╗██║       ║
+   ║      ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝       ║
+   ║     Mahmoud Elshorbagy | 0x1             ║
+   ╚══════════════════════════════════════════╝`;
 
-        const BLUE_BANNER = `
-<div class="mb-2 text-blue-400 font-mono text-[6px] sm:text-[8px] leading-tight whitespace-pre overflow-x-auto">
-${FALCON_ASCII}
-</div>
-<div class="text-blue-300 font-bold mb-4">𖤍 DEFENSIVE MODE 🐦‍🔥</div>
-`;
+        const NEOFETCH = `
+  mahmoud@arch
+  ─────────────
+  OS: Arch Linux x86_64
+  Host: CyberSec Workstation
+  Kernel: 6.x-arch1-1
+  Uptime: 24/7 hunting
+  Shell: zsh 5.9
+  DE: Hyprland
+  Terminal: kitty
+  CPU: Intel i7 @ 4.2GHz
+  Memory: 32GB DDR5
+  GPU: RTX 4060
+  Disk: 1TB NVMe
+  Tools: Burp Suite, Frida, Nmap
+  Focus: Web/API/Mobile Security`;
 
-        const COMMANDS = {
-            help: () => {
-                const isAr = document.documentElement.lang === 'ar';
-                return isAr ? "الأوامر المتاحة: <span class='text-accent'>whoami, skills, projects, contact, update, clear, banner</span>"
-                    : "Available commands: <span class='text-accent'>whoami, skills, projects, contact, update, clear, banner</span>";
-            },
-            whoami: () => {
-                const isAr = document.documentElement.lang === 'ar';
-                return isAr ? "falcon0x1 (محمود الشوربجي) - مهندس أمن سيبراني ومختبر اختراق."
-                    : "falcon0x1 (Mahmoud Elshorbagy) - Security Engineer & Penetration Tester.";
-            },
-            skills: () => {
-                return `<div class="text-accent mb-1">[+] Initializing Arsenal Scan...</div>
-<div class="text-gray-400 font-mono">
-├── <span class="text-white font-bold">Web & API</span> : Burp Suite Pro, GraphQL, Postman, sqlmap<br>
-├── <span class="text-white font-bold">Mobile   </span> : Frida, MobSF, Objection, apktool<br>
-├── <span class="text-white font-bold">Network  </span> : Nmap, Metasploit, Wireshark, Active Directory<br>
-└── <span class="text-white font-bold">Scripting</span> : Python, Bash, C++, Linux OS
-</div>`;
-            },
-            projects: "FalconRecon, Technical Writeups.",
-            contact: "LinkedIn, GitHub, Email.",
-            update: () => {
-                const date = new Date().toLocaleDateString();
-                const isAr = document.documentElement.lang === 'ar';
-                if (isAr) {
-                    return `<div class="text-gray-300">جاري البحث عن تحديثات...</div>
-                        <div class="text-green-500">النظام محدث.</div>
-                        <div class="text-gray-500">آخر تحديث: ${date} // تمت إضافة أداتين</div>`;
-                }
-                return `<div>Fetching latest intel...</div>
-                        <div class="text-green-500">System up to date.</div>
-                        <div class="text-gray-500">Last updated: ${date} // 2 New Tools Added</div>`;
-            },
-            banner: () => {
-                const isBlue = document.body.classList.contains('blue-team');
-                return isBlue ? BLUE_BANNER : RED_BANNER;
-            },
-            clear: () => {
-                terminalBody.innerHTML = '';
-                return '';
+        const WELCOME_MESSAGE = [
+            { text: '╔═════════════════════════════════════════════╗', type: 'blood' },
+            { text: '║  FALCON TERMINAL v3.1.4 — M. Elshorbagy    ║', type: 'blood' },
+            { text: '║  Cyber Security Engineer | eWPT Certified   ║', type: 'blood' },
+            { text: '╚═════════════════════════════════════════════╝', type: 'blood' },
+            { text: '', type: 'output' },
+            { text: '  System initialized. Type "help" for commands.', type: 'success' },
+            { text: '  Type "hack" for a surprise 😈', type: 'info' },
+            { text: '', type: 'output' },
+        ];
+
+        const AVAILABLE_COMMANDS = [
+            'help', 'whoami', 'skills', 'projects', 'certs', 'contact', 'social',
+            'neofetch', 'clear', 'ls', 'cat', 'nmap', 'hack', 'matrix',
+            'history', 'uname', 'pwd', 'date', 'echo', 'sudo',
+            'ping', 'whois', 'fortune', 'cowsay', 'exit', 'recon', 'scan',
+            'id', 'hostname', 'uptime', 'ifconfig', 'ip', 'update', 'banner'
+        ];
+
+        const MAX_OUTPUT_LINES = 500;
+
+        // Color mapping based on terminal theme
+        const getLineColor = (type) => {
+            switch (type) {
+                case 'input': return 'text-green-400';
+                case 'error': return 'text-red-400';
+                case 'success': return 'text-green-400';
+                case 'info': return 'text-blue-400';
+                case 'warning': return 'text-yellow-400';
+                case 'blood': return 'text-accent';
+                case 'forensic': return 'text-blue-500';
+                case 'ascii': return 'text-accent';
+                case 'system': return 'text-purple-400';
+                default: return 'text-gray-300';
             }
         };
 
-        const print = (text, isCommand = false) => {
-            if (!text) return;
-            const line = document.createElement('div');
-            line.className = 'terminal-line mb-1';
-            if (isCommand) {
-                line.innerHTML = `<span class="terminal-prompt">falcon0x1@portfolio: ~$</span> ${text}`;
-            } else {
-                line.innerHTML = text;
-            }
-            terminalBody.insertBefore(line, terminalInput.parentElement);
+        // Helper: Add output lines immediately
+        const addOutput = (lines) => {
+            lines.forEach(line => {
+                const div = document.createElement('div');
+                div.className = `terminal-line mb-1 ${getLineColor(line.type)}`;
+                div.textContent = line.text || '\u00A0';
+                terminalBody.insertBefore(div, terminalInput.parentElement);
+            });
             terminalBody.scrollTop = terminalBody.scrollHeight;
         };
 
-        // Initial Banner
-        const initBanner = document.createElement('div');
-        initBanner.className = 'terminal-banner mb-4';
-        initBanner.innerHTML = document.body.classList.contains('blue-team') ? BLUE_BANNER : RED_BANNER;
-        terminalBody.insertBefore(initBanner, terminalBody.firstChild);
-
-        // Ensure Logo is synced with Theme on Load (Default: Black)
-        const navLogo = document.getElementById('nav-logo');
-        if (navLogo) {
-            navLogo.src = document.body.classList.contains('blue-team') ? 'img/logo-blue.webp' : 'img/logo-black.webp';
-        }
-
-        // Auto-dissolve banner (User Request: "printed once and then disapeer")
-        setTimeout(() => {
-            if (initBanner && terminalBody.contains(initBanner)) {
-                initBanner.style.transition = 'opacity 1s ease';
-                initBanner.style.opacity = '0';
-                setTimeout(() => {
-                    if (initBanner && terminalBody.contains(initBanner)) {
-                        initBanner.remove();
-                    }
-                }, 1000);
+        // Helper: Type output with delay (async)
+        const typeOutput = async (lines, speed = 20) => {
+            isTyping = true;
+            terminalInput.disabled = true;
+            for (const line of lines) {
+                await new Promise(resolve => setTimeout(resolve, speed));
+                const div = document.createElement('div');
+                div.className = `terminal-line mb-1 ${getLineColor(line.type)}`;
+                div.textContent = line.text || '\u00A0';
+                terminalBody.insertBefore(div, terminalInput.parentElement);
+                terminalBody.scrollTop = terminalBody.scrollHeight;
             }
-        }, 3000);
+            isTyping = false;
+            terminalInput.disabled = false;
+            terminalInput.focus();
+        };
 
+        // Helper: Trim output to prevent unbounded growth
+        const trimOutput = () => {
+            const lines = terminalBody.querySelectorAll('.terminal-line');
+            if (lines.length > MAX_OUTPUT_LINES) {
+                for (let i = 0; i < lines.length - MAX_OUTPUT_LINES; i++) {
+                    lines[i].remove();
+                }
+            }
+        };
+
+        // Helper: Print command input line
+        const printInput = (cmd) => {
+            const div = document.createElement('div');
+            div.className = 'terminal-line mb-1';
+            div.innerHTML = `<span class="text-green-400">┌──(mahmoud㉿arch)-[~/portfolio]</span>`;
+            terminalBody.insertBefore(div, terminalInput.parentElement);
+            
+            const div2 = document.createElement('div');
+            div2.className = 'terminal-line mb-1';
+            div2.innerHTML = `<span class="text-green-400">└─$</span> ${cmd}`;
+            terminalBody.insertBefore(div2, terminalInput.parentElement);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        };
+
+        // Matrix Rain Effect
+        const startMatrix = () => {
+            if (matrixActive) return;
+            matrixActive = true;
+            
+            const canvas = document.createElement('canvas');
+            canvas.className = 'matrix-canvas';
+            canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:10;pointer-events:none;opacity:0.4;';
+            
+            const terminalContainer = terminalBody.parentElement;
+            terminalContainer.style.position = 'relative';
+            terminalContainer.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            const updateSize = () => {
+                canvas.width = terminalContainer.offsetWidth;
+                canvas.height = terminalContainer.offsetHeight;
+            };
+            updateSize();
+
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
+            const fontSize = 14;
+            const columns = Math.floor(canvas.width / fontSize) || 1;
+            const drops = new Array(columns).fill(1);
+
+            let lastTime = 0;
+
+            const draw = (time) => {
+                if (!matrixActive) {
+                    canvas.remove();
+                    return;
+                }
+                if (time - lastTime < 50) {
+                    requestAnimationFrame(draw);
+                    return;
+                }
+                lastTime = time;
+
+                ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.font = `${fontSize}px monospace`;
+
+                for (let i = 0; i < drops.length; i++) {
+                    const char = chars[Math.floor(Math.random() * chars.length)];
+                    const rand = Math.random();
+                    ctx.fillStyle = rand > 0.95 ? '#ffffff' : rand > 0.5 ? '#B91C1C' : '#1E3A8A';
+                    ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+                requestAnimationFrame(draw);
+            };
+
+            requestAnimationFrame(draw);
+
+            addOutput([
+                { text: '  🟢 Entering the Matrix...', type: 'success' },
+                { text: '  Click terminal or press Esc to exit.', type: 'info' },
+                { text: '', type: 'output' },
+            ]);
+
+            // Auto-stop after 10s
+            if (matrixTimeout) clearTimeout(matrixTimeout);
+            matrixTimeout = setTimeout(() => {
+                matrixActive = false;
+                canvas.remove();
+            }, 10000);
+        };
+
+        const stopMatrix = () => {
+            matrixActive = false;
+            if (matrixTimeout) clearTimeout(matrixTimeout);
+            const canvas = terminalBody.parentElement.querySelector('.matrix-canvas');
+            if (canvas) canvas.remove();
+        };
+
+        // Fortune quotes
+        const fortunes = [
+            '"The quieter you become, the more you can hear." — Kali Linux',
+            '"There are only two types of companies: those that have been hacked, and those that will be." — Robert Mueller',
+            '"The only truly secure system is one that is powered off." — Gene Spafford',
+            '"I use Arch btw." — Every Arch User Ever',
+            '"Hack the planet!" — Hackers (1995)',
+            '"Security is a process, not a product." — Bruce Schneier',
+        ];
+
+        // Command Processor
+        const processCommand = async (cmd) => {
+            const trimmed = cmd.trim().toLowerCase();
+            const parts = trimmed.split(/\s+/);
+            const command = parts[0];
+            const args = parts.slice(1);
+
+            if (!command) return;
+
+            // Add to history
+            commandHistory.push(cmd);
+            historyIndex = -1;
+            trimOutput();
+            printInput(cmd);
+
+            switch (command) {
+                case 'help': {
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        { text: '  ╔═══════════════════════════════════╗', type: 'forensic' },
+                        { text: '  ║      AVAILABLE COMMANDS           ║', type: 'forensic' },
+                        { text: '  ╠═══════════════════════════════════╣', type: 'forensic' },
+                        { text: '  ║  📋 INFO                          ║', type: 'forensic' },
+                        { text: '  ║  whoami    → Identity              ║', type: 'output' },
+                        { text: '  ║  skills    → Technical arsenal     ║', type: 'output' },
+                        { text: '  ║  projects  → Security tools        ║', type: 'output' },
+                        { text: '  ║  certs     → Certifications        ║', type: 'output' },
+                        { text: '  ║  contact   → Get in touch          ║', type: 'output' },
+                        { text: '  ║  social    → Social links          ║', type: 'output' },
+                        { text: '  ║  neofetch  → System info           ║', type: 'output' },
+                        { text: '  ║                                   ║', type: 'forensic' },
+                        { text: '  ║  🛠️  SYSTEM                        ║', type: 'forensic' },
+                        { text: '  ║  ls        → List files            ║', type: 'output' },
+                        { text: '  ║  cat <f>   → Read file             ║', type: 'output' },
+                        { text: '  ║  pwd/uname → System info           ║', type: 'output' },
+                        { text: '  ║  clear     → Clear terminal        ║', type: 'output' },
+                        { text: '  ║                                   ║', type: 'forensic' },
+                        { text: '  ║  🔥 FUN & HACKING                 ║', type: 'forensic' },
+                        { text: '  ║  hack      → Attack simulation     ║', type: 'output' },
+                        { text: '  ║  matrix    → Enter the Matrix      ║', type: 'output' },
+                        { text: '  ║  nmap <h>  → Port scan sim         ║', type: 'output' },
+                        { text: '  ║  recon <d> → Recon simulation      ║', type: 'output' },
+                        { text: '  ║  scan      → Vuln scan sim         ║', type: 'output' },
+                        { text: '  ║  fortune   → Hacker quote          ║', type: 'output' },
+                        { text: '  ║  cowsay    → ASCII cow             ║', type: 'output' },
+                        { text: '  ║  sudo      → Try it ;)             ║', type: 'output' },
+                        { text: '  ╚═══════════════════════════════════╝', type: 'forensic' },
+                        { text: '', type: 'output' },
+                        { text: '  💡 ↑/↓ for history, Tab to complete', type: 'info' },
+                        { text: '', type: 'output' },
+                    ], 12);
+                    break;
+                }
+
+                case 'whoami': {
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        ...ASCII_FALCON.split('\n').map(line => ({ text: line, type: 'blood' })),
+                        { text: '', type: 'output' },
+                        { text: '  ┌─ IDENTITY ──────────────────────────', type: 'success' },
+                        { text: '  │', type: 'success' },
+                        { text: '  │  Name      : Mahmoud M. Elshorbagy', type: 'output' },
+                        { text: '  │  Codename  : 0x1', type: 'output' },
+                        { text: '  │  Title     : Cyber Security Engineer', type: 'output' },
+                        { text: '  │  Cert      : eWPT Certified', type: 'blood' },
+                        { text: '  │  Education : B.Sc. CS & Systems Eng', type: 'output' },
+                        { text: '  │  University: Al-Azhar University', type: 'output' },
+                        { text: '  │  Grade     : Very Good', type: 'success' },
+                        { text: '  │  Grad Proj : IoT/ICS (Excellent)', type: 'success' },
+                        { text: '  │  Location  : Cairo, Egypt 🇪🇬', type: 'output' },
+                        { text: '  │  Military  : ✅ Completed', type: 'success' },
+                        { text: '  │  OS        : Arch Linux (btw)', type: 'forensic' },
+                        { text: '  │  Focus     : Web | API | Mobile', type: 'blood' },
+                        { text: '  │  Training  : ITI Offensive Security', type: 'output' },
+                        { text: '  │', type: 'success' },
+                        { text: '  └────────────────────────────────────', type: 'success' },
+                        { text: '', type: 'output' },
+                    ], 25);
+                    break;
+                }
+
+                case 'skills': {
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        { text: '  🌐 WEB & API SECURITY', type: 'success' },
+                        { text: '  ├── Burp Suite Pro ████████████████░ 95%', type: 'output' },
+                        { text: '  ├── OWASP ZAP     ██████████████░░░ 85%', type: 'output' },
+                        { text: '  ├── sqlmap        █████████████████ 90%', type: 'output' },
+                        { text: '  ├── Postman       ██████████████░░░ 88%', type: 'output' },
+                        { text: '  ├── GraphQL       ████████████░░░░░ 80%', type: 'output' },
+                        { text: '  └── JWT Analysis  ██████████████░░░ 85%', type: 'output' },
+                        { text: '', type: 'output' },
+                        { text: '  📱 MOBILE & NETWORK', type: 'success' },
+                        { text: '  ├── Frida         ██████████████░░░ 85%', type: 'output' },
+                        { text: '  ├── JADX          █████████████░░░░ 82%', type: 'output' },
+                        { text: '  ├── Nmap          █████████████████ 90%', type: 'output' },
+                        { text: '  ├── Metasploit    █████████████░░░░ 82%', type: 'output' },
+                        { text: '  └── Wireshark     ██████████████░░░ 85%', type: 'output' },
+                        { text: '', type: 'output' },
+                        { text: '  💻 PROGRAMMING & OS', type: 'success' },
+                        { text: '  ├── Python        █████████████████ 90%', type: 'output' },
+                        { text: '  ├── Bash          ██████████████░░░ 88%', type: 'output' },
+                        { text: '  ├── JavaScript    ████████████░░░░░ 72%', type: 'output' },
+                        { text: '  └── Arch Linux    █████████████████ 92%', type: 'forensic' },
+                        { text: '', type: 'output' },
+                    ], 15);
+                    break;
+                }
+
+                case 'projects': {
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        { text: '  ┌─ CASE #001 ──────────────────────', type: 'success' },
+                        { text: '  │ 📁 FalconRecon — Recon Framework', type: 'blood' },
+                        { text: '  │ Status: ACTIVE | Lang: Bash', type: 'warning' },
+                        { text: '  │ Automated recon pipeline', type: 'output' },
+                        { text: '  └──────────────────────────────────', type: 'success' },
+                        { text: '', type: 'output' },
+                        { text: '  ┌─ CASE #002 ──────────────────────', type: 'success' },
+                        { text: '  │ 📁 FalconDelta — APK Diffing', type: 'blood' },
+                        { text: '  │ Status: ACTIVE | Lang: Python', type: 'warning' },
+                        { text: '  │ Compare APK versions', type: 'output' },
+                        { text: '  └──────────────────────────────────', type: 'success' },
+                        { text: '', type: 'output' },
+                        { text: '  ┌─ CASE #003 ──────────────────────', type: 'success' },
+                        { text: '  │ 📁 FalconServiceAnalyzer', type: 'blood' },
+                        { text: '  │ Status: ACTIVE | Lang: Python', type: 'warning' },
+                        { text: '  │ Android attack surface tool', type: 'output' },
+                        { text: '  └──────────────────────────────────', type: 'success' },
+                        { text: '', type: 'output' },
+                        { text: '  ┌─ CASE #004 ──────────────────────', type: 'success' },
+                        { text: '  │ 📁 ZeroTrust — Privacy Dashboard', type: 'blood' },
+                        { text: '  │ Status: DONE | Lang: Flutter', type: 'success' },
+                        { text: '  │ Breach check via k-anonymity', type: 'output' },
+                        { text: '  └──────────────────────────────────', type: 'success' },
+                        { text: '', type: 'output' },
+                    ], 15);
+                    break;
+                }
+
+                case 'certs': {
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        { text: '  🏆 CERTIFICATIONS', type: 'blood' },
+                        { text: '  ═══════════════════════════════════', type: 'blood' },
+                        { text: '', type: 'output' },
+                        { text: '  ★ eWPT — Web App PT  ✅ VERIFIED', type: 'warning' },
+                        { text: '  ★ CyberTalents Web PT ✅', type: 'forensic' },
+                        { text: '  ★ CyberTalents Mobile PT ✅', type: 'forensic' },
+                        { text: '  ★ CyberTalents AD PT ✅', type: 'forensic' },
+                        { text: '  ★ Hextree Android PT ✅', type: 'forensic' },
+                        { text: '  ★ APIsec API PT ✅', type: 'forensic' },
+                        { text: '', type: 'output' },
+                    ], 25);
+                    break;
+                }
+
+                case 'contact': {
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        { text: '  📡 CONTACT', type: 'blood' },
+                        { text: '  ═══════════════════════════════════', type: 'blood' },
+                        { text: '  📧 mahmoud.elshorbagy0x1@gmail.com', type: 'output' },
+                        { text: '  📱 +20 155 668 8657', type: 'output' },
+                        { text: '  📍 Cairo, Egypt', type: 'output' },
+                        { text: '  🟢 Available for engagement', type: 'success' },
+                        { text: '', type: 'output' },
+                    ], 30);
+                    break;
+                }
+
+                case 'social': {
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        { text: '  🌐 SOCIAL PROFILES', type: 'blood' },
+                        { text: '  [1] 💼 LinkedIn', type: 'forensic' },
+                        { text: '  [2] 🐙 GitHub', type: 'info' },
+                        { text: '  [3] 📝 Medium — Writeups', type: 'success' },
+                        { text: '      └── SSL Pinning bypass', type: 'output' },
+                        { text: '      └── Advanced SQLi', type: 'output' },
+                        { text: '', type: 'output' },
+                    ], 30);
+                    break;
+                }
+
+                case 'neofetch': {
+                    await typeOutput(
+                        NEOFETCH.split('\n').map(line => ({ text: line, type: 'output' })),
+                        20
+                    );
+                    addOutput([{ text: '', type: 'output' }]);
+                    break;
+                }
+
+                case 'clear': {
+                    terminalBody.innerHTML = '';
+                    break;
+                }
+
+                case 'ls': {
+                    const isLong = args[0] === '-la' || args[0] === '-l' || args[0] === '-al';
+                    if (isLong) {
+                        await typeOutput([
+                            { text: '  drwxr-xr-x  mahmoud  4096  resume.txt', type: 'success' },
+                            { text: '  -rw-r--r--  mahmoud  1024  skills.json', type: 'success' },
+                            { text: '  -rwx------  mahmoud  4096  exploits/', type: 'blood' },
+                            { text: '  drwxr-xr-x  mahmoud  4096  projects/', type: 'forensic' },
+                            { text: '  -rw-r--r--  mahmoud   512  .bashrc', type: 'info' },
+                            { text: '  -rwx------  mahmoud  8192  falcon_recon.sh', type: 'blood' },
+                            { text: '  -rw-r--r--  mahmoud   512  README.md', type: 'output' },
+                            { text: '', type: 'output' },
+                        ], 20);
+                    } else {
+                        await typeOutput([
+                            { text: '  resume.txt  skills.json  exploits/', type: 'success' },
+                            { text: '  projects/   .bashrc      README.md', type: 'output' },
+                            { text: '  falcon_recon.sh  falcon_delta.py', type: 'blood' },
+                            { text: '', type: 'output' },
+                        ], 20);
+                    }
+                    break;
+                }
+
+                case 'cat': {
+                    const file = args[0];
+                    if (!file) {
+                        addOutput([{ text: '  cat: missing file. Try: cat resume.txt', type: 'error' }]);
+                    } else if (file === 'resume.txt') {
+                        await typeOutput([
+                            { text: '', type: 'output' },
+                            { text: '  MAHMOUD ELSHORBAGY — RESUME', type: 'blood' },
+                            { text: '  ═══════════════════════════════════', type: 'blood' },
+                            { text: '  eWPT-Certified | B.Sc. Systems Eng', type: 'output' },
+                            { text: '  Focus: Web, API, Mobile security', type: 'output' },
+                            { text: '', type: 'output' },
+                            { text: '  EXPERIENCE', type: 'success' },
+                            { text: '  ITI — Offensive Security Track', type: 'output' },
+                            { text: '  Jul 2025 – Nov 2025', type: 'info' },
+                            { text: '', type: 'output' },
+                            { text: '  EDUCATION', type: 'success' },
+                            { text: '  Al-Azhar University | Very Good', type: 'output' },
+                            { text: '  Grad: IoT/ICS (Excellent)', type: 'output' },
+                            { text: '', type: 'output' },
+                        ], 18);
+                    } else if (file === '.bashrc') {
+                        await typeOutput([
+                            { text: '  # ~/.bashrc', type: 'info' },
+                            { text: '  export EDITOR="nvim"', type: 'output' },
+                            { text: '  alias recon="~/scripts/falcon_recon.sh"', type: 'blood' },
+                            { text: '  alias delta="python3 ~/tools/falcon_delta.py"', type: 'blood' },
+                            { text: '  # I use Arch btw', type: 'info' },
+                            { text: '', type: 'output' },
+                        ], 25);
+                    } else if (file === 'skills.json') {
+                        await typeOutput([
+                            { text: '  {', type: 'output' },
+                            { text: '    "web": ["Burp Suite", "ZAP", "sqlmap"],', type: 'forensic' },
+                            { text: '    "mobile": ["Frida", "JADX", "MobSF"],', type: 'blood' },
+                            { text: '    "lang": ["Python", "Bash", "JS"],', type: 'info' },
+                            { text: '    "os": ["Arch Linux", "Kali", "RHEL"]', type: 'warning' },
+                            { text: '  }', type: 'output' },
+                            { text: '', type: 'output' },
+                        ], 25);
+                    } else if (file === 'readme.md' || file === 'README.md') {
+                        await typeOutput([
+                            { text: '', type: 'output' },
+                            { text: '  # Mahmoud Elshorbagy — Portfolio', type: 'blood' },
+                            { text: '  Cyber Security Engineer | eWPT', type: 'output' },
+                            { text: '  Focused on Web, API, Mobile PT', type: 'output' },
+                            { text: '  Tools: FalconRecon, FalconDelta', type: 'forensic' },
+                            { text: '', type: 'output' },
+                        ], 25);
+                    } else {
+                        addOutput([{ text: `  cat: ${file}: No such file or directory`, type: 'error' }]);
+                    }
+                    break;
+                }
+
+                case 'nmap': {
+                    const target = args[0] || '10.10.10.1';
+                    addOutput([
+                        { text: `  Starting Nmap 7.94 ( https://nmap.org )`, type: 'info' },
+                        { text: `  Nmap scan report for ${target}`, type: 'output' },
+                        { text: '  HOST IS UP (0.042s latency)', type: 'success' },
+                        { text: '', type: 'output' },
+                        { text: '  PORT     STATE    SERVICE', type: 'output' },
+                    ]);
+
+                    const ports = [
+                        { text: '  22/tcp   open     ssh', type: 'success' },
+                        { text: '  80/tcp   open     http', type: 'success' },
+                        { text: '  443/tcp  open     https', type: 'success' },
+                        { text: '  3306/tcp filtered mysql', type: 'warning' },
+                        { text: '  8080/tcp open     http-proxy', type: 'blood' },
+                    ];
+                    for (const port of ports) {
+                        await new Promise(resolve => setTimeout(resolve, 200 + Math.random() * 300));
+                        addOutput([port]);
+                    }
+                    addOutput([
+                        { text: '', type: 'output' },
+                        { text: `  Nmap done: 1 IP address (1 host up) scanned`, type: 'info' },
+                        { text: '  ⚠️  Simulation only — no real scan performed.', type: 'warning' },
+                        { text: '', type: 'output' },
+                    ]);
+                    break;
+                }
+
+                case 'hack': {
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        { text: '  ⚡ INITIATING ATTACK SEQUENCE...', type: 'blood' },
+                        { text: '', type: 'output' },
+                    ], 30);
+                    const steps = [
+                        { text: '  [▓░░░░░░░░░] 10%  Scanning target...', type: 'warning' },
+                        { text: '  [▓▓▓░░░░░░░] 25%  Enumerating services...', type: 'warning' },
+                        { text: '  [▓▓▓▓▓░░░░░] 45%  Exploiting SQLi...', type: 'blood' },
+                        { text: '  [▓▓▓▓▓▓▓░░░] 65%  Dumping database...', type: 'blood' },
+                        { text: '  [▓▓▓▓▓▓▓▓▓░] 85%  Privilege escalation...', type: 'error' },
+                        { text: '  [▓▓▓▓▓▓▓▓▓▓] 100% ROOT ACCESS OBTAINED', type: 'success' },
+                    ];
+                    for (const step of steps) {
+                        await new Promise(resolve => setTimeout(resolve, 400));
+                        addOutput([step]);
+                    }
+                    await typeOutput([
+                        { text: '', type: 'output' },
+                        { text: '  🎯 TARGET COMPROMISED', type: 'success' },
+                        { text: '  Findings: 2 Critical, 3 High, 2 Medium', type: 'error' },
+                        { text: '  ⚠️  Relax — just a simulation! 😄', type: 'info' },
+                        { text: '', type: 'output' },
+                    ], 30);
+                    break;
+                }
+
+                case 'matrix': {
+                    startMatrix();
+                    break;
+                }
+
+                case 'recon': {
+                    const domain = args[0] || 'target.com';
+                    const reconSteps = [
+                        { text: `  [*] Running subfinder on ${domain}...`, type: 'info' },
+                        { text: `  [+] api.${domain}`, type: 'success' },
+                        { text: `  [+] staging.${domain}`, type: 'success' },
+                        { text: `  [+] admin.${domain}`, type: 'blood' },
+                        { text: `  [*] Running httpx on discovered subs...`, type: 'info' },
+                        { text: `  [+] https://api.${domain} [200]`, type: 'success' },
+                        { text: `  [+] https://admin.${domain} [403]`, type: 'warning' },
+                        { text: `  [*] Running nuclei scanner...`, type: 'info' },
+                        { text: `  [!] CRITICAL: Default admin credentials`, type: 'error' },
+                        { text: `  [!] HIGH: Broken authentication on /api/v1`, type: 'blood' },
+                        { text: '', type: 'output' },
+                        { text: `  ✅ Recon complete. 3 subdomains, 2 vulnerabilities.`, type: 'success' },
+                        { text: '', type: 'output' },
+                    ];
+                    for (const step of reconSteps) {
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                        addOutput([step]);
+                    }
+                    break;
+                }
+
+                case 'scan': {
+                    const vulns = [
+                        { text: '  [SCAN] Testing for SQL Injection...', type: 'info' },
+                        { text: '  [VULN] SQLi found in /search?q= (UNION-based)', type: 'error' },
+                        { text: '  [SCAN] Testing for XSS...', type: 'info' },
+                        { text: '  [VULN] Reflected XSS in search parameter', type: 'blood' },
+                        { text: '  [SCAN] Testing for IDOR...', type: 'info' },
+                        { text: '  [VULN] IDOR at /api/users/{id} — data leakage', type: 'blood' },
+                        { text: '  [SCAN] Testing JWT implementation...', type: 'info' },
+                        { text: '  [VULN] JWT accepts "none" algorithm!', type: 'error' },
+                        { text: '', type: 'output' },
+                        { text: '  ══════════════════════════════════', type: 'blood' },
+                        { text: '  SCAN RESULT: 4 Critical Vulnerabilities', type: 'error' },
+                        { text: '  ⚠️  This is a simulated scan.', type: 'warning' },
+                        { text: '', type: 'output' },
+                    ];
+                    for (const v of vulns) {
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                        addOutput([v]);
+                    }
+                    break;
+                }
+
+                case 'ping': {
+                    const host = args[0] || '8.8.8.8';
+                    addOutput([{ text: `  PING ${host} (${host}) 56(84) bytes of data.`, type: 'output' }]);
+                    for (let i = 1; i <= 4; i++) {
+                        const time = (Math.random() * 30 + 10).toFixed(1);
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        addOutput([{ text: `  64 bytes from ${host}: icmp_seq=${i} ttl=64 time=${time}ms`, type: 'success' }]);
+                    }
+                    addOutput([
+                        { text: '', type: 'output' },
+                        { text: `  --- ${host} ping statistics ---`, type: 'info' },
+                        { text: '  4 packets transmitted, 4 received, 0% packet loss', type: 'success' },
+                        { text: '', type: 'output' },
+                    ]);
+                    break;
+                }
+
+                case 'whois': {
+                    await typeOutput([
+                        { text: '  Domain: mahmoud-elshorbagy.sec', type: 'blood' },
+                        { text: '  Status: ACTIVE', type: 'success' },
+                        { text: '  Registrant: Mahmoud M. Elshorbagy', type: 'output' },
+                        { text: '  Country: EG (Egypt)', type: 'output' },
+                        { text: '  Specialty: Web / API / Mobile PT', type: 'blood' },
+                        { text: '  Cert: eWPT Verified', type: 'success' },
+                        { text: '', type: 'output' },
+                    ], 30);
+                    break;
+                }
+
+                case 'fortune': {
+                    const quote = fortunes[Math.floor(Math.random() * fortunes.length)];
+                    addOutput([
+                        { text: '', type: 'output' },
+                        { text: `  🎯 ${quote}`, type: 'info' },
+                        { text: '', type: 'output' },
+                    ]);
+                    break;
+                }
+
+                case 'cowsay': {
+                    const msg = args.join(' ') || 'I use Arch btw';
+                    const display = msg.slice(0, 36);
+                    const b = '─'.repeat(display.length + 2);
+                    addOutput([
+                        { text: '', type: 'output' },
+                        { text: `   ┌${b}┐`, type: 'output' },
+                        { text: `   │ ${display} │`, type: 'success' },
+                        { text: `   └${b}┘`, type: 'output' },
+                        { text: '        \\   ^__^', type: 'output' },
+                        { text: '         \\  (oo)\\_______', type: 'output' },
+                        { text: '            (__)\\       )\\/\\', type: 'output' },
+                        { text: '                ||----w |', type: 'output' },
+                        { text: '                ||     ||', type: 'output' },
+                        { text: '', type: 'output' },
+                    ]);
+                    break;
+                }
+
+                case 'sudo': {
+                    const sudoCmd = args.join(' ');
+                    if (sudoCmd === 'rm -rf /') {
+                        await typeOutput([
+                            { text: '', type: 'output' },
+                            { text: '  🚨 NICE TRY! System protected. 😏', type: 'error' },
+                            { text: '  This incident has been reported.', type: 'warning' },
+                            { text: '', type: 'output' },
+                        ], 30);
+                    } else if (sudoCmd === 'hire mahmoud') {
+                        await typeOutput([
+                            { text: '', type: 'output' },
+                            { text: '  ✅ EXCELLENT DECISION! 🎉', type: 'success' },
+                            { text: '  📧 Sending employment contract to HR...', type: 'info' },
+                            { text: '  💰 Negotiating competitive salary...', type: 'warning' },
+                            { text: '  🚀 Onboarding Mahmoud Elshorbagy...', type: 'info' },
+                            { text: '  ✅ Welcome aboard! Smart choice.', type: 'success' },
+                            { text: '', type: 'output' },
+                        ], 40);
+                    } else {
+                        await typeOutput([
+                            { text: `  [sudo] password for visitor: `, type: 'output' },
+                            { text: '  visitor is not in the sudoers file.', type: 'error' },
+                            { text: '  This incident will be reported. 👀', type: 'warning' },
+                            { text: '  💡 Try: sudo hire mahmoud', type: 'info' },
+                            { text: '', type: 'output' },
+                        ], 30);
+                    }
+                    break;
+                }
+
+                case 'pwd': {
+                    addOutput([{ text: '  /home/mahmoud/portfolio', type: 'output' }, { text: '', type: 'output' }]);
+                    break;
+                }
+                case 'uname': {
+                    addOutput([{ text: '  Linux arch 6.7.4-arch1-1 x86_64 GNU/Linux', type: 'output' }, { text: '', type: 'output' }]);
+                    break;
+                }
+                case 'date': {
+                    addOutput([{ text: `  ${new Date().toString()}`, type: 'output' }, { text: '', type: 'output' }]);
+                    break;
+                }
+                case 'id': {
+                    addOutput([{ text: '  uid=1337(mahmoud) gid=1337(security) groups=1337(security),27(sudo)', type: 'output' }, { text: '', type: 'output' }]);
+                    break;
+                }
+                case 'hostname': {
+                    addOutput([{ text: '  falcon-workstation', type: 'output' }, { text: '', type: 'output' }]);
+                    break;
+                }
+                case 'uptime': {
+                    addOutput([{ text: `  up 365 days, ${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}, 1 user, load average: 0.42, 0.38, 0.35`, type: 'output' }, { text: '', type: 'output' }]);
+                    break;
+                }
+                case 'ifconfig':
+                case 'ip': {
+                    addOutput([
+                        { text: '  eth0: flags=4163<UP,BROADCAST,RUNNING>  mtu 1500', type: 'output' },
+                        { text: '        inet 10.10.14.37  netmask 255.255.255.0', type: 'success' },
+                        { text: '  tun0: flags=4305<UP,POINTOPOINT,RUNNING>  mtu 1500', type: 'output' },
+                        { text: '        inet 10.10.14.2  [HTB VPN]', type: 'blood' },
+                        { text: '', type: 'output' },
+                    ]);
+                    break;
+                }
+
+                case 'history': {
+                    if (commandHistory.length === 0) {
+                        addOutput([{ text: '  No commands in history.', type: 'info' }, { text: '', type: 'output' }]);
+                    } else {
+                        const hist = commandHistory.slice(-20);
+                        const lines = hist.map((c, i) => ({ text: `  ${String(i + 1).padStart(4, ' ')}  ${c}`, type: 'output' }));
+                        lines.push({ text: '', type: 'output' });
+                        addOutput(lines);
+                    }
+                    break;
+                }
+
+                case 'echo': {
+                    addOutput([{ text: `  ${args.join(' ')}`, type: 'output' }, { text: '', type: 'output' }]);
+                    break;
+                }
+
+                case 'exit': {
+                    await typeOutput([
+                        { text: '  logout', type: 'output' },
+                        { text: '  Connection to portfolio closed.', type: 'info' },
+                        { text: '  ...just kidding, you can\'t leave that easily! 😄', type: 'warning' },
+                        { text: '', type: 'output' },
+                    ], 40);
+                    break;
+                }
+
+                case 'update': {
+                    const date = new Date().toLocaleDateString();
+                    const isAr = document.documentElement.lang === 'ar';
+                    if (isAr) {
+                        addOutput([
+                            { text: '  جاري البحث عن تحديثات...', type: 'info' },
+                            { text: '  النظام محدث.', type: 'success' },
+                            { text: `  آخر تحديث: ${date}`, type: 'output' },
+                            { text: '', type: 'output' },
+                        ]);
+                    } else {
+                        addOutput([
+                            { text: '  Fetching latest intel...', type: 'info' },
+                            { text: '  System up to date.', type: 'success' },
+                            { text: `  Last updated: ${date}`, type: 'output' },
+                            { text: '', type: 'output' },
+                        ]);
+                    }
+                    break;
+                }
+
+                case 'banner': {
+                    const isBlue = document.body.classList.contains('blue-team');
+                    if (isBlue) {
+                        addOutput([{ text: BLUE_BANNER, type: 'output' }]);
+                    } else {
+                        addOutput([{ text: RED_BANNER, type: 'output' }]);
+                    }
+                    break;
+                }
+
+                default: {
+                    addOutput([
+                        { text: `  bash: ${command}: command not found`, type: 'error' },
+                        { text: '  Type "help" for available commands.', type: 'info' },
+                        { text: '', type: 'output' },
+                    ]);
+                    break;
+                }
+            }
+        };
+
+        // Initialize Welcome Message
+        WELCOME_MESSAGE.forEach(line => {
+            const div = document.createElement('div');
+            div.className = `terminal-line mb-1 ${getLineColor(line.type)}`;
+            div.textContent = line.text || '\u00A0';
+            terminalBody.insertBefore(div, terminalInput.parentElement);
+        });
+
+        // Keyboard Event Handler
         terminalInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && !isTyping) {
                 const input = terminalInput.value.trim();
                 if (input) {
-                    print(input, true);
-                    const cmd = input.toLowerCase();
-                    if (COMMANDS[cmd]) {
-                        const output = typeof COMMANDS[cmd] === 'function' ? COMMANDS[cmd]() : COMMANDS[cmd];
-                        if (cmd !== 'clear') print(output);
-                    } else if (cmd === 'clear') {
-                        COMMANDS.clear();
-                    } else {
-                        print(`< span class="text-red-500" > Command not found: ${cmd}</span > `);
-                    }
+                    processCommand(input);
                 }
                 terminalInput.value = '';
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (commandHistory.length > 0) {
+                    const newIndex = historyIndex < commandHistory.length - 1 ? historyIndex + 1 : historyIndex;
+                    historyIndex = newIndex;
+                    terminalInput.value = commandHistory[commandHistory.length - 1 - newIndex];
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIndex > 0) {
+                    const newIndex = historyIndex - 1;
+                    historyIndex = newIndex;
+                    terminalInput.value = commandHistory[commandHistory.length - 1 - newIndex];
+                } else {
+                    historyIndex = -1;
+                    terminalInput.value = '';
+                }
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                const input = terminalInput.value.trim().toLowerCase();
+                if (input) {
+                    const matches = AVAILABLE_COMMANDS.filter(cmd => cmd.startsWith(input));
+                    if (matches.length === 1) {
+                        terminalInput.value = matches[0];
+                    } else if (matches.length > 1) {
+                        addOutput([{ text: `  ${matches.join('  ')}`, type: 'info' }]);
+                    }
+                }
+            } else if (e.key === 'l' && e.ctrlKey) {
+                e.preventDefault();
+                terminalBody.innerHTML = '';
+            } else if (e.key === 'Escape') {
+                if (matrixActive) stopMatrix();
             }
         });
 
-        // Update Banner on Theme Toggle
-        const themeBtn = document.getElementById('theme-toggle');
-        if (themeBtn) {
-            themeBtn.addEventListener('click', () => {
-                const isBlue = document.body.classList.contains('blue-team');
-                // Clear and show new banner
-                // terminalBody.innerHTML = ''; // Optional: keep history or clear
-                // print(isBlue ? BLUE_BANNER : RED_BANNER);
-
-                // Better: Update the *existing* banner if it's visible, or print new one
-                const existingBanner = terminalBody.querySelector('.terminal-banner');
-                if (existingBanner) {
-                    existingBanner.innerHTML = isBlue ? BLUE_BANNER : RED_BANNER;
-                }
-
-                // Update Logo (Black vs Blue)
-                const navLogo = document.getElementById('nav-logo');
-                if (navLogo) {
-                    navLogo.src = isBlue ? 'img/logo-blue.webp' : 'img/logo-black.webp';
-                }
-            });
-        }
+        // Click to focus and exit matrix
+        terminalBody.addEventListener('click', () => {
+            terminalInput.focus();
+            if (matrixActive) stopMatrix();
+        });
     }
 
     skillCards.forEach(card => skillObserver.observe(card));
