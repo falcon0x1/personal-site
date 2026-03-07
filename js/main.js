@@ -75,7 +75,7 @@ const translations = {
         tools_header: "الأدوات والمنصات",
         experience_header: "الخبرة العملية ذات الصلة",
         exp_role: "متدرب — مسار الأمن الهجومي واختبار الاختراق",
-        exp_org: "معهد تكنولوجيا المعلومات (ITI)، مدينة نصر، القاهرة — 07/2025 – 11/2025",
+        exp_org: "معهد تكنولوجيا المعلومات (ITI)، مدينة نصر، القاهرة — 07/2024 – 11/2024",
         exp_b1: "أجريت اختبارات اختراق Black-Box وGrey-Box على أكثر من 15 هدفًا معمليًا تحاكي تطبيقات بنكية وتجارية حقيقية.",
         exp_b2: "نفذت اختبارات يدوية وآلية ضد ثغرات OWASP Top 10.",
         exp_b3: "نفذت هجمات على الويب وواجهات البرمجة وActive Directory في بيئات مختبرية محكومة.",
@@ -151,7 +151,7 @@ const translations = {
         tools_header: "Tools & Platforms",
         experience_header: "Relevant Experience",
         exp_role: "Trainee — Offensive Security & Penetration Testing Track",
-        exp_org: "Information Technology Institute (ITI), Nasr City, Cairo — 07/2025 – 11/2025",
+        exp_org: "Information Technology Institute (ITI), Nasr City, Cairo — 07/2024 – 11/2024",
         exp_b1: "Conducted Black-Box and Grey-Box penetration testing on 15+ lab targets mimicking real-world banking and e-commerce applications.",
         exp_b2: "Performed manual and automated testing against OWASP Top 10 vulnerabilities.",
         exp_b3: "Executed web, API, and Active Directory attacks in controlled lab environments.",
@@ -298,7 +298,6 @@ const initApp = () => {
     const body = document.body;
 
     if (themeToggle) {
-        const themeIcon = themeToggle.querySelector('i');
         const teamLabel = document.getElementById('team-label');
         const navLogo = document.getElementById('nav-logo');
 
@@ -330,19 +329,9 @@ const initApp = () => {
             // Sync mobile toggle UI (if it exists)
             const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
             const mobileTeamLabel = document.getElementById('mobile-team-label');
-            const mobileThemeIcon = mobileThemeToggle?.querySelector('i');
 
             if (mobileTeamLabel) {
                 mobileTeamLabel.textContent = isBlue ? 'BLUE' : 'RED';
-            }
-            if (mobileThemeIcon) {
-                if (isBlue) {
-                    mobileThemeIcon.classList.remove('fa-skull-crossbones');
-                    mobileThemeIcon.classList.add('fa-shield-alt');
-                } else {
-                    mobileThemeIcon.classList.remove('fa-shield-alt');
-                    mobileThemeIcon.classList.add('fa-skull-crossbones');
-                }
             }
         };
 
@@ -366,14 +355,6 @@ const initApp = () => {
             setTimeout(() => { loader.style.display = 'none'; }, 500);
         }, 1200);
     }
-
-    document.querySelectorAll('.skill-tag').forEach(tag => {
-        if (!tag.className.includes('bg-')) {
-            tag.className += ' px-3 py-1 bg-dark-bg border border-gray-700 rounded text-xs text-gray-300 hover:border-gray-500 hover:text-white hover:bg-gray-800 transition transform hover:scale-105 cursor-default';
-        } else {
-            tag.className += ' px-3 py-1 rounded text-xs transition transform hover:scale-105 cursor-default';
-        }
-    });
 
     // Init Scroll Reveal
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
@@ -490,16 +471,11 @@ const initApp = () => {
     // Mobile Theme Toggle
     const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     if (mobileThemeToggle) {
-        const mobileThemeIcon = mobileThemeToggle.querySelector('i');
         const mobileTeamLabel = document.getElementById('mobile-team-label');
         const navLogo = document.getElementById('nav-logo');
 
         // Sync mobile toggle state on load
         if (body.classList.contains('blue-team')) {
-            if (mobileThemeIcon) {
-                mobileThemeIcon.classList.remove('fa-skull-crossbones');
-                mobileThemeIcon.classList.add('fa-shield-alt');
-            }
             if (mobileTeamLabel) {
                 mobileTeamLabel.textContent = 'BLUE';
             }
@@ -512,31 +488,12 @@ const initApp = () => {
             localStorage.setItem('team', newTeam);
 
             // Update mobile toggle UI
-            if (mobileThemeIcon) {
-                if (isBlueTeam) {
-                    mobileThemeIcon.classList.remove('fa-skull-crossbones');
-                    mobileThemeIcon.classList.add('fa-shield-alt');
-                } else {
-                    mobileThemeIcon.classList.remove('fa-shield-alt');
-                    mobileThemeIcon.classList.add('fa-skull-crossbones');
-                }
-            }
             if (mobileTeamLabel) {
                 mobileTeamLabel.textContent = isBlueTeam ? 'BLUE' : 'RED';
             }
 
             // Sync desktop toggle UI
-            const desktopThemeIcon = themeToggle?.querySelector('i');
             const desktopTeamLabel = document.getElementById('team-label');
-            if (desktopThemeIcon) {
-                if (isBlueTeam) {
-                    desktopThemeIcon.classList.remove('fa-skull-crossbones');
-                    desktopThemeIcon.classList.add('fa-shield-alt');
-                } else {
-                    desktopThemeIcon.classList.remove('fa-shield-alt');
-                    desktopThemeIcon.classList.add('fa-skull-crossbones');
-                }
-            }
             if (desktopTeamLabel) {
                 desktopTeamLabel.textContent = isBlueTeam ? 'BLUE' : 'RED';
             }
