@@ -46,8 +46,6 @@ const translations = {
         btn_contact: "تواصل معي",
         btn_cv: "تحميل السيرة الذاتية",
         btn_blog: "المقالات",
-
-        btn_blog: "المقالات",
         btn_verify: "تحقق من الشهادة",
         btn_personal_blog: "مدونتي الشخصية",
         btn_medium: "مقالات Medium",
