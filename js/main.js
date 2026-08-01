@@ -1716,13 +1716,16 @@ function initAccordion() {
 function updateTerminalTimestamps() {
     const timestamps = document.querySelectorAll('.hud-timestamp');
     const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const timeStr = `[ ${hours}:${minutes}:${seconds} ]`;
-    
-    timestamps.forEach(ts => {
-        ts.textContent = timeStr;
+
+    timestamps.forEach((ts, index) => {
+        // Stagger each row a few seconds apart so the HUD reads like a
+        // sequential scan log instead of every category finishing at once.
+        const offsetSeconds = (timestamps.length - 1 - index) * 3;
+        const time = new Date(now.getTime() - offsetSeconds * 1000);
+        const hours = String(time.getHours()).padStart(2, '0');
+        const minutes = String(time.getMinutes()).padStart(2, '0');
+        const seconds = String(time.getSeconds()).padStart(2, '0');
+        ts.textContent = `[ ${hours}:${minutes}:${seconds} ]`;
     });
 }
 
