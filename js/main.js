@@ -1645,10 +1645,6 @@ const initApp = () => {
         });
     });
 
-    // Initial Headline Animation
-    const headline = document.querySelector('.hero-headline');
-    if (headline && typeof hackerDecode === 'function') hackerDecode(headline);
-
     // Contact Form AJAX Handler
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
