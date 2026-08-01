@@ -10,8 +10,8 @@
     "build:html": "node scripts/build-html.js",
     "build": "npm run prebuild && npm run build:images && npm run build:css && npm run build:js && npm run build:html",
     "predev": "npm run build",
-    "dev": "npx serve dist",
-    "dev:dist": "npx serve dist"
+    "dev": "npx serve dist -l 3000",
+    "dev:dist": "npx serve dist -l 3000"
   },
   "devDependencies": {
     "cssnano": "^6.0.0",
