@@ -348,6 +348,12 @@ html[lang="ar"] body {
     transition: all 0.3s ease;
 }
 
+/* Offset anchor-linked sections so the fixed navbar doesn't cover their
+   top content when jumped to via nav links (#about, #terminal, etc). */
+#about, #terminal, #skills, #projects, #contact {
+    scroll-margin-top: 90px;
+}
+
 @media (max-width: 768px) {
     .floating-navbar {
         top: 1rem !important;
