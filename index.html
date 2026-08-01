@@ -10,7 +10,7 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
 
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com;">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://formsubmit.co;">
 
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
@@ -410,7 +410,7 @@
                     </h1>
                     
                     <!-- Title -->
-                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-200 mb-2">SECURITY ENGINEER</h2>
+                    <h2 class="hero-headline text-2xl sm:text-3xl font-bold text-gray-200 mb-2" data-i18n="hero_headline">SECURITY ENGINEER</h2>
                     
                     <!-- Typing Effect -->
                     <div class="text-accent mb-4 font-mono text-lg h-6 sm:h-7 flex items-center justify-center md:justify-start">
@@ -421,18 +421,18 @@
                     <div class="w-full md:max-w-md mt-2 p-5 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-l-4 border-l-accent relative overflow-hidden group">
                         <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20"></div>
                         <div class="relative z-10 text-gray-400 font-mono text-sm sm:text-base space-y-2 text-left">
-                            <p class="text-gray-300">Hello, I'm <span class="text-white font-bold tracking-wide">Mahmoud Elshorbagy</span></p>
+                            <p class="text-gray-300">Hello, I'm <span id="hero-name" class="text-white font-bold tracking-wide">Mahmoud Elshorbagy</span></p>
                             <div class="h-px w-full bg-gradient-to-r from-gray-700 to-transparent my-2"></div>
-                            <p><span class="text-accent inline-block w-20">RANK:</span> Security Engineer</p>
-                            <p><span class="text-accent inline-block w-20">TARGET:</span> Web, Mobile, API</p>
-                            <p><span class="text-accent inline-block w-20">MISSION:</span> Penetration Testing</p>
+                            <p><span class="text-accent inline-block w-20" data-i18n="mission_rank">RANK:</span> Security Engineer</p>
+                            <p><span class="text-accent inline-block w-20" data-i18n="mission_target">TARGET:</span> Web, Mobile, API</p>
+                            <p><span class="text-accent inline-block w-20" data-i18n="mission_mission">MISSION:</span> Penetration Testing</p>
                         </div>
                     </div>
 
                     <!-- Buttons -->
                     <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 w-full mt-6">
                         <a href="#contact" class="cyber-btn primary text-sm sm:text-base w-full sm:w-auto text-center">> INITIALIZE CONNECTION</a>
-                        <a href="cv.pdf" target="_blank" class="cyber-btn secondary text-sm sm:text-base w-full sm:w-auto text-center">DOWNLOAD CV</a>
+                        <a href="cv.pdf" target="_blank" class="cyber-btn secondary text-sm sm:text-base w-full sm:w-auto text-center" data-i18n="btn_cv">DOWNLOAD CV</a>
                     </div>
                 </div>
 
@@ -466,19 +466,19 @@
         <div class="max-w-7xl mx-auto flex flex-wrap justify-around items-center gap-8">
             <div class="text-center">
                 <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="5" data-suffix="+">5+</div>
-                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2">Certifications</span>
+                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_certs">Certifications</span>
             </div>
             <div class="text-center">
                 <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="50" data-suffix="+">50+</div>
-                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2">Labs Pwned</span>
+                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_labs">Labs Pwned</span>
             </div>
             <div class="text-center">
                 <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="5" data-suffix="+">5+</div>
-                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2">Tools Built</span>
+                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_tools">Tools Built</span>
             </div>
             <div class="text-center">
                 <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="100" data-suffix="%">100%</div>
-                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2">Commitment</span>
+                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_passion">Commitment</span>
             </div>
         </div>
     </div>
@@ -534,7 +534,7 @@
         <div class="container mx-auto px-6">
             <div class="section-header reveal">
                 <span class="section-marker">##</span>
-                <h2 class="section-title" style="margin-bottom: 0;">Technical Arsenal</h2>
+                <h2 class="section-title" style="margin-bottom: 0;" data-i18n="skills_title">Technical Arsenal</h2>
                 <div class="section-line"></div>
             </div>
 
@@ -547,7 +547,7 @@
 
                 <!-- LEFT COLUMN : CERTIFICATIONS -->
                 <div class="flex flex-col gap-3 reveal delay-100">
-                    <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2">
+                    <h3 class="text-gray-400 font-mono text-sm mb-4 border-b border-gray-800 pb-2" data-i18n="cert_header">
                         >> CERTIFICATIONS
                     </h3>
 
@@ -629,7 +629,7 @@
 
                 <!-- RIGHT COLUMN : SKILLS -->
                 <div class="reveal">
-                    <h3 class="skills-header">
+                    <h3 class="skills-header" data-i18n="skills_header">
                         SKILLS & TOOLS
                     </h3>
 
@@ -839,9 +839,6 @@
                 <button type="button" onclick="document.getElementById('modal-project1').showModal()"
                     data-category="automation web"
                     class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-100" aria-label="View FalconRecon project details">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white group-hover:text-accent transition">FalconRecon</h3>
-                        <svg
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold text-white group-hover:text-accent transition">FalconRecon</h3>
                         <svg
@@ -1131,7 +1128,7 @@
                     <div class="experience-content">
                         <div class="exp-header flex flex-row justify-between items-center gap-4">
                             <div>
-                                <h3 class="experience-title">Trainee — Offensive Security & Penetration Testing Track
+                                <h3 class="experience-title" data-i18n="exp_role">Trainee — Offensive Security & Penetration Testing Track
                                 </h3>
                                 <span class="experience-date">Jul 2024 – Nov 2024</span>
                                 <p class="experience-company">Information Technology Institute (ITI), Nasr City, Cairo
@@ -1146,14 +1143,14 @@
                         </div>
                         <div class="exp-content">
                             <ul class="experience-list">
-                                <li>Conducted comprehensive Black-Box and Grey-Box penetration testing on 15+ lab
+                                <li data-i18n="exp_b1">Conducted comprehensive Black-Box and Grey-Box penetration testing on 15+ lab
                                     targets
                                     mimicking real-world banking and e-commerce applications</li>
-                                <li>Performed manual and automated penetration testing against OWASP Top 10
+                                <li data-i18n="exp_b2">Performed manual and automated penetration testing against OWASP Top 10
                                     vulnerabilities
                                 </li>
-                                <li>Conducted web, API, and Active Directory attacks in controlled lab environments</li>
-                                <li>Applied industry-standard methodologies such as PTES and OSSTMM during security
+                                <li data-i18n="exp_b3">Conducted web, API, and Active Directory attacks in controlled lab environments</li>
+                                <li data-i18n="exp_b4">Applied industry-standard methodologies such as PTES and OSSTMM during security
                                     assessments</li>
                                 <li>Gained hands-on experience with Bash scripting and Red Hat Linux administration</li>
                             </ul>
@@ -1410,6 +1407,7 @@
                     <form action="https://formsubmit.co/mahmoud.elshorbagy0x1@gmail.com" method="POST"
                         class="contact-form" id="contact-form">
                         <!-- Note: You will need to confirm the first submission via email -->
+                        <input type="hidden" name="_next" value="#contact">
 
 
                         <div class="form-group">
@@ -1512,8 +1510,6 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"
-        referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"
         referrerpolicy="no-referrer"></script>
 

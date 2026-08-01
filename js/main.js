@@ -286,9 +286,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 const initApp = () => {
-    // Prevent Right Click
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
     // Theme Switcher - Red Team (Offensive) / Blue Team (Defensive)
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
@@ -1629,6 +1626,53 @@ const initApp = () => {
     // Initial Headline Animation
     const headline = document.querySelector('.hero-headline');
     if (headline && typeof hackerDecode === 'function') hackerDecode(headline);
+
+    // Contact Form AJAX Handler
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        let statusEl = document.getElementById('form-status');
+        if (!statusEl) {
+            statusEl = document.createElement('div');
+            statusEl.id = 'form-status';
+            statusEl.className = 'mt-4 hidden p-3 rounded font-mono text-sm';
+            contactForm.appendChild(statusEl);
+        }
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            if (submitBtn) submitBtn.disabled = true;
+
+            statusEl.className = 'mt-4 p-3 rounded font-mono text-sm bg-blue-900/40 border border-blue-500 text-blue-300';
+            statusEl.textContent = 'Sending message...';
+            statusEl.classList.remove('hidden');
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    body: new FormData(contactForm)
+                });
+
+                if (response.ok) {
+                    statusEl.className = 'mt-4 p-3 rounded font-mono text-sm bg-green-900/40 border border-green-500 text-green-300';
+                    statusEl.textContent = '✓ Message sent successfully! I will get back to you soon.';
+                    contactForm.reset();
+                } else {
+                    const data = await response.json().catch(() => ({}));
+                    statusEl.className = 'mt-4 p-3 rounded font-mono text-sm bg-red-900/40 border border-red-500 text-red-300';
+                    statusEl.textContent = data.message || '✕ Failed to send message. Please try again.';
+                }
+            } catch (err) {
+                statusEl.className = 'mt-4 p-3 rounded font-mono text-sm bg-red-900/40 border border-red-500 text-red-300';
+                statusEl.textContent = '✕ An error occurred. Please try again later.';
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+            }
+        });
+    }
 };
 
 // Mobile Accordion - Encrypted Logs
