@@ -10,7 +10,7 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
 
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://formsubmit.co;">
+        content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://formsubmit.co;">
 
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
@@ -68,7 +68,7 @@
 
     <!-- SVG Sprite for Inline Icons -->
     <!-- Lucide Icons for UI/tech | Font Awesome Brands for company logos -->
-    <svg style="display: none;">
+    <svg class="sr-only-svg-sprite">
         <!-- Lucide Icons - Tech/UI Icons -->
         <symbol id="icon-skull" viewBox="0 0 24 24">
             <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -218,7 +218,7 @@
                 class="flex items-center gap-2 lg:gap-3 text-lg lg:text-2xl font-bold font-mono text-white tracking-tighter hover:text-accent transition duration-300 transform hover:scale-105">
                 <img src="img/logo-black.webp" alt="falcon0x1" id="nav-logo"
                     loading="lazy" srcset="img/logo-black.webp 1x, img/logo-black.webp 2x"
-                    class="h-8 w-8 lg:h-12 lg:w-12 object-contain" style="image-rendering: -webkit-optimize-contrast;">
+                    class="h-8 w-8 lg:h-12 lg:w-12 object-contain nav-logo-crisp">
                 <span><span class="text-accent">&lt;</span>falcon0x1<span class="text-accent">/&gt;</span></span>
             </a>
 
@@ -488,10 +488,10 @@
         <div class="container mx-auto px-6 max-w-5xl">
             <div class="section-header reveal">
                 <span class="section-marker">##</span>
-                <h2 class="section-title" style="margin-bottom: 0;">Interactive Terminal</h2>
+                <h2 class="section-title section-title--no-margin">Interactive Terminal</h2>
                 <div class="section-line"></div>
             </div>
-            <p class="text-gray-500 text-sm mb-8 reveal" style="font-family: var(--font-body);">// Try typing "help"</p>
+            <p class="text-gray-500 text-sm mb-8 reveal font-body">// Try typing "help"</p>
 
             <div class="terminal-container reveal delay-100">
                 <div class="terminal-header">
@@ -510,10 +510,9 @@
                     <div class="terminal-line">
                         <span class="text-gray-500">─────────────────────────────────────────</span>
                     </div>
-                    <div class="terminal-line" style="display: flex; align-items: center;">
+                    <div class="terminal-line terminal-line-flex">
                         <span class="terminal-prompt">falcon0x1@portfolio:~$</span>
-                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off"
-                            style="background: transparent; border: none; outline: none; color: inherit; font-family: inherit; font-size: inherit; flex: 1; margin-left: 5px;">
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -533,12 +532,12 @@
         <div class="container mx-auto px-6">
             <div class="section-header reveal">
                 <span class="section-marker">##</span>
-                <h2 class="section-title" style="margin-bottom: 0;" data-i18n="skills_title">Technical Arsenal</h2>
+                <h2 class="section-title section-title--no-margin" data-i18n="skills_title">Technical Arsenal</h2>
                 <div class="section-line"></div>
             </div>
 
             <!-- Slogan -->
-            <p class="text-gray-500 text-sm mb-12 reveal" style="font-family: var(--font-body);"
+            <p class="text-gray-500 text-sm mb-12 reveal font-body"
                 data-i18n="slogan_skills">"Every tool is a weapon when you know how to wield it."</p>
 
             <!-- GRID WRAPPER -->
@@ -817,12 +816,12 @@
         <div class="container mx-auto px-6">
             <div class="section-header reveal">
                 <span class="section-marker">##</span>
-                <h2 class="section-title" style="margin-bottom: 0;"><span data-i18n="work_title">Projects</span></h2>
+                <h2 class="section-title section-title--no-margin"><span data-i18n="work_title">Projects</span></h2>
                 <div class="section-line"></div>
             </div>
 
             <!-- Slogan -->
-            <p class="text-gray-500 text-sm mb-8 reveal" style="font-family: var(--font-body);"
+            <p class="text-gray-500 text-sm mb-8 reveal font-body"
                 data-i18n="slogan_projects">"Building tools that break systems, to make them stronger."</p>
 
             <!-- Project Filters -->
@@ -837,7 +836,7 @@
             </div>
 
             <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <button type="button" onclick="document.getElementById('modal-project1').showModal()"
+                <button type="button" data-modal-target="modal-project1"
                     data-category="automation web"
                     class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-100" aria-label="View FalconRecon project details">
                     <div class="flex justify-between items-start mb-4">
@@ -857,7 +856,7 @@
                      </div>
                  </button>
 
-                 <button type="button" onclick="document.getElementById('modal-project2').showModal()"
+                 <button type="button" data-modal-target="modal-project2"
                     data-category="automation web mobile"
                     class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-200" aria-label="View FalconServiceAnalyzer project details">
                     <div class="flex justify-between items-start mb-4">
@@ -879,7 +878,7 @@
                      </div>
                  </button>
 
-                 <button type="button" onclick="document.getElementById('modal-project3').showModal()"
+                 <button type="button" data-modal-target="modal-project3"
                     data-category="automation research"
                     class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-300" aria-label="View FalconAutopilot project details">
                     <div class="flex justify-between items-start mb-4">
@@ -899,7 +898,7 @@
                      </div>
                  </button>
 
-                 <button type="button" onclick="document.getElementById('modal-project4').showModal()"
+                 <button type="button" data-modal-target="modal-project4"
                     data-category="privacy mobile"
                     class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-400" aria-label="View SecurePhone project details">
                     <div class="flex justify-between items-start mb-4">
@@ -919,7 +918,7 @@
                      </div>
                  </button>
 
-                 <button type="button" onclick="document.getElementById('modal-project5').showModal()"
+                 <button type="button" data-modal-target="modal-project5"
                     data-category="iot"
                     class="project-item block bg-card-bg p-6 rounded border border-gray-800 hover:border-accent hover:shadow-[0_0_20px_rgba(0,255,65,0.1)] hover:-translate-y-2 transition duration-300 group reveal delay-500" aria-label="View IoT Defender project details">
                     <div class="flex justify-between items-start mb-4">
@@ -1101,8 +1100,8 @@
                             Security</span>
                     </div>
 
-                    <button onclick="document.getElementById('modal-project5').close()"
-                        class="btn btn-primary w-full text-center flex justify-center mt-4 py-3">Close</button>
+                    <form method="dialog"><button type="submit"
+                        class="btn btn-primary w-full text-center flex justify-center mt-4 py-3">Close</button></form>
                 </div>
             </div>
         </dialog>
@@ -1322,8 +1321,7 @@
                 </article>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-4 mt-4 pt-8 reveal"
-                style="margin-top: 20px; padding-top: 20px;">
+            <div class="flex flex-wrap justify-center gap-4 reveal blog-cta-row">
                 <a href="https://falcon0x1.github.io/" target="_blank" rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-black font-bold rounded hover:bg-opacity-90 transition">
                     <svg class="icon">
@@ -1384,7 +1382,7 @@
                 <div id="github-calendar" class="github-calendar-container">
                     <a href="https://github.com/falcon0x1" target="_blank" rel="noopener noreferrer">
                         <img src="https://ghchart.rshah.org/ff3333/falcon0x1" alt="GitHub Contributions"
-                            class="w-full rounded-lg" style="filter: brightness(0.9) contrast(1.1);" loading="lazy"
+                            class="w-full rounded-lg github-chart-img" loading="lazy"
                             width="700" height="112">
                     </a>
                 </div>
