@@ -589,6 +589,14 @@ const initApp = () => {
         });
     }
 
+    // Modal Opening Logic
+    document.querySelectorAll('[data-modal-target]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modal = document.getElementById(btn.dataset.modalTarget);
+            if (modal) modal.showModal();
+        });
+    });
+
     // Strict Modal Closing Logic to Fix Freezing
     const modals = document.querySelectorAll('.cyber-modal');
     modals.forEach(modal => {

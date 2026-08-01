@@ -765,17 +765,22 @@ html[dir="rtl"] .nav-link::after {
 }
 
 .terminal-input {
-    background: none;
+    background: transparent;
     border: none;
-    color: var(--color-terminal-input);
-    font-family: var(--font-display), monospace;
-    font-size: 14px;
     outline: none;
-    width: calc(100% - 200px);
-    margin-left: 8px;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    flex: 1;
+    margin-left: 5px;
     /* Force LTR */
     direction: ltr !important;
     text-align: left !important;
+}
+
+.terminal-line-flex {
+    display: flex;
+    align-items: center;
 }
 
 .terminal-cursor {
@@ -2069,7 +2074,7 @@ html[lang="ar"] .bg-gray-800 {
 .hud-tools {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 12px;
+    gap: 6px 8px;
     color: var(--color-text-gray-400);
     font-size: 0.85rem;
     position: relative;
@@ -2080,35 +2085,19 @@ html[lang="ar"] .bg-gray-800 {
     position: relative;
     transition: all 0.2s ease;
     cursor: crosshair;
-    padding: 2px 6px;
-    border-radius: 2px;
-    background: transparent;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--color-border-gray-900);
+    border: 1px solid var(--color-border-gray-800);
+    color: var(--color-text-gray-300);
+    font-size: 0.8rem;
 }
 
 .hud-tool-item:hover {
     color: var(--color-text-white);
-    text-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-terminal-shadow);
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 2px;
-}
-
-.hud-tool-item:not(:last-child)::after {
-    content: ',';
-    color: var(--color-text-gray-600);
-    margin-left: 1px;
-}
-
-@keyframes hud-flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 1; }
-}
-
-.tools-hud-container {
-    animation: hud-flicker 8s infinite;
-}
-
-.tools-hud-container:hover {
-    animation: none;
 }
 
 
@@ -3443,4 +3432,30 @@ a.cyber-datacard {
         align-items: center;
         justify-content: center;
     }
+}
+
+/* CSP Refactor Utilities */
+.sr-only-svg-sprite {
+    display: none;
+}
+
+.nav-logo-crisp {
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.section-title--no-margin {
+    margin-bottom: 0;
+}
+
+.font-body {
+    font-family: var(--font-body);
+}
+
+.blog-cta-row {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.github-chart-img {
+    filter: brightness(0.9) contrast(1.1);
 }
