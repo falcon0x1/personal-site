@@ -3384,7 +3384,7 @@ a.cyber-datacard {
 /* =========================================
    MOBILE HORIZONTAL SCROLL - WRITEUPS
    ========================================= */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .writeups-container {
         display: flex !important;
         flex-direction: row !important;
@@ -3399,10 +3399,48 @@ a.cyber-datacard {
     .writeups-container::-webkit-scrollbar {
         display: none;
     }
-    .writeups-container > div, .writeup-card, .blog-card {
+    .writeups-container > article, .writeups-container > div, .writeup-card, .blog-card {
         flex: 0 0 85% !important;
         max-width: 85% !important;
         scroll-snap-align: center !important;
         min-width: 280px;
+    }
+}
+
+/* =========================================
+   MOBILE ACCESSIBILITY & TOUCH ENHANCEMENTS
+   ========================================= */
+@media (max-width: 767px) {
+    .filter-btn {
+        padding: 8px 16px;
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #mobile-menu .mobile-controls button,
+    #mobile-menu .mobile-controls a,
+    #mobile-lang-btn,
+    #mobile-theme-toggle {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cyber-modal {
+        padding: 1.25rem 1rem;
+        max-height: 85vh;
+        overflow-y: auto;
+        width: 92%;
+    }
+
+    .cyber-modal .modal-close {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 }

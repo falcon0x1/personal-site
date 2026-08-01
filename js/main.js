@@ -202,6 +202,10 @@ let pIndex = 0, cIndex = 0, isDeleting = false;
 const hackerDecode = (el) => {
     if (!el) return;
     const originalText = el.getAttribute('data-text') || el.innerText;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.innerText = originalText;
+        return;
+    }
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
     let iterations = 0;
 
@@ -286,6 +290,9 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 const initApp = () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
     // Theme Switcher - Red Team (Offensive) / Blue Team (Defensive)
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
@@ -426,7 +433,7 @@ const initApp = () => {
 
     // Initialize Vanilla Tilt
     const tiltElements = document.querySelectorAll('.tilt');
-    if (tiltElements.length > 0 && typeof VanillaTilt !== 'undefined') {
+    if (tiltElements.length > 0 && typeof VanillaTilt !== 'undefined' && !prefersReducedMotion && !isTouchDevice) {
         VanillaTilt.init(tiltElements, {
             max: 15,
             speed: 400,
@@ -838,6 +845,7 @@ const initApp = () => {
         // Matrix Rain Effect
         const startMatrix = () => {
             if (matrixActive) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
             matrixActive = true;
             
             const canvas = document.createElement('canvas');
@@ -1259,7 +1267,13 @@ const initApp = () => {
                 }
 
                 case 'matrix': {
-                    startMatrix();
+                    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                        await typeOutput([
+                            { text: '  Matrix effect skipped (reduced motion preferred)', type: 'info' }
+                        ], 20);
+                    } else {
+                        startMatrix();
+                    }
                     break;
                 }
 

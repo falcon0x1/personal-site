@@ -463,7 +463,7 @@
 
     <!-- FULL WIDTH STATS BAR -->
     <div class="w-full bg-[#0a0a0a]/60 backdrop-blur-lg border-t border-white/10 py-10 mt-12 reveal">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-around items-center gap-8">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-around items-center gap-8 px-4">
             <div class="text-center">
                 <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="5" data-suffix="+">5+</div>
                 <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_certs">Certifications</span>
@@ -523,8 +523,7 @@
                     <svg class="icon text-accent">
                         <use href="#icon-lightbulb"></use>
                     </svg>
-                    Pro Tip: Try commands like <span class="text-accent">whoami</span>, <span
-                        class="text-accent">skills</span>, or <span class="text-accent">contact</span>
+                    Pro Tip: Type <span class="text-accent">help</span> to see all commands, or try <span class="text-accent">whoami</span>, <span class="text-accent">skills</span>, <span class="text-accent">hack</span>
                 </p>
             </div>
         </div>
@@ -831,8 +830,10 @@
                 <button class="filter-btn active" data-filter="all" aria-label="Show all projects">All</button>
                 <button class="filter-btn" data-filter="web" aria-label="Show web security projects">Web Sec</button>
                 <button class="filter-btn" data-filter="automation" aria-label="Show automation projects">Automation</button>
+                <button class="filter-btn" data-filter="mobile" aria-label="Show mobile security projects">Mobile</button>
+                <button class="filter-btn" data-filter="privacy" aria-label="Show privacy projects">Privacy</button>
                 <button class="filter-btn" data-filter="research" aria-label="Show research projects">Research</button>
-                 <button class="filter-btn" data-filter="iot" aria-label="Show IoT projects">IoT</button>
+                <button class="filter-btn" data-filter="iot" aria-label="Show IoT projects">IoT</button>
             </div>
 
             <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1223,7 +1224,7 @@
                 Swipe right &rarr;
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 writeups-container">
+            <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 writeups-container">
                 <!-- Blog Post 1 -->
                 <article class="blog-card reveal delay-100">
                     <div class="blog-card-header">
