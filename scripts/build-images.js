@@ -25,6 +25,7 @@ async function convertImages() {
     const outputPath = path.join(imgDir, img.name.replace(/\.[^.]+$/, '.webp'));
     
     if (fs.existsSync(inputPath)) {
+      if (inputPath === outputPath) continue;
       try {
         await sharp(inputPath)
           .resize(img.width, null, { fit: 'inside' })

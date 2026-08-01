@@ -1281,23 +1281,12 @@ html[dir="rtl"] .nav-link::after {
     min-height: auto;
     max-height: calc(100vh - 48px);
     overflow-y: auto;
-    display: none;
     z-index: 41;
     border-radius: 0 0 1.5rem 1.5rem !important;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     background: rgba(10, 10, 10, 0.85);
     border: 1px solid var(--color-glass-border);
-}
-
-#mobile-menu.matrix-open {
-    display: flex !important;
-    animation: slideDown 0.3s ease-out;
-}
-
-#mobile-menu:not(.hidden) {
-    display: block;
-    animation: slideDown 0.3s ease-out;
 }
 
 @keyframes slideDown {

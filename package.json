@@ -9,7 +9,8 @@
     "build:js": "node scripts/build-js.js",
     "build:html": "node scripts/build-html.js",
     "build": "npm run prebuild && npm run build:images && npm run build:css && npm run build:js && npm run build:html",
-    "dev": "npx serve .",
+    "predev": "npm run build",
+    "dev": "npx serve dist",
     "dev:dist": "npx serve dist"
   },
   "devDependencies": {
