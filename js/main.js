@@ -226,7 +226,7 @@ const hackerDecode = (el) => {
 function type(textEl) {
     if (!textEl) return;
     const phrase = typingPhrases[pIndex % typingPhrases.length];
-    const currentSpeed = isDeleting ? 50 : 100;
+    const currentSpeed = isDeleting ? 60 : 130;
 
     if (isDeleting) {
         textEl.textContent = phrase.substring(0, cIndex - 1);
@@ -238,11 +238,11 @@ function type(textEl) {
 
     if (!isDeleting && cIndex === phrase.length) {
         isDeleting = true;
-        setTimeout(() => type(textEl), 2000);
+        setTimeout(() => type(textEl), 2200);
     } else if (isDeleting && cIndex === 0) {
         isDeleting = false;
         pIndex++;
-        setTimeout(() => type(textEl), 500);
+        setTimeout(() => type(textEl), 600);
     } else {
         setTimeout(() => type(textEl), currentSpeed);
     }
