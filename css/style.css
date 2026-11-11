@@ -783,7 +783,6 @@ html[dir="rtl"] .nav-link::after {
 .terminal-input {
     background: transparent;
     border: none;
-    outline: none;
     color: inherit;
     font-family: inherit;
     font-size: inherit;
@@ -3472,4 +3471,18 @@ a.cyber-datacard {
 
 .github-chart-img {
     filter: brightness(0.9) contrast(1.1);
+}
+
+.terminal-input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
