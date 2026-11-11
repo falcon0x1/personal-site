@@ -1513,6 +1513,17 @@ const initApp = () => {
         });
 
         // Keyboard Event Handler
+        // Introduce yourself once the terminal scrolls into view
+        let introduced = false;
+        const introObserver = new IntersectionObserver((entries) => {
+            if (entries.some(en => en.isIntersecting) && !introduced && commandHistory.length === 0) {
+                introduced = true;
+                introObserver.disconnect();
+                processCommand('whoami');
+            }
+        }, { threshold: 0.4 });
+        introObserver.observe(terminalBody);
+
         terminalInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !isTyping) {
                 const input = terminalInput.value.trim();
