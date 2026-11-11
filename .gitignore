@@ -18,6 +18,10 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Spec-Kit (may contain credentials)
+# AI agent tooling (never commit)
 .opencode/
-.specify/cache/
+.specify/
+.claude/
+CLAUDE.md
+AGENTS.md
+GEMINI.md
