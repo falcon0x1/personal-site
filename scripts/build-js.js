@@ -7,7 +7,6 @@ const distDir = path.join(projectRoot, 'dist');
 
 const jsFiles = [
   { file: path.join(projectRoot, 'js/main.js'), defer: true },
-  { file: path.join(projectRoot, 'js/terminal.js'), defer: true },
 ];
 
 async function buildJS() {

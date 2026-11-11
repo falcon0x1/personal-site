@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const postcss = require('postcss');
+const cssnano = require('cssnano');
 
 const projectRoot = path.join(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
@@ -29,8 +31,10 @@ async function buildCSS() {
       combinedCSS += `/* === output.css === */\n${tailwind}\n\n`;
     }
     
-    // Write to dist (without minification for now)
+    // Minify and write to dist
     const outputPath = path.join(distDir, 'main.min.css');
+    const minified = await postcss([cssnano({ preset: 'default' })]).process(combinedCSS, { from: undefined });
+    combinedCSS = minified.css;
     fs.writeFileSync(outputPath, combinedCSS);
     
     const size = Buffer.byteLength(combinedCSS, 'utf8');

@@ -1,31 +1,3 @@
-// Global error handler to prevent clipboard and other API errors from breaking the site
-window.addEventListener('error', function(e) {
-    if (e.message && (e.message.includes('clipboard') || e.message.includes('navigator'))) {
-        console.warn('Ignored non-critical error:', e.message);
-        e.preventDefault();
-    }
-}, true);
-
-// Clipboard API safety wrapper
-if (navigator && navigator.clipboard) {
-    const originalClipboard = { ...navigator.clipboard };
-    navigator.clipboard = new Proxy(navigator.clipboard, {
-        get: function(target, prop) {
-            try {
-                return function(...args) {
-                    try {
-                        return target[prop].apply(target, args);
-                    } catch (e) {
-                        console.warn('Clipboard operation failed:', e.message);
-                        return Promise.reject(e);
-                    }
-                };
-            } catch (e) {
-                return undefined;
-            }
-        }
-    });
-}
 
 const translations = {
     ar: {
@@ -172,6 +144,16 @@ const translations = {
         proj_2_desc: "Detailed security research articles covering IDOR, SQL Injection, and Active Directory exploitation techniques.",
         contact_title: "Initialize Connection"
     }
+};
+
+// Load the Arabic font only when Arabic is selected
+const loadArabicFont = () => {
+    if (document.getElementById('font-cairo')) return;
+    const link = document.createElement('link');
+    link.id = 'font-cairo';
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap';
+    document.head.appendChild(link);
 };
 
 let currentLang = 'en';
@@ -385,6 +367,7 @@ const initApp = () => {
             const html = document.documentElement;
             html.setAttribute('lang', currentLang);
             html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            if (currentLang === 'ar') loadArabicFont();
             langBtn.textContent = currentLang === 'en' ? 'AR' : 'EN';
 
             // Switch typing phrases
@@ -430,17 +413,6 @@ const initApp = () => {
             });
         }
     });
-
-    // Initialize Vanilla Tilt
-    const tiltElements = document.querySelectorAll('.tilt');
-    if (tiltElements.length > 0 && typeof VanillaTilt !== 'undefined' && !prefersReducedMotion && !isTouchDevice) {
-        VanillaTilt.init(tiltElements, {
-            max: 15,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2
-        });
-    }
 
     // Mobile Menu
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -516,6 +488,7 @@ const initApp = () => {
             const html = document.documentElement;
             html.setAttribute('lang', currentLang);
             html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            if (currentLang === 'ar') loadArabicFont();
 
             // Update both mobile and desktop buttons
             mobileLangBtn.textContent = currentLang === 'en' ? 'AR' : 'EN';
