@@ -1654,7 +1654,7 @@ const initApp = () => {
             statusEl.classList.remove('hidden');
 
             try {
-                const response = await fetch(contactForm.action, {
+                const response = await fetch(contactForm.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json'
