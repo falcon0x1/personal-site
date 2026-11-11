@@ -845,7 +845,11 @@ const initApp = () => {
             
             const div2 = document.createElement('div');
             div2.className = 'terminal-line mb-1';
-            div2.innerHTML = `<span class="text-green-400">└─$</span> ${cmd}`;
+            const prompt2 = document.createElement('span');
+            prompt2.className = 'text-green-400';
+            prompt2.textContent = '└─$';
+            div2.appendChild(prompt2);
+            div2.appendChild(document.createTextNode(' ' + cmd));
             terminalBody.insertBefore(div2, terminalInput.parentElement);
             terminalBody.scrollTop = terminalBody.scrollHeight;
         };
