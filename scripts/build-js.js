@@ -53,6 +53,17 @@ async function buildJS() {
       console.log('  ✅ Copied canary.min.js to dist/');
     }
 
+    // Copy cv.pdf, _headers and 404.html to dist
+    for (const name of ['cv.pdf', '_headers', '404.html', '404.css', '404.js']) {
+      const src = path.join(projectRoot, name);
+      if (fs.existsSync(src)) {
+        fs.copyFileSync(src, path.join(distDir, name));
+        console.log(`  ✅ Copied ${name} to dist/`);
+      } else {
+        console.warn(`  ⚠️  ${name} not found, skipped`);
+      }
+    }
+
     // Copy img folder to dist/img
     const imgSrcDir = path.join(projectRoot, 'img');
     const imgDestDir = path.join(distDir, 'img');
