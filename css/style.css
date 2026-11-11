@@ -4,7 +4,6 @@
    Color: Terminal Green (#00FF41) on Near-Black (#050505)
    ========================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Source+Code+Pro:wght@400;600;700&display=swap');
 
 .icon {
     display: inline-block;
@@ -783,7 +782,6 @@ html[dir="rtl"] .nav-link::after {
 .terminal-input {
     background: transparent;
     border: none;
-    outline: none;
     color: inherit;
     font-family: inherit;
     font-size: inherit;
@@ -3473,3 +3471,46 @@ a.cyber-datacard {
 .github-chart-img {
     filter: brightness(0.9) contrast(1.1);
 }
+
+.terminal-input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* Evidence links on skill badges (replace self-rated percentages) */
+.badge-proof {
+    font-size: 0.62rem;
+    color: var(--color-accent);
+    font-family: var(--font-display), monospace;
+    text-decoration: none;
+    margin-top: 0.25rem;
+    text-align: center;
+    line-height: 1.2;
+    position: relative;
+    z-index: 2;
+}
+.badge-proof:hover,
+.badge-proof:focus-visible { text-decoration: underline; }
+
+/* Skip link */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    background: var(--color-accent);
+    color: #000;
+    font-family: var(--font-display), monospace;
+}
+.skip-link:focus { top: 1rem; }

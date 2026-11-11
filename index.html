@@ -5,14 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="X-Frame-Options" content="DENY">
 
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://formsubmit.co;">
-
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
     <meta name="description"
         content="falcon0x1 (Mahmoud Elshorbagy) - Penetration Tester & Red Teamer. Specialized in Web, Mobile, and AD Security.">
@@ -22,38 +18,63 @@
     <title>Mahmoud Elshorbagy | Security Engineer - falcon0x1</title>
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://falcon0x1.github.io/">
+    <link rel="canonical" href="https://elshorbagy.pages.dev/">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Mahmoud Elshorbagy | Security Engineer - falcon0x1">
     <meta property="og:description" content="Portfolio of Mahmoud Elshorbagy, a Cyber Security Engineer specializing in Web, API, and Mobile Penetration Testing.">
-    <meta property="og:url" content="https://falcon0x1.github.io/">
-    <meta property="og:image" content="https://github.com/falcon0x1.png">
+    <meta property="og:url" content="https://elshorbagy.pages.dev/">
+    <meta property="og:image" content="https://elshorbagy.pages.dev/img/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Mahmoud Elshorbagy, security engineer: terminal-style portfolio card">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mahmoud Elshorbagy | Security Engineer - falcon0x1">
     <meta name="twitter:description" content="Portfolio of Mahmoud Elshorbagy, a Cyber Security Engineer specializing in Web, API, and Mobile Penetration Testing.">
-    <meta name="twitter:image" content="https://github.com/falcon0x1.png">
+    <meta name="twitter:image" content="https://elshorbagy.pages.dev/img/og.png">
 
-    <link rel="icon" type="image/png" href="favicon/favicon.png">
+    <link rel="icon" href="favicon/favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
 
     <!-- Fonts - combined in single request below -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=JetBrains+Mono:wght@400;700;800&family=Source+Code+Pro:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="main.min.css">
+    <!-- Clone detection (Canarytoken) -->
+    <script src="canary.js" defer></script>
 
-    <!-- Performance Analytics (Canary/Obfuscated) -->
-    <script src="canary.min.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "mainEntity": {
+            "@type": "Person",
+            "name": "Mahmoud Elshorbagy",
+            "alternateName": "falcon0x1",
+            "jobTitle": "Security Engineer",
+            "description": "Penetration tester focused on web, API and mobile security.",
+            "url": "https://elshorbagy.pages.dev/",
+            "image": "https://elshorbagy.pages.dev/img/me.webp",
+            "sameAs": [
+                "https://github.com/falcon0x1",
+                "https://linkedin.com/in/mahmoud-elshorbagy-b77b38234/",
+                "https://falcon0x1.github.io/"
+            ]
+        }
+    }
+    </script>
 
 </head>
 
 <body class="grid-bg">
-    <!-- Noise Overlay Background -->
-    <div id="noise-overlay"></div>
+    <a href="#main" class="skip-link">Skip to content</a>
 
     <!-- SVG Sprite for Inline Icons -->
     <!-- Lucide Icons for UI/tech | Font Awesome Brands for company logos -->
@@ -206,7 +227,7 @@
             <a href="#"
                 class="flex items-center gap-2 lg:gap-3 text-lg lg:text-2xl font-bold font-mono text-white tracking-tighter hover:text-accent transition duration-300 transform hover:scale-105">
                 <img src="img/logo-black.webp" alt="falcon0x1" id="nav-logo"
-                    loading="lazy" srcset="img/logo-black.webp 1x, img/logo-black.webp 2x"
+                    srcset="img/logo-black.webp 1x, img/logo-black.webp 2x"
                     class="h-8 w-8 lg:h-12 lg:w-12 object-contain nav-logo-crisp">
                 <span><span class="text-accent">&lt;</span>falcon0x1<span class="text-accent">/&gt;</span></span>
             </a>
@@ -377,6 +398,7 @@
         </div>
     </div>
 
+    <main id="main">
     <!-- HERO SECTION -->
     <section id="about" class="relative pt-24 pb-16 md:pt-32 md:pb-24 border-b border-gray-800/50 overflow-hidden">
         
@@ -389,14 +411,15 @@
                     
                     <!-- Availability Badge -->
                     <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 border border-accent/50 rounded text-xs font-mono text-accent bg-accent/5">
-                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                        <span class="w-2 h-2 rounded-full bg-accent"></span>
                         OPEN TO OPPORTUNITIES
                     </div>
                     
                     <!-- Name -->
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-display text-white tracking-tight mb-2">
-                        <span class="text-accent">falcon0x1</span>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-display text-white tracking-tight mb-1">
+                        Mahmoud Elshorbagy
                     </h1>
+                    <p class="font-mono text-accent text-lg mb-2">@falcon0x1</p>
                     
                     <!-- Title -->
                     <h2 class="hero-headline text-2xl sm:text-3xl font-bold text-gray-200 mb-2" data-i18n="hero_headline">SECURITY ENGINEER</h2>
@@ -408,7 +431,6 @@
                     
                     <!-- Terminal Card -->
                     <div class="w-full md:max-w-md mt-2 p-5 bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-l-4 border-l-accent relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20"></div>
                         <div class="relative z-10 text-gray-400 font-mono text-sm sm:text-base space-y-2 text-left">
                             <p class="text-gray-300">Hello, I'm <span id="hero-name" class="text-white font-bold tracking-wide">Mahmoud Elshorbagy</span></p>
                             <div class="h-px w-full bg-gradient-to-r from-gray-700 to-transparent my-2"></div>
@@ -427,11 +449,11 @@
 
                 <!-- IMAGE COLUMN (Mobile: Top, Desktop: Right) - KEEP THIS PHOTO -->
                 <div class="order-first md:order-last w-full md:w-1/2 flex justify-center">
-                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl border border-gray-700/50 bg-gray-800/20 backdrop-blur-xl p-3 shadow-2xl transition-transform hover:-translate-y-2 duration-500">
-                        <img src="https://github.com/falcon0x1.png" alt="Mahmoud" loading="lazy" srcset="https://github.com/falcon0x1.png 1x, https://github.com/falcon0x1.png 2x"
+                    <div class="relative w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80 rounded-2xl border border-gray-700/50 bg-gray-800/20 backdrop-blur-xl p-3 shadow-2xl transition-transform hover:-translate-y-2 duration-500">
+                        <img src="img/me.webp" alt="Mahmoud Elshorbagy" loading="eager" fetchpriority="high" width="640" height="640" decoding="async"
                             class="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-500">
                         
-                        <div class="absolute -bottom-6 -left-6 bg-[#111] border border-gray-700 p-4 rounded-xl shadow-2xl flex items-center gap-3 backdrop-blur-lg">
+                        <div class="absolute -bottom-6 -left-6 bg-[#111] border border-gray-700 p-4 rounded-xl shadow-2xl hidden sm:flex items-center gap-3">
                             <div class="text-accent text-2xl">🛡️</div>
                             <div>
                                 <p class="text-white text-sm font-bold tracking-wide">eWPT Certified</p>
@@ -445,32 +467,6 @@
         </div>
     </section>
 
-    <!-- Background Glow for Glass Effect -->
-    <div class="relative -mt-32">
-        <div class="absolute inset-x-0 h-64 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none"></div>
-    </div>
-
-    <!-- FULL WIDTH STATS BAR -->
-    <div class="w-full bg-[#0a0a0a]/60 backdrop-blur-lg border-t border-white/10 py-10 mt-12 reveal">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-around items-center gap-8 px-4">
-            <div class="text-center">
-                <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="5" data-suffix="+">5+</div>
-                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_certs">Certifications</span>
-            </div>
-            <div class="text-center">
-                <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="50" data-suffix="+">50+</div>
-                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_labs">Labs Pwned</span>
-            </div>
-            <div class="text-center">
-                <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="5" data-suffix="+">5+</div>
-                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_tools">Tools Built</span>
-            </div>
-            <div class="text-center">
-                <div class="text-4xl md:text-5xl font-bold text-accent stat-number" data-value="100" data-suffix="%">100%</div>
-                <span class="block text-xs md:text-sm font-semibold text-gray-400 tracking-[0.2em] uppercase mt-2" data-i18n="stat_passion">Commitment</span>
-            </div>
-        </div>
-    </div>
 
     <!-- INTERACTIVE TERMINAL SECTION -->
     <section id="terminal" class="py-20 md:py-32 bg-dark-bg" dir="ltr">
@@ -489,7 +485,7 @@
                     <span class="terminal-dot dot-maximize"></span>
                     <span class="text-gray-500 text-xs ml-3 font-mono">falcon0x1@portfolio:~$</span>
                 </div>
-                <div class="terminal-body" id="terminal-body">
+                <div class="terminal-body" id="terminal-body" role="log" aria-live="polite">
                     <div class="terminal-line">
                         <span class="command-success">Welcome to falcon0x1 Portfolio Terminal v1.0</span>
                     </div>
@@ -501,7 +497,7 @@
                     </div>
                     <div class="terminal-line terminal-line-flex">
                         <span class="terminal-prompt">falcon0x1@portfolio:~$</span>
-                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off">
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" aria-label="Terminal command input">
                     </div>
                 </div>
             </div>
@@ -629,11 +625,8 @@
                                         <use href="#icon-globe"></use>
                                     </svg>
                                     <h4 class="badge-title">Web Sec</h4>
-                                    <span class="badge-level">90%</span>
+                                    <a class="badge-proof" href="#blog">IDOR writeup &rarr;</a>
                                 </div>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-progress" data-width="90%"></div>
                             </div>
                             <div class="badge-glow"></div>
                         </div>
@@ -645,11 +638,8 @@
                                         <use href="#icon-smartphone"></use>
                                     </svg>
                                     <h4 class="badge-title">Mobile Sec</h4>
-                                    <span class="badge-level">80%</span>
+                                    <a class="badge-proof" href="#projects">Android tools &rarr;</a>
                                 </div>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-progress" data-width="80%"></div>
                             </div>
                             <div class="badge-glow"></div>
                         </div>
@@ -661,11 +651,8 @@
                                         <use href="#icon-shield"></use>
                                     </svg>
                                     <h4 class="badge-title">Network</h4>
-                                    <span class="badge-level">75%</span>
+                                    <a class="badge-proof" href="#blog">enum writeup &rarr;</a>
                                 </div>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-progress" data-width="75%"></div>
                             </div>
                             <div class="badge-glow"></div>
                         </div>
@@ -677,11 +664,8 @@
                                         <use href="#icon-terminal"></use>
                                     </svg>
                                     <h4 class="badge-title">Scripting</h4>
-                                    <span class="badge-level">95%</span>
+                                    <a class="badge-proof" href="#projects">5+ tools built &rarr;</a>
                                 </div>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-progress" data-width="95%"></div>
                             </div>
                             <div class="badge-glow"></div>
                         </div>
@@ -693,11 +677,8 @@
                                         <use href="#icon-active-directory"></use>
                                     </svg>
                                     <h4 class="badge-title">Active Dir</h4>
-                                    <span class="badge-level">85%</span>
+                                    <a class="badge-proof" href="#projects">FalconDelta &rarr;</a>
                                 </div>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-progress" data-width="85%"></div>
                             </div>
                             <div class="badge-glow"></div>
                         </div>
@@ -709,11 +690,8 @@
                                         <use href="#icon-reverse-engineering"></use>
                                     </svg>
                                     <h4 class="badge-title">Rev Eng</h4>
-                                    <span class="badge-level">65%</span>
+                                    <a class="badge-proof" href="#projects">APK analysis &rarr;</a>
                                 </div>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-progress" data-width="65%"></div>
                             </div>
                             <div class="badge-glow"></div>
                         </div>
@@ -1066,7 +1044,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="text-2xl font-bold text-accent">Smart Poultry Farm (IoT/ICS)</h3>
-                    <form method="dialog"><button class="modal-close">&times;</button></form>
+                    <form method="dialog"><button class="modal-close" aria-label="Close modal">&times;</button></form>
                 </div>
                 <div class="modal-body">
                     <h4 class="text-white font-bold mb-2 break-word">Architecture & Security</h4>
@@ -1490,6 +1468,8 @@
         </div>
     </section>
 
+    </main>
+
     <footer class="py-6 bg-black border-t border-gray-800 text-center relative">
         <div class="container mx-auto px-6">
             <p class="text-gray-600 text-xs font-mono">
@@ -1497,9 +1477,6 @@
             </p>
         </div>
     </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"
-        referrerpolicy="no-referrer"></script>
 
     <script src="main.min.js" defer></script>
 </body>

@@ -7,7 +7,6 @@ const distDir = path.join(projectRoot, 'dist');
 
 const jsFiles = [
   { file: path.join(projectRoot, 'js/main.js'), defer: true },
-  { file: path.join(projectRoot, 'js/terminal.js'), defer: true },
 ];
 
 async function buildJS() {
@@ -45,12 +44,23 @@ async function buildJS() {
     const outputPath = path.join(distDir, 'main.min.js');
     fs.writeFileSync(outputPath, result.code);
 
-    // Copy canary.min.js to dist
-    const canarySrc = path.join(projectRoot, 'js/canary.min.js');
-    const canaryDest = path.join(distDir, 'canary.min.js');
+    // Copy canary.js to dist
+    const canarySrc = path.join(projectRoot, 'js/canary.js');
+    const canaryDest = path.join(distDir, 'canary.js');
     if (fs.existsSync(canarySrc)) {
       fs.copyFileSync(canarySrc, canaryDest);
-      console.log('  ✅ Copied canary.min.js to dist/');
+      console.log('  ✅ Copied canary.js to dist/');
+    }
+
+    // Copy cv.pdf, _headers and 404.html to dist
+    for (const name of ['cv.pdf', '_headers', '404.html', '404.css', '404.js', 'robots.txt', 'sitemap.xml']) {
+      const src = path.join(projectRoot, name);
+      if (fs.existsSync(src)) {
+        fs.copyFileSync(src, path.join(distDir, name));
+        console.log(`  ✅ Copied ${name} to dist/`);
+      } else {
+        console.warn(`  ⚠️  ${name} not found, skipped`);
+      }
     }
 
     // Copy img folder to dist/img

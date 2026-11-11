@@ -1,0 +1,22 @@
+.nf-body {
+    background: #0a0a0a;
+    color: #e5e7eb;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.nf-term {
+    width: min(90vw, 640px);
+    padding: 1.5rem;
+    border: 1px solid #374151;
+    border-radius: 0.75rem;
+    background: #111;
+}
+.nf-line { margin: 0.5rem 0; word-break: break-all; }
+.nf-prompt { color: #4ade80; }
+.nf-error { color: #ff3333; }
+.nf-link { color: #ff6b6b; text-decoration: underline; }
+.nf-link:focus-visible { outline: 2px solid #ff3333; outline-offset: 2px; }
